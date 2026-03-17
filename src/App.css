@@ -19,7 +19,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #ffffff;
+  background: #FAF9F7;
   border-radius: 32px;
   overflow: hidden;
   position: relative;
@@ -95,7 +95,7 @@ html, body, #root {
   width: 220px;
   height: calc(100vh - 16px);
   border-radius: 22px;
-  background: rgba(248, 248, 248, 0.96);
+  background: rgba(250, 249, 247, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 100;
@@ -246,7 +246,6 @@ html, body, #root {
   padding: 60px 40px 40px;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(ellipse 70% 50% at 0% 0%, rgba(255, 159, 28, 0.07) 0%, transparent 100%);
 }
 
 /* Both states: max-width 822px centered */
@@ -332,7 +331,7 @@ html, body, #root {
 }
 
 .add-btn:hover {
-  background: #f0f0f0;
+  background: rgba(0, 0, 0, 0.05);
   color: #333;
 }
 
@@ -888,7 +887,7 @@ html, body, #root {
 }
 
 .skill-more-btn:hover {
-  background: #f0f0f0;
+  background: rgba(0, 0, 0, 0.05);
   color: #555;
 }
 
@@ -1045,7 +1044,7 @@ html, body, #root {
 }
 
 .memory-card:hover {
-  background: #f0f0f0;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .memory-cover {
@@ -1174,7 +1173,7 @@ html, body, #root {
 }
 
 .back-btn:hover {
-  background: #f0f0f0;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .chat-header-info {
