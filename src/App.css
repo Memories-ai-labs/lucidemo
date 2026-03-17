@@ -211,8 +211,8 @@ html, body, #root {
 }
 
 .user-plan {
-  font-size: 12px;
-  color: #888;
+  font-size: 11px;
+  color: #aaa;
 }
 
 /* ── Main content ── */
@@ -266,13 +266,15 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 40px;
+  margin-bottom: 44px;
 }
 
 .greeting {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   color: #1a1a1a;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .stats-badge {
@@ -303,13 +305,15 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .channels-title {
-  font-size: 15px;
-  color: #555;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .add-btn {
@@ -334,7 +338,7 @@ html, body, #root {
 .channel-list {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .channel-item {
@@ -418,7 +422,7 @@ html, body, #root {
 }
 
 .channel-time {
-  font-size: 12px;
+  font-size: 11px;
   color: #aaa;
   min-width: 40px;
   text-align: right;
@@ -436,6 +440,8 @@ html, body, #root {
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .settings-tabs {
@@ -478,7 +484,10 @@ html, body, #root {
 }
 
 .settings-divider {
-  display: none;
+  display: block;
+  height: 1px;
+  background: #f0f0f0;
+  flex-shrink: 0;
 }
 
 .account-row {
@@ -511,14 +520,15 @@ html, body, #root {
 }
 
 .account-row-label {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #1a1a1a;
 }
 
 .account-row-sub {
-  font-size: 12px;
-  color: #999;
+  font-size: 11px;
+  color: #aaa;
+  line-height: 1.5;
 }
 
 .account-row-actions {
@@ -700,8 +710,8 @@ html, body, #root {
 }
 
 .subscription-plan-ends {
-  font-size: 12px;
-  color: #999;
+  font-size: 11px;
+  color: #aaa;
 }
 
 .subscription-upgrade-btn {
@@ -724,7 +734,7 @@ html, body, #root {
 .subscription-desc {
   font-size: 13px;
   color: #888;
-  line-height: 1.7;
+  line-height: 1.6;
   padding: 18px 0;
   max-width: 560px;
 }
@@ -761,8 +771,8 @@ html, body, #root {
 }
 
 .usage-label {
-  font-size: 12px;
-  color: #999;
+  font-size: 11px;
+  color: #aaa;
   white-space: nowrap;
 }
 
@@ -776,6 +786,7 @@ html, body, #root {
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 8px;
+  letter-spacing: -0.01em;
 }
 
 .skills-section-desc {
@@ -789,13 +800,15 @@ html, body, #root {
 .skills-list {
   display: flex;
   flex-direction: column;
+  border-top: 1px solid #f0f0f0;
 }
 
 .skill-item {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px 0;
+  padding: 18px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .skill-text {
@@ -807,15 +820,15 @@ html, body, #root {
 }
 
 .skill-name {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
 .skill-desc {
   font-size: 13px;
-  color: #999;
-  line-height: 1.4;
+  color: #888;
+  line-height: 1.6;
 }
 
 .skill-actions {
@@ -931,7 +944,7 @@ html, body, #root {
 .integrations-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 12px;
 }
 
 .integration-card {
@@ -1002,20 +1015,22 @@ html, body, #root {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 60px 24px 40px;
+  padding: 60px 40px 40px;
 }
 
 .memories-title {
   font-size: 26px;
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .memories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(200px, calc(50% - 2px)), 1fr));
-  gap: 4px;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, calc(50% - 6px)), 1fr));
+  gap: 12px;
 }
 
 .memory-card {
@@ -1108,7 +1123,7 @@ html, body, #root {
 .memory-info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
   padding: 0 2px;
 }
 
@@ -1122,8 +1137,8 @@ html, body, #root {
 }
 
 .memory-date {
-  font-size: 12px;
-  color: #999;
+  font-size: 11px;
+  color: #aaa;
 }
 
 /* ── Chat View ── */
@@ -1233,8 +1248,8 @@ html, body, #root {
 .bubble {
   padding: 10px 14px;
   border-radius: 14px;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.55;
   word-break: break-word;
 }
 

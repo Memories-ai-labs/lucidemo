@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 12px;
+  padding: 12px 12px;
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.15s;
@@ -35,7 +35,7 @@
 }
 
 .channel-name {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #1a1a1a;
 }
