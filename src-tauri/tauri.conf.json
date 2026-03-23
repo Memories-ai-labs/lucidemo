@@ -12,6 +12,7 @@
   "app": {
     "windows": [
       {
+        "label": "main",
         "title": "",
         "width": 1100,
         "height": 720,
@@ -19,6 +20,21 @@
         "hiddenTitle": true,
         "transparent": true,
         "trafficLightPosition": { "x": 32, "y": 32 }
+      },
+      {
+        "label": "island",
+        "url": "island.html",
+        "title": "LUCI Island",
+        "width": 320,
+        "height": 56,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "shadow": false,
+        "focus": false,
+        "visible": true
       }
     ],
     "macOSPrivateApi": true,

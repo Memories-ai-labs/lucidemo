@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { listen } from "@tauri-apps/api/event";
 import logoUrl from "./assets/logo.svg";
 import Modal from "./components/Modal";
 import ChannelItem from "./components/ChannelItem";
@@ -12,6 +13,7 @@ import {
   Plus,
   ArrowLeft,
   Send,
+  Paperclip,
   PanelLeftClose,
   PanelLeftOpen,
   MoreHorizontal,
@@ -162,10 +164,46 @@ export default function App() {
   const [deleteMemoryTarget, setDeleteMemoryTarget] = useState<Memory | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [attachments, setAttachments] = useState<File[]>([]);
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length === 0) return;
+    setAttachments((prev) => [...prev, ...files]);
+    e.target.value = "";
+  }
+
+  function removeAttachment(index: number) {
+    setAttachments((prev) => prev.filter((_, i) => i !== index));
+  }
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Receive transcribed voice text from island window → add to channel 1
+  useEffect(() => {
+    const unlisten = listen<string>("add-to-channel", (event) => {
+      const text = event.payload.trim();
+      if (!text) return;
+      const ch = channelList[0];
+      const newMsg: Message = {
+        id: Date.now(),
+        role: "user",
+        text,
+        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      };
+      setActiveNav("ask");
+      setActiveChannel(ch);
+      setMessages((prev) => {
+        const base = prev.length ? prev : (mockMessages[ch.id] ?? []);
+        return [...base, newMsg];
+      });
+    });
+    return () => { unlisten.then((fn) => fn()); };
+  }, [channelList]);
 
   useEffect(() => {
     if (skillMenuId === null) return;
@@ -223,6 +261,8 @@ export default function App() {
     };
     setMessages((prev) => [...prev, newMsg]);
     setInput("");
+    setAttachments([]);
+    if (textareaRef.current) textareaRef.current.style.height = "auto";
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
@@ -600,17 +640,41 @@ export default function App() {
             </div>
 
             <div className="chat-input-area">
-              <textarea
-                className="chat-input"
-                placeholder="Message LUCI..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                rows={1}
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                style={{ display: "none" }}
+                onChange={handleFileChange}
               />
-              <button className={`send-btn ${input.trim() ? "active" : ""}`} onClick={sendMessage}>
-                <Send size={16} />
-              </button>
+              <div className="chat-input-box">
+                {attachments.length > 0 && (
+                  <div className="attachments-preview">
+                    {attachments.map((f, i) => (
+                      <div className="attachment-chip" key={i}>
+                        <span className="attachment-name">{f.name}</span>
+                        <button className="attachment-remove" onClick={() => removeAttachment(i)}>×</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <textarea
+                  ref={textareaRef}
+                  className="chat-input"
+                  placeholder="Press Fn to ask"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+                <div className="chat-input-bottom">
+                  <button className="attach-btn" onClick={() => fileInputRef.current?.click()}>
+                    <Plus size={16} />
+                  </button>
+                  <button className={`send-btn ${input.trim() || attachments.length > 0 ? "active" : ""}`} onClick={sendMessage}>
+                    <Send size={16} />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         ) : (
