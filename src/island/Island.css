@@ -2,27 +2,28 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .island {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #111111;
-  border-radius: 999px;
+  background: #1e1f23;
+  border-radius: 6px;
   padding: 0 14px;
   height: 36px;
   min-width: 130px;
   transition: min-width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
               background 0.2s ease;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35), 0 0 0 0.5px rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
   cursor: default;
   user-select: none;
 }
 
 .island--listening {
   min-width: 175px;
-  background: #0a0a0a;
+  background: #23251d;
 }
 
 .island--loading {
@@ -42,7 +43,6 @@
 .island-logo img {
   width: 100%;
   height: 100%;
-  /* invert to white on dark background */
   filter: invert(1) brightness(1.2);
 }
 
@@ -51,8 +51,8 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #ff3b30;
-  box-shadow: 0 0 6px rgba(255, 59, 48, 0.6);
+  background: #F54E00;
+  box-shadow: 0 0 6px rgba(245, 78, 0, 0.6);
 }
 
 /* Listening: waveform bars */
@@ -65,8 +65,8 @@
 
 .wave-bar {
   width: 3px;
-  background: #ff9f1c;
-  border-radius: 999px;
+  background: #F54E00;
+  border-radius: 2px;
   animation: wave 0.7s ease-in-out infinite alternate;
 }
 
