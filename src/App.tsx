@@ -24,6 +24,8 @@ import {
   Check,
   Key,
   Download,
+  SlidersHorizontal,
+  X,
 } from "lucide-react";
 import "./App.css";
 
@@ -46,22 +48,253 @@ interface Memory {
   title: string;
   date: string;
   duration: string;
-  cover: string; // gradient css value
+  cover: string; // gradient css value or image url
+  thumbnail: string; // thumbnail image url
+  participants: Array<{ id: number; avatar: string; name: string }>;
+  project: string;
 }
 
 const mockMemoryList: Memory[] = [
-  { id: 1,  title: "Q1 Planning Meeting",       date: "Mar 15, 2026 · 9:00 AM",  duration: "1h 23m", cover: "linear-gradient(135deg,#e8f0fe,#c3d4f8)" },
-  { id: 2,  title: "Design Review Sprint 4",     date: "Mar 14, 2026 · 2:30 PM",  duration: "45m",    cover: "linear-gradient(135deg,#fde8f0,#f8c3d4)" },
-  { id: 3,  title: "Engineering Sync",           date: "Mar 13, 2026 · 10:00 AM", duration: "58m",    cover: "linear-gradient(135deg,#e8fde8,#c3f8c3)" },
-  { id: 4,  title: "Product Roadmap Review",     date: "Mar 12, 2026 · 3:00 PM",  duration: "1h 10m", cover: "linear-gradient(135deg,#fef8e8,#f8e8c3)" },
-  { id: 5,  title: "Sales Kickoff",              date: "Mar 11, 2026 · 9:30 AM",  duration: "2h 05m", cover: "linear-gradient(135deg,#f0e8fe,#d4c3f8)" },
-  { id: 6,  title: "Customer Onboarding",        date: "Mar 10, 2026 · 11:00 AM", duration: "30m",    cover: "linear-gradient(135deg,#e8fef8,#c3f8e8)" },
-  { id: 7,  title: "Weekly Standup",             date: "Mar 9,  2026 · 9:00 AM",  duration: "20m",    cover: "linear-gradient(135deg,#feeae8,#f8cdc3)" },
-  { id: 8,  title: "UX Research Debrief",        date: "Mar 8,  2026 · 4:00 PM",  duration: "1h 02m", cover: "linear-gradient(135deg,#e8f8fe,#c3e8f8)" },
-  { id: 9,  title: "Board Presentation Prep",    date: "Mar 7,  2026 · 2:00 PM",  duration: "1h 30m", cover: "linear-gradient(135deg,#fdf0e8,#f8d4c3)" },
-  { id: 10, title: "Marketing Strategy",         date: "Mar 6,  2026 · 10:30 AM", duration: "55m",    cover: "linear-gradient(135deg,#eefee8,#d4f8c3)" },
-  { id: 11, title: "Investor Update",            date: "Mar 5,  2026 · 3:30 PM",  duration: "40m",    cover: "linear-gradient(135deg,#f8e8fe,#e8c3f8)" },
-  { id: 12, title: "Retrospective Sprint 3",     date: "Mar 4,  2026 · 5:00 PM",  duration: "1h 15m", cover: "linear-gradient(135deg,#e8fef5,#c3f8db)" },
+  {
+    id: 1,
+    title: "Q1 Planning Meeting",
+    date: "2025/03/15 14:03",
+    duration: "1h 23m",
+    cover: "linear-gradient(135deg,#e8f0fe,#c3d4f8)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project C",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+      { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
+      { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
+    ]
+  },
+  {
+    id: 2,
+    title: "Design Review Sprint 4",
+    date: "2025/03/15 15:30",
+    duration: "45m",
+    cover: "linear-gradient(135deg,#fde8f0,#f8c3d4)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project A",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+    ]
+  },
+  {
+    id: 3,
+    title: "Engineering Sync",
+    date: "2025/03/15 16:45",
+    duration: "58m",
+    cover: "linear-gradient(135deg,#e8fde8,#c3f8c3)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Untitled",
+    participants: [
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+    ]
+  },
+  {
+    id: 4,
+    title: "Product Roadmap Review",
+    date: "2025/03/14 14:30",
+    duration: "1h 10m",
+    cover: "linear-gradient(135deg,#fef8e8,#f8e8c3)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project B",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
+      { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+    ]
+  },
+  {
+    id: 5,
+    title: "Sales Kickoff",
+    date: "2025/03/14 16:00",
+    duration: "2h 05m",
+    cover: "linear-gradient(135deg,#f0e8fe,#d4c3f8)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project A",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+    ]
+  },
+  {
+    id: 6,
+    title: "Customer Onboarding",
+    date: "2025/03/13 10:00",
+    duration: "30m",
+    cover: "linear-gradient(135deg,#e8fef8,#c3f8e8)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project C",
+    participants: [
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+    ]
+  },
+  {
+    id: 7,
+    title: "Weekly Standup",
+    date: "2025/03/13 11:30",
+    duration: "20m",
+    cover: "linear-gradient(135deg,#feeae8,#f8cdc3)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project B",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+    ]
+  },
+  {
+    id: 8,
+    title: "UX Research Debrief",
+    date: "2025/03/13 14:00",
+    duration: "1h 02m",
+    cover: "linear-gradient(135deg,#e8f8fe,#c3e8f8)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Untitled",
+    participants: [
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+      { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
+    ]
+  },
+  {
+    id: 9,
+    title: "Board Presentation Prep",
+    date: "2025/03/07 14:00",
+    duration: "1h 30m",
+    cover: "linear-gradient(135deg,#fdf0e8,#f8d4c3)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project A",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+    ]
+  },
+  {
+    id: 10,
+    title: "Marketing Strategy",
+    date: "2025/03/06 10:30",
+    duration: "55m",
+    cover: "linear-gradient(135deg,#eefee8,#d4f8c3)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project C",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
+      { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
+    ]
+  },
+  {
+    id: 11,
+    title: "Investor Update",
+    date: "2025/03/05 15:30",
+    duration: "40m",
+    cover: "linear-gradient(135deg,#f8e8fe,#e8c3f8)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Untitled",
+    participants: [
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+      { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+    ]
+  },
+  {
+    id: 12,
+    title: "Retrospective Sprint 3",
+    date: "2025/03/04 17:00",
+    duration: "1h 15m",
+    cover: "linear-gradient(135deg,#e8fef5,#c3f8db)",
+    thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
+    project: "Project B",
+    participants: [
+      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+    ]
+  },
+];
+
+const allParticipantPool = [
+  { id: 1,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1",  name: "Alice" },
+  { id: 2,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2",  name: "Bob" },
+  { id: 3,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3",  name: "Charlie" },
+  { id: 4,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4",  name: "Diana" },
+  { id: 5,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5",  name: "Eve" },
+  { id: 6,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6",  name: "Frank" },
+  { id: 7,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7",  name: "Grace" },
+  { id: 8,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8",  name: "Henry" },
+  { id: 9,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9",  name: "Iris" },
+  { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+  { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
+  { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
 ];
 
 const channels: Channel[] = [
@@ -162,6 +395,17 @@ export default function App() {
   const [renameMemoryTarget, setRenameMemoryTarget] = useState<Memory | null>(null);
   const [renameMemoryValue, setRenameMemoryValue] = useState("");
   const [deleteMemoryTarget, setDeleteMemoryTarget] = useState<Memory | null>(null);
+  const [memoryTab, setMemoryTab] = useState<"meetings" | "people">("meetings");
+  const [memoryFilter, setMemoryFilter] = useState("All");
+  const [memoryFilters, setMemoryFilters] = useState(["All", "Project A", "Project B", "Project C", "Untitled"]);
+  const [addProjectOpen, setAddProjectOpen] = useState(false);
+  const [addProjectValue, setAddProjectValue] = useState("");
+  const [editProjectsOpen, setEditProjectsOpen] = useState(false);
+  const [editingProjectIdx, setEditingProjectIdx] = useState<number | null>(null);
+  const [editingProjectValue, setEditingProjectValue] = useState("");
+  const [editMeetingTarget, setEditMeetingTarget] = useState<Memory | null>(null);
+  const [editMeetingProject, setEditMeetingProject] = useState("");
+  const [editMeetingParticipants, setEditMeetingParticipants] = useState<Memory["participants"]>([]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -225,6 +469,58 @@ export default function App() {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, [memoryMenuId]);
+
+  function openEditMeeting(m: Memory) {
+    setEditMeetingTarget(m);
+    setEditMeetingProject(m.project);
+    setEditMeetingParticipants([...m.participants]);
+  }
+
+  function confirmEditMeeting() {
+    if (!editMeetingTarget) return;
+    setMemoryList((prev) =>
+      prev.map((m) =>
+        m.id === editMeetingTarget.id
+          ? { ...m, project: editMeetingProject, participants: editMeetingParticipants }
+          : m
+      )
+    );
+    setEditMeetingTarget(null);
+  }
+
+  function confirmEditProject(idx: number) {
+    const name = editingProjectValue.trim();
+    if (!name) return;
+    const oldName = memoryFilters[idx];
+    setMemoryFilters((prev) => prev.map((f, i) => i === idx ? name : f));
+    setMemoryList((prev) => prev.map((m) => m.project === oldName ? { ...m, project: name } : m));
+    if (memoryFilter === oldName) setMemoryFilter(name);
+    setEditingProjectIdx(null);
+  }
+
+  function deleteProject(idx: number) {
+    const name = memoryFilters[idx];
+    // reassign cards belonging to this project to "Untitled"
+    setMemoryList((prev) =>
+      prev.map((m) => m.project === name ? { ...m, project: "Untitled" } : m)
+    );
+    // remove the project from filters, ensure "Untitled" stays
+    setMemoryFilters((prev) => {
+      const next = prev.filter((_, i) => i !== idx);
+      if (!next.includes("Untitled")) next.push("Untitled");
+      return next;
+    });
+    if (memoryFilter === name) setMemoryFilter("All");
+  }
+
+  function confirmAddProject() {
+    const name = addProjectValue.trim();
+    if (!name) return;
+    setMemoryFilters((prev) => [...prev, name]);
+    setAddProjectOpen(false);
+    setAddProjectValue("");
+    setEditingProjectIdx(null);
+  }
 
   function confirmRenameMemory() {
     if (!renameMemoryTarget || !renameMemoryValue.trim()) return;
@@ -369,35 +665,122 @@ export default function App() {
         {activeNav === "memories" && !activeChannel ? (
           <div className="memories-view">
             <h1 className="memories-title">Memories</h1>
-            <div className="memories-grid">
-              {memoryList.map((m) => (
-                <div className="memory-card" key={m.id}>
-                  <div className="memory-cover" style={{ background: m.cover }}>
-                    <button
-                      className="memory-more-btn"
-                      onClick={(e) => { e.stopPropagation(); setMemoryMenuId(memoryMenuId === m.id ? null : m.id); }}
-                    >
-                      <MoreHorizontal size={14} />
-                    </button>
-                    {memoryMenuId === m.id && (
-                      <div className="memory-dropdown" onClick={(e) => e.stopPropagation()}>
-                        <button className="memory-dropdown-item" onClick={() => { setRenameMemoryTarget(m); setRenameMemoryValue(m.title); setMemoryMenuId(null); }}>
-                          <Pencil size={13} />
-                          Rename
-                        </button>
-                        <button className="memory-dropdown-item danger" onClick={() => { setDeleteMemoryTarget(m); setMemoryMenuId(null); }}>
-                          <Trash2 size={13} />
-                          Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  <div className="memory-info">
-                    <span className="memory-name">{m.title}</span>
-                    <span className="memory-date">{m.date}</span>
-                  </div>
-                </div>
+            <div className="memories-tabs">
+              {(["meetings", "people"] as const).map((tab) => (
+                <button
+                  key={tab}
+                  className={`memory-tab ${memoryTab === tab ? "active" : ""}`}
+                  onClick={() => setMemoryTab(tab)}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </button>
               ))}
+            </div>
+            <div className="memory-filters">
+              {[...memoryFilters.filter((f) => f !== "Untitled"), "Untitled"].map((f) => (
+                <button
+                  key={f}
+                  className={`memory-filter-btn ${memoryFilter === f ? "active" : ""}`}
+                  onClick={() => setMemoryFilter(f)}
+                >
+                  {f}
+                </button>
+              ))}
+              <div className="memory-filter-actions">
+                <button className="memory-filter-add" onClick={() => setEditProjectsOpen(true)}>
+                  <Pencil size={14} />
+                </button>
+              </div>
+            </div>
+            <div className="memories-list-container">
+              {(() => {
+                const filteredList = memoryFilter === "All" ? memoryList : memoryList.filter((m) => m.project === memoryFilter);
+                const groupedByDate = filteredList.reduce((acc: Record<string, typeof filteredList>, m) => {
+                  const dateStr = m.date.split(" ")[0];
+                  if (!acc[dateStr]) acc[dateStr] = [];
+                  acc[dateStr].push(m);
+                  return acc;
+                }, {});
+                const sortedDates = Object.keys(groupedByDate).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
+                return (
+                  <div className="memories-rows">
+                    {sortedDates.flatMap((dateStr, dateIdx) => {
+                      const dateObj = new Date(dateStr);
+                      const day = dateObj.getDate();
+                      const month = dateObj.toLocaleString("en-US", { month: "short" });
+                      const items = groupedByDate[dateStr];
+                      const isLastDate = dateIdx === sortedDates.length - 1;
+                      return items.map((m, itemIdx) => {
+                        const isFirstItem = itemIdx === 0;
+                        const isLastItem = itemIdx === items.length - 1;
+                        const isVeryFirst = dateIdx === 0 && itemIdx === 0;
+                        return (
+                        <div key={m.id} className="memory-row">
+                          <div className="memories-timeline-item">
+                            {isFirstItem && (
+                              <>
+                                <div className="timeline-date">
+                                  <div className="timeline-day">{day}</div>
+                                  <div className="timeline-month">{month}</div>
+                                </div>
+                                <div className="timeline-dot"></div>
+                              </>
+                            )}
+                            {!(isLastDate && isLastItem) && (
+                              <div className="timeline-line"></div>
+                            )}
+                          </div>
+                          <div className="memory-list-item">
+                            <div className="memory-thumbnail">
+                              <img src={m.thumbnail} alt={m.title} />
+                            </div>
+                            <div className="memory-content">
+                              <div className="memory-title">{m.title}</div>
+                              <div className="memory-meta">
+                                <span className="memory-project">{m.project}</span>
+                                <span className="memory-meta-divider" />
+                                <span className="memory-datetime">{m.date}</span>
+                              </div>
+                              <div className="memory-participants">
+                                <div className="participant-avatars">
+                                  {m.participants.slice(0, isVeryFirst ? 6 : 3).map((p, idx) => (
+                                    <img
+                                      key={p.id}
+                                      src={p.avatar}
+                                      alt={p.name}
+                                      className="participant-avatar"
+                                      title={p.name}
+                                      style={{ marginLeft: idx > 0 ? "-8px" : "0" }}
+                                    />
+                                  ))}
+                                </div>
+                                {isVeryFirst && m.participants.length > 6 && (
+                                  <span className="participants-more">and {m.participants.length - 6} more</span>
+                                )}
+                              </div>
+                            </div>
+                            <div className="memory-actions">
+                              <button
+                                className="memory-action-btn"
+                                onClick={(e) => { e.stopPropagation(); openEditMeeting(m); }}
+                              >
+                                <SlidersHorizontal size={14} />
+                              </button>
+                              <button
+                                className="memory-action-btn danger"
+                                onClick={(e) => { e.stopPropagation(); setDeleteMemoryTarget(m); }}
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        );
+                      });
+                    })}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         ) : activeNav === "settings" && !activeChannel ? (
@@ -757,6 +1140,143 @@ export default function App() {
         confirmLabel="Delete"
         confirmDanger
       />
+
+      {editMeetingTarget && (
+        <div className="modal-backdrop" onClick={() => setEditMeetingTarget(null)}>
+          <div className="modal modal--wide" onClick={(e) => e.stopPropagation()}>
+            <h2 className="modal-title">Edit Meeting</h2>
+            <div className="modal-body">
+              {/* Project selector */}
+              <div className="em-section">
+                <div className="em-label">Project</div>
+                <div className="em-project-pills">
+                  {memoryFilters.filter((f) => f !== "All").map((f) => (
+                    <button
+                      key={f}
+                      className={`em-project-pill ${editMeetingProject === f ? "active" : ""}`}
+                      onClick={() => setEditMeetingProject(f)}
+                    >
+                      {f}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {/* Participants */}
+              <div className="em-section">
+                <div className="em-label">Participants</div>
+                <div className="em-participants">
+                  {editMeetingParticipants.map((p) => (
+                    <div key={p.id} className="em-participant-chip">
+                      <img src={p.avatar} alt={p.name} className="em-participant-avatar" />
+                      <span className="em-participant-name">{p.name}</span>
+                      <button
+                        className="em-participant-remove"
+                        onClick={() => setEditMeetingParticipants((prev) => prev.filter((x) => x.id !== p.id))}
+                      >
+                        <X size={11} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Add participants */}
+              {allParticipantPool.filter((p) => !editMeetingParticipants.find((x) => x.id === p.id)).length > 0 && (
+                <div className="em-section">
+                  <div className="em-label">Add participants</div>
+                  <div className="em-add-participants">
+                    {allParticipantPool
+                      .filter((p) => !editMeetingParticipants.find((x) => x.id === p.id))
+                      .map((p) => (
+                        <button
+                          key={p.id}
+                          className="em-add-participant"
+                          onClick={() => setEditMeetingParticipants((prev) => [...prev, p])}
+                          title={p.name}
+                        >
+                          <img src={p.avatar} alt={p.name} className="em-participant-avatar" />
+                          <span className="em-participant-name">{p.name}</span>
+                          <Plus size={11} className="em-add-icon" />
+                        </button>
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="modal-actions">
+              <button className="modal-btn cancel" onClick={() => setEditMeetingTarget(null)}>Cancel</button>
+              <button className="modal-btn confirm" onClick={confirmEditMeeting}>Save</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editProjectsOpen && (
+        <div className="modal-backdrop" onClick={() => { setEditProjectsOpen(false); setEditingProjectIdx(null); }}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h2 className="modal-title">Edit Projects</h2>
+            <div className="modal-body">
+              <div className="edit-projects-list">
+                {memoryFilters.filter((f) => f !== "All").map((f) => {
+                  const realIdx = memoryFilters.indexOf(f);
+                  return (
+                    <div key={f} className="edit-project-row">
+                      {editingProjectIdx === realIdx ? (
+                        <input
+                          className="edit-project-input"
+                          value={editingProjectValue}
+                          onChange={(e) => setEditingProjectValue(e.target.value)}
+                          onKeyDown={(e) => { if (e.key === "Enter") confirmEditProject(realIdx); if (e.key === "Escape") setEditingProjectIdx(null); }}
+                          onBlur={() => confirmEditProject(realIdx)}
+                          autoFocus
+                        />
+                      ) : (
+                        <span className="edit-project-name" onClick={() => { setEditingProjectIdx(realIdx); setEditingProjectValue(f); }}>{f}</span>
+                      )}
+                      {f !== "Untitled" && (
+                        <button className="edit-project-delete" onClick={() => deleteProject(realIdx)}>
+                          <Trash2 size={14} />
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+                <div className="edit-project-add-row">
+                  <input
+                    className="edit-project-input"
+                    placeholder="New project name..."
+                    value={addProjectValue}
+                    onChange={(e) => setAddProjectValue(e.target.value)}
+                    onKeyDown={(e) => { if (e.key === "Enter") confirmAddProject(); }}
+                  />
+                  <button className="edit-project-add-btn" onClick={confirmAddProject}>
+                    <Plus size={14} />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="modal-btn confirm" onClick={() => { setEditProjectsOpen(false); setEditingProjectIdx(null); }}>Done</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <Modal
+        title="New project"
+        open={addProjectOpen}
+        onConfirm={confirmAddProject}
+        onCancel={() => setAddProjectOpen(false)}
+        confirmLabel="Add"
+      >
+        <input
+          className="modal-input"
+          placeholder="Project name"
+          value={addProjectValue}
+          onChange={(e) => setAddProjectValue(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && confirmAddProject()}
+          autoFocus
+        />
+      </Modal>
 
       <Modal
         title="Rename recording"
