@@ -64,18 +64,18 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project C",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
-      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
-      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
-      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
-      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
-      { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
-      { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack" },
+      { id: 11, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=11", name: "Kate" },
+      { id: 12, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=12", name: "Liam" },
     ]
   },
   {
@@ -87,14 +87,14 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
-      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
-      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", name: "Henry" },
     ]
   },
   {
@@ -106,15 +106,15 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Untitled",
     participants: [
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
-      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
-      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
-      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
-      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack" },
     ]
   },
   {
@@ -126,14 +126,14 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
-      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
-      { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", name: "Grace" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9", name: "Iris" },
+      { id: 11, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=11", name: "Kate" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
     ]
   },
   {
@@ -145,12 +145,12 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
     ]
   },
   {
@@ -162,14 +162,14 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project C",
     participants: [
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
-      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
-      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
-      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
-      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack" },
     ]
   },
   {
@@ -181,12 +181,12 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
     ]
   },
   {
@@ -198,12 +198,12 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Untitled",
     participants: [
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
-      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
-      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
-      { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", name: "Henry" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack" },
+      { id: 12, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=12", name: "Liam" },
     ]
   },
   {
@@ -215,16 +215,16 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
-      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
-      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
-      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
-      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", name: "Grace" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", name: "Henry" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9", name: "Iris" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack" },
     ]
   },
   {
@@ -236,12 +236,12 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project C",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 7, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7", name: "Grace" },
-      { id: 9, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9", name: "Iris" },
-      { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 7, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", name: "Grace" },
+      { id: 9, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9", name: "Iris" },
+      { id: 11, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=11", name: "Kate" },
     ]
   },
   {
@@ -253,14 +253,14 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Untitled",
     participants: [
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
-      { id: 8, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8", name: "Henry" },
-      { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
-      { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
+      { id: 8, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", name: "Henry" },
+      { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack" },
+      { id: 12, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=12", name: "Liam" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
     ]
   },
   {
@@ -272,29 +272,44 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     participants: [
-      { id: 1, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1", name: "Alice" },
-      { id: 2, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2", name: "Bob" },
-      { id: 3, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3", name: "Charlie" },
-      { id: 4, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4", name: "Diana" },
-      { id: 5, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5", name: "Eve" },
-      { id: 6, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6", name: "Frank" },
+      { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
+      { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
+      { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
+      { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
+      { id: 5, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", name: "Eve" },
+      { id: 6, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", name: "Frank" },
     ]
   },
 ];
 
+const mockPeople = [
+  { id: 1,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1",  name: "Alice",   email: "alice@company.com" },
+  { id: 2,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2",  name: "Bob",     email: "bob@company.com" },
+  { id: 3,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3",  name: "Charlie", email: "charlie@company.com" },
+  { id: 4,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4",  name: "Diana",   email: "diana@company.com" },
+  { id: 5,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5",  name: "Eve",     email: "eve@company.com" },
+  { id: 6,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6",  name: "Frank",   email: "frank@company.com" },
+  { id: 7,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7",  name: "Grace",   email: "grace@company.com" },
+  { id: 8,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8",  name: "Henry",   email: "henry@company.com" },
+  { id: 9,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9",  name: "Iris",    email: "iris@company.com" },
+  { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack",    email: "jack@company.com" },
+  { id: 11, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=11", name: "Kate",    email: "kate@company.com" },
+  { id: 12, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=12", name: "Liam",    email: "liam@company.com" },
+];
+
 const allParticipantPool = [
-  { id: 1,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=1",  name: "Alice" },
-  { id: 2,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=2",  name: "Bob" },
-  { id: 3,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=3",  name: "Charlie" },
-  { id: 4,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=4",  name: "Diana" },
-  { id: 5,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=5",  name: "Eve" },
-  { id: 6,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=6",  name: "Frank" },
-  { id: 7,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=7",  name: "Grace" },
-  { id: 8,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=8",  name: "Henry" },
-  { id: 9,  avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=9",  name: "Iris" },
-  { id: 10, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=10", name: "Jack" },
-  { id: 11, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=11", name: "Kate" },
-  { id: 12, avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=12", name: "Liam" },
+  { id: 1,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1",  name: "Alice" },
+  { id: 2,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2",  name: "Bob" },
+  { id: 3,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3",  name: "Charlie" },
+  { id: 4,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4",  name: "Diana" },
+  { id: 5,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5",  name: "Eve" },
+  { id: 6,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6",  name: "Frank" },
+  { id: 7,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7",  name: "Grace" },
+  { id: 8,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8",  name: "Henry" },
+  { id: 9,  avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=9",  name: "Iris" },
+  { id: 10, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=10", name: "Jack" },
+  { id: 11, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=11", name: "Kate" },
+  { id: 12, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=12", name: "Liam" },
 ];
 
 const channels: Channel[] = [
@@ -403,6 +418,7 @@ export default function App() {
   const [editProjectsOpen, setEditProjectsOpen] = useState(false);
   const [editingProjectIdx, setEditingProjectIdx] = useState<number | null>(null);
   const [editingProjectValue, setEditingProjectValue] = useState("");
+  const [personFilter, setPersonFilter] = useState<number | null>(null);
   const [editMeetingTarget, setEditMeetingTarget] = useState<Memory | null>(null);
   const [editMeetingProject, setEditMeetingProject] = useState("");
   const [editMeetingParticipants, setEditMeetingParticipants] = useState<Memory["participants"]>([]);
@@ -670,13 +686,23 @@ export default function App() {
                 <button
                   key={tab}
                   className={`memory-tab ${memoryTab === tab ? "active" : ""}`}
-                  onClick={() => setMemoryTab(tab)}
+                  onClick={() => { setMemoryTab(tab); setPersonFilter(null); }}
                 >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  {tab === "meetings" ? "Projects" : "People"}
                 </button>
               ))}
             </div>
-            <div className="memory-filters">
+            {memoryTab === "meetings" && <div className="memory-filters">
+              {personFilter !== null && (() => {
+                const person = mockPeople.find((p) => p.id === personFilter);
+                return person ? (
+                  <div className="person-filter-chip">
+                    <img src={person.avatar} alt={person.name} className="person-filter-avatar" />
+                    <span>{person.name}</span>
+                    <button className="person-filter-clear" onClick={() => setPersonFilter(null)}><X size={11} /></button>
+                  </div>
+                ) : null;
+              })()}
               {[...memoryFilters.filter((f) => f !== "Untitled"), "Untitled"].map((f) => (
                 <button
                   key={f}
@@ -691,10 +717,47 @@ export default function App() {
                   <Pencil size={14} />
                 </button>
               </div>
-            </div>
+            </div>}
+            {memoryTab === "people" && personFilter === null ? (
+              <div className="people-grid">
+                {mockPeople.map((p) => (
+                  <div key={p.id} className="people-card" onClick={() => setPersonFilter(p.id)}>
+                    <img src={p.avatar} alt={p.name} className="people-avatar" />
+                    <div className="people-info">
+                      <span className="people-name">{p.name}</span>
+                      <span className="people-email">{p.email}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+            <>
+            {memoryTab === "people" && (() => {
+              const person = mockPeople.find((p) => p.id === personFilter);
+              return person ? (
+                <div className="memory-filters">
+                  <div className="person-filter-chip">
+                    <img src={person.avatar} alt={person.name} className="person-filter-avatar" />
+                    <span>{person.name}</span>
+                    <button className="person-filter-clear" onClick={() => setPersonFilter(null)}><X size={11} /></button>
+                  </div>
+                  {[...memoryFilters.filter((f) => f !== "Untitled"), "Untitled"].map((f) => (
+                    <button
+                      key={f}
+                      className={`memory-filter-btn ${memoryFilter === f ? "active" : ""}`}
+                      onClick={() => setMemoryFilter(f)}
+                    >
+                      {f}
+                    </button>
+                  ))}
+                </div>
+              ) : null;
+            })()}
             <div className="memories-list-container">
               {(() => {
-                const filteredList = memoryFilter === "All" ? memoryList : memoryList.filter((m) => m.project === memoryFilter);
+                const filteredList = memoryList
+                  .filter((m) => memoryFilter === "All" || m.project === memoryFilter)
+                  .filter((m) => personFilter === null || m.participants.some((p) => Number(p.id) === Number(personFilter)));
                 const groupedByDate = filteredList.reduce((acc: Record<string, typeof filteredList>, m) => {
                   const dateStr = m.date.split(" ")[0];
                   if (!acc[dateStr]) acc[dateStr] = [];
@@ -782,6 +845,8 @@ export default function App() {
                 );
               })()}
             </div>
+            </>
+            )}
           </div>
         ) : activeNav === "settings" && !activeChannel ? (
           <div className="settings-view">
@@ -1216,7 +1281,7 @@ export default function App() {
             <h2 className="modal-title">Edit Projects</h2>
             <div className="modal-body">
               <div className="edit-projects-list">
-                {memoryFilters.filter((f) => f !== "All").map((f) => {
+                {memoryFilters.filter((f) => f !== "All" && f !== "Untitled").map((f) => {
                   const realIdx = memoryFilters.indexOf(f);
                   return (
                     <div key={f} className="edit-project-row">

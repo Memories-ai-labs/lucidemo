@@ -1426,7 +1426,7 @@ html, body, #root {
 .memories-tabs {
   display: flex;
   gap: 16px;
-  padding: 0 8px 16px 0;
+  padding: 0 8px 0 0;
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 20px;
 }
@@ -1441,6 +1441,7 @@ html, body, #root {
   font-size: 14px;
   font-weight: 500;
   border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
   transition: all 0.15s;
   text-align: center;
 }
@@ -1457,6 +1458,47 @@ html, body, #root {
   flex-wrap: wrap;
   margin-bottom: 20px;
   padding-right: 8px;
+}
+
+.person-filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 999px;
+  background: rgba(255, 159, 28, 0.12);
+  border: 1px solid #FF9F1C;
+  font-size: 13px;
+  font-weight: 500;
+  color: #b37000;
+}
+
+.person-filter-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.person-filter-clear {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 159, 28, 0.3);
+  color: #b37000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.person-filter-clear:hover {
+  background: #FF9F1C;
+  color: #fff;
 }
 
 .memory-filter-btn {
@@ -1482,6 +1524,60 @@ html, body, #root {
   border-color: #FF9F1C;
   color: #b37000;
   font-weight: 600;
+}
+
+/* People Tab */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding-right: 8px;
+}
+
+.people-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.people-card:hover {
+  background: #f5f5f5;
+}
+
+.people-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.people-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.people-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.people-email {
+  font-size: 11px;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Edit Meeting Modal */
