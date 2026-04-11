@@ -1042,6 +1042,7 @@ html, body, #root {
   cursor: pointer;
   border-radius: 10px;
   padding: 8px;
+  background: #fff;
   transition: background 0.15s;
 }
 
@@ -1501,6 +1502,32 @@ html, body, #root {
   color: #fff;
 }
 
+.person-filter-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.person-filter-select {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 500;
+  color: inherit;
+  cursor: pointer;
+  padding-right: 16px;
+  outline: none;
+}
+
+.person-filter-chevron {
+  position: absolute;
+  right: 0;
+  pointer-events: none;
+  color: inherit;
+}
+
 .memory-filter-btn {
   padding: 6px 14px;
   border-radius: 999px;
@@ -1526,7 +1553,309 @@ html, body, #root {
   font-weight: 600;
 }
 
+/* Daily Tab */
+.daily-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.daily-date-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.daily-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #888;
+  transition: background 0.15s;
+}
+
+.daily-nav-btn:hover {
+  background: #f0f0f0;
+  color: #1a1a1a;
+}
+
+.daily-date-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.daily-timeline {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+  margin-right: 8px;
+}
+
+.daily-hour-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.daily-hour-left {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  flex-shrink: 0;
+  width: 48px;
+}
+
+.daily-hour-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #bbb;
+  width: 20px;
+  text-align: right;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.daily-hour-row.active .daily-hour-label {
+  color: #888;
+}
+
+.daily-hour-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+}
+
+.daily-hour-dot {
+  display: none;
+}
+
+.daily-hour-line {
+  width: 0.5px;
+  flex: 1;
+  background: repeating-linear-gradient(
+    to bottom,
+    #d0d0d0 0px,
+    #d0d0d0 6px,
+    transparent 6px,
+    transparent 10px
+  );
+}
+
+.daily-hour-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.daily-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.daily-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.daily-app-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.daily-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.daily-card-time {
+  font-size: 11px;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
+.daily-card-summary {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Library Tab */
+.library-view {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-right: 8px;
+}
+
+.library-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.library-section-header .library-section-title {
+  margin-bottom: 0;
+}
+
+.library-section-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.library-section-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.library-section-btn:hover {
+  background: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.library-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.02em;
+}
+
+.project-cards-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.project-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.15s;
+}
+
+.project-card:hover {
+  background: #f5f5f5;
+}
+
+.project-card-icon {
+  color: #888;
+  flex-shrink: 0;
+}
+
+.project-card-name {
+  font-size: 14px;
+  color: #1a1a1a;
+  flex: 1;
+}
+
+.project-card-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.project-card:hover .project-card-actions {
+  opacity: 1;
+}
+
+.project-card-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #888;
+  transition: background 0.15s, color 0.15s;
+}
+
+.project-card-action-btn:hover {
+  background: #e8e8e8;
+  color: #1a1a1a;
+}
+
+.project-card-action-btn.danger:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
 /* People Tab */
+.library-people-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.library-people-card {
+  position: relative;
+  background: #fff;
+}
+
+.people-card-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.library-people-card:hover .people-card-actions {
+  opacity: 1;
+}
+
 .people-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1719,6 +2048,82 @@ html, body, #root {
   padding: 4px 0;
 }
 
+.merge-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.merge-checkbox {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.merge-rename-step {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.merge-rename-label {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+
+.merge-selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.merge-people-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.merge-person-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.merge-person-row:hover {
+  background: #f5f5f5;
+}
+
+.merge-person-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.merge-person-name {
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.merge-tag {
+  font-size: 12px;
+  background: #f0f0f0;
+  color: #555;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
 .edit-project-name {
   flex: 1;
   font-size: 14px;
@@ -1896,6 +2301,7 @@ html, body, #root {
   gap: 16px;
   padding: 14px 12px;
   border-radius: 10px;
+  background: #fff;
   transition: background 0.15s;
   cursor: pointer;
   position: relative;
@@ -2044,4 +2450,214 @@ html, body, #root {
 
 .memory-list-item:hover .memory-action-btn {
   display: flex;
+}
+
+/* Personal tab */
+.personal-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow: hidden;
+  padding-right: 8px;
+  padding-bottom: 12px;
+}
+
+.personal-row {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 16px;
+}
+
+.personal-row2 {
+  flex: 1;
+  min-height: 0;
+}
+
+.personal-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.personal-pie-card {
+  flex: 1;
+}
+
+.personal-bar-card {
+  flex: 2;
+}
+
+.personal-todo-card,
+.personal-done-card {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.personal-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.personal-pie-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.personal-pie-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 200px;
+}
+
+.personal-pie-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.personal-pie-label {
+  font-size: 12px;
+  color: #555;
+  flex: 1;
+}
+
+.personal-pie-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.personal-bar-chart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.personal-bar-area {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  min-height: 80px;
+}
+
+.personal-bar-slot {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.personal-bar-fill {
+  width: 100%;
+  background: #f28c4e;
+  border-radius: 2px 2px 0 0;
+  opacity: 0.85;
+  min-height: 2px;
+}
+
+.personal-bar-x-axis {
+  position: relative;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.personal-bar-x-axis span {
+  position: absolute;
+  font-size: 10px;
+  color: #bbb;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.personal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.personal-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 4px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.12s;
+}
+
+.personal-list-item:hover {
+  background: #f7f7f7;
+}
+
+.personal-check-empty {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid #d0d0d0;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.personal-check-done {
+  width: 16px;
+  height: 16px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.personal-list-text {
+  font-size: 13px;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.personal-list-text.done {
+  color: #bbb;
+  text-decoration: line-through;
+}
+
+.personal-highlight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.personal-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.personal-highlight-item::before {
+  content: "•";
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.personal-highlight-text {
+  font-size: 12px;
+  color: #444;
+  line-height: 1.6;
 }
