@@ -3,6 +3,10 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { listen } from "@tauri-apps/api/event";
 import logoUrl from "./assets/logo.svg";
 import Modal from "./components/Modal";
+import RegularButton from "./components/RegularButton";
+import MenuBarTab from "./components/MenuBarTab";
+import RegularIconButton from "./components/RegularIconButton";
+import Title from "./components/Title";
 import ChannelItem from "./components/ChannelItem";
 import {
   MessageCircle,
@@ -580,6 +584,24 @@ export default function App() {
     });
   }
   const [themeMode, setThemeMode] = useState("system");
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (themeMode === "dark") {
+      root.setAttribute("data-theme", "dark");
+    } else if (themeMode === "light") {
+      root.removeAttribute("data-theme");
+    } else {
+      // system
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      const apply = (e: MediaQueryListEvent | MediaQueryList) =>
+        e.matches ? root.setAttribute("data-theme", "dark") : root.removeAttribute("data-theme");
+      apply(mq);
+      mq.addEventListener("change", apply);
+      return () => mq.removeEventListener("change", apply);
+    }
+  }, [themeMode]);
+
   const restorePoints = ["20260317143012", "20260316090512", "20260315164823"];
   const [restorePoint, setRestorePoint] = useState(restorePoints[0]);
   const [restoreDropdownOpen, setRestoreDropdownOpen] = useState(false);
@@ -919,19 +941,9 @@ export default function App() {
         </div>
 
         <nav className="sidebar-nav">
-          <button className={`nav-item ${activeNav === "ask" ? "active" : ""}`} onClick={() => setActiveNav("ask")}>
-            <MessageCircle size={16} />
-            <span>Ask LUCI</span>
-            <kbd className="shortcut">Fn</kbd>
-          </button>
-          <button className={`nav-item ${activeNav === "memories" ? "active" : ""}`} onClick={() => setActiveNav("memories")}>
-            <BookMarked size={16} />
-            <span>Memories</span>
-          </button>
-          <button className={`nav-item ${activeNav === "settings" ? "active" : ""}`} onClick={() => setActiveNav("settings")}>
-            <Settings size={16} />
-            <span>Settings</span>
-          </button>
+          <MenuBarTab icon={<MessageCircle size={16} />} label="Ask LUCI" active={activeNav === "ask"} onClick={() => setActiveNav("ask")} />
+          <MenuBarTab icon={<BookMarked size={16} />} label="Memories" active={activeNav === "memories"} onClick={() => setActiveNav("memories")} />
+          <MenuBarTab icon={<Settings size={16} />} label="Settings" active={activeNav === "settings"} onClick={() => setActiveNav("settings")} />
         </nav>
 
         <div className="sidebar-footer">
@@ -1397,10 +1409,10 @@ export default function App() {
                     <span className="account-row-sub">A secure virtual environment where Luci runs</span>
                   </div>
                   <div className="account-row-actions">
-                    <button className="settings-btn">Restart</button>
-                    <button className="settings-btn">Manual backup</button>
+                    <RegularButton>Restart</RegularButton>
+                    <RegularButton>Manual backup</RegularButton>
                     <div className="restore-split-btn">
-                      <button className="restore-main">Restore</button>
+                      <RegularButton>Restore</RegularButton>
                       <div className="restore-divider" />
                       <div className="restore-arrow-wrap" onClick={(e) => { e.stopPropagation(); setRestoreDropdownOpen((v) => !v); }}>
                         <ChevronDown size={13} />
@@ -1429,7 +1441,7 @@ export default function App() {
                 <div className="account-row">
                   <span className="account-row-label">Import memory to LUCI</span>
                   <div className="account-row-actions">
-                    <button className="settings-btn">Import</button>
+                    <RegularButton>Import</RegularButton>
                   </div>
                 </div>
 
@@ -1439,7 +1451,7 @@ export default function App() {
                 <div className="account-row">
                   <span className="account-row-label">Chat with Luci on Telegram</span>
                   <div className="account-row-actions">
-                    <button className="settings-btn">Start on Telegram</button>
+                    <RegularButton>Start on Telegram</RegularButton>
                   </div>
                 </div>
               </div>
@@ -1452,7 +1464,7 @@ export default function App() {
                     <span className="subscription-plan-name">Free Plan</span>
                     <span className="subscription-plan-ends">Ends on 9999/01/01</span>
                   </div>
-                  <button className="subscription-upgrade-btn">Upgrade</button>
+                  <RegularButton variant="primary">Upgrade</RegularButton>
                 </div>
 
                 <div className="settings-divider" />
@@ -1539,12 +1551,11 @@ export default function App() {
                           {app.name.charAt(0)}
                         </div>
                         <span className="integration-name">{app.name}</span>
-                        <button
-                          className={`integration-btn ${connected ? "connected" : ""}`}
+                        <RegularButton
                           onClick={() => toggleConnect(app.id)}
                         >
                           {connected ? "Connected" : "Connect"}
-                        </button>
+                        </RegularButton>
                       </div>
                     );
                   })}
@@ -1632,12 +1643,7 @@ export default function App() {
             </div>
 
             <div className="channels">
-              <div className="channels-header">
-                <span className="channels-title">Channels</span>
-                <button className="add-btn" onClick={() => { setCreateOpen(true); setCreateValue(""); }}>
-                  <Plus size={16} />
-                </button>
-              </div>
+              <Title rightBtn={<RegularIconButton icon={<Plus size={16} />} variant="outlined" onClick={() => { setCreateOpen(true); setCreateValue(""); }} />}>Sessions</Title>
               <div className="channel-list">
                 {channelList.map((ch) => (
                   <ChannelItem

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
+import RegularIconButton from "./RegularIconButton";
 import "./ChannelItem.css";
 
 export interface Channel {
@@ -34,12 +35,8 @@ export default function ChannelItem({ channel, onClick, onRename, onDelete }: Ch
       <div className="channel-right">
         {hovered && (
           <div className="channel-actions" onClick={(e) => e.stopPropagation()}>
-            <button className="action-btn" onClick={() => onRename(channel)}>
-              <Pencil size={14} />
-            </button>
-            <button className="action-btn" onClick={() => onDelete(channel)}>
-              <Trash2 size={14} />
-            </button>
+            <RegularIconButton icon={<Pencil size={14} />} onClick={() => onRename(channel)} />
+            <RegularIconButton icon={<Trash2 size={14} />} onClick={() => onDelete(channel)} />
           </div>
         )}
         <span className="channel-time">{channel.time}</span>

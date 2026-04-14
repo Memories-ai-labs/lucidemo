@@ -19,7 +19,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #FAF9F7;
+  background: var(--semi-App-grey-0);
   border-radius: 32px;
   overflow: hidden;
   position: relative;
@@ -46,7 +46,7 @@ html, body, #root {
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #aaa;
+  color: var(--semi-App-grey-3);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -56,7 +56,7 @@ html, body, #root {
 
 .sidebar-close-btn:hover {
   background: rgba(0, 0, 0, 0.06);
-  color: #444;
+  color: var(--semi-color-app-text-1);
 }
 
 /* ── Open btn (fixed, visible when sidebar is closed) ── */
@@ -69,11 +69,11 @@ html, body, #root {
   height: 28px;
   border-radius: 999px;
   border: none;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--app-float-btn-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
-  color: #666;
+  color: var(--semi-App-grey-5);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -82,8 +82,8 @@ html, body, #root {
 }
 
 .sidebar-open-btn:hover {
-  background: rgba(255, 255, 255, 1);
-  color: #333;
+  background: var(--app-float-btn-bg-hover);
+  color: var(--semi-color-app-text-0);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 0 0 0.5px rgba(0, 0, 0, 0.07);
 }
 
@@ -95,7 +95,7 @@ html, body, #root {
   width: 220px;
   height: calc(100vh - 16px);
   border-radius: 22px;
-  background: rgba(250, 249, 247, 0.97);
+  background: var(--app-sidebar-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 100;
@@ -133,6 +133,10 @@ html, body, #root {
   width: auto;
 }
 
+[data-theme="dark"] .sidebar-logo-img {
+  filter: invert(1) hue-rotate(195deg);
+}
+
 .sidebar-nav {
   flex: 1;
   padding: 8px 10px;
@@ -144,12 +148,12 @@ html, body, #root {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
+  gap: 6px;
+  padding: 12px 16px;
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #555;
+  color: var(--semi-App-grey-6);
   font-size: 14px;
   cursor: pointer;
   text-align: left;
@@ -159,13 +163,13 @@ html, body, #root {
 
 .nav-item:hover {
   background: rgba(0, 0, 0, 0.05);
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .nav-item.active {
   background: rgba(255, 159, 28, 0.12);
-  color: #b37000;
-  font-weight: 500;
+  color: var(--semi-color-APP-active);
+  font-weight: 400;
 }
 
 .nav-item span {
@@ -173,12 +177,12 @@ html, body, #root {
 }
 
 .shortcut {
-  font-size: 11px;
+  font-size: 12px;
   background: transparent;
-  color: #aaa;
+  color: var(--semi-App-grey-3);
   padding: 1px 6px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--semi-App-grey-2);
   font-family: inherit;
   font-weight: 600;
   border: none;
@@ -195,7 +199,7 @@ html, body, #root {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #ddd;
+  background: var(--semi-App-grey-1m);
   flex-shrink: 0;
 }
 
@@ -205,14 +209,14 @@ html, body, #root {
 }
 
 .user-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .user-plan {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
 }
 
 /* ── Main content ── */
@@ -272,7 +276,7 @@ html, body, #root {
 .greeting {
   font-size: 32px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   letter-spacing: -0.03em;
   line-height: 1.15;
 }
@@ -290,14 +294,14 @@ html, body, #root {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
-  color: #b37000;
+  font-size: 14px;
+  color: var(--semi-color-APP-active);
 }
 
 .stat-divider {
   width: 1px;
   height: 16px;
-  background: #ddd;
+  background: var(--semi-App-grey-1m);
 }
 
 /* Channels */
@@ -309,20 +313,20 @@ html, body, #root {
 }
 
 .channels-title {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  color: #999;
+  color: var(--semi-App-grey-3);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .add-btn {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 999px;
-  border: none;
+  border: 1px solid var(--semi-App-grey-1);
   background: transparent;
-  color: #888;
+  color: var(--semi-App-grey-4);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -332,7 +336,7 @@ html, body, #root {
 
 .add-btn:hover {
   background: rgba(0, 0, 0, 0.05);
-  color: #333;
+  color: var(--semi-color-app-text-0);
 }
 
 .channel-list {
@@ -352,15 +356,15 @@ html, body, #root {
 }
 
 .channel-item.hovered {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .channel-icon {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #FFF4E0;
-  color: #FF9F1C;
+  background: var(--semi-orange-0);
+  color: var(--semi-color-APP);
   font-size: 18px;
   font-weight: 700;
   display: flex;
@@ -380,12 +384,12 @@ html, body, #root {
 .channel-name {
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .channel-desc {
-  font-size: 13px;
-  color: #888;
+  font-size: 14px;
+  color: var(--semi-App-grey-4);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -408,8 +412,8 @@ html, body, #root {
   height: 30px;
   border-radius: 999px;
   border: none;
-  background: #ebebeb;
-  color: #555;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-App-grey-6);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -418,12 +422,12 @@ html, body, #root {
 }
 
 .action-btn:hover {
-  background: #e0e0e0;
+  background: var(--semi-App-grey-1m);
 }
 
 .channel-time {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
   min-width: 40px;
   text-align: right;
 }
@@ -438,7 +442,7 @@ html, body, #root {
 .settings-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   margin-bottom: 24px;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -447,7 +451,7 @@ html, body, #root {
 .settings-tabs {
   display: flex;
   gap: 4px;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid var(--semi-App-grey-1);
   padding-bottom: 0;
 }
 
@@ -455,9 +459,9 @@ html, body, #root {
   padding: 8px 14px;
   border: none;
   background: transparent;
-  font-size: 13px;
+  font-size: 14px;
   font-family: inherit;
-  color: #888;
+  color: var(--semi-App-grey-4);
   cursor: pointer;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
@@ -467,13 +471,13 @@ html, body, #root {
 }
 
 .settings-tab:hover {
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .settings-tab.active {
-  color: #FF9F1C;
+  color: var(--semi-color-APP);
   font-weight: 600;
-  border-bottom-color: #FF9F1C;
+  border-bottom-color: var(--semi-color-APP);
 }
 
 /* ── Account Tab ── */
@@ -486,7 +490,7 @@ html, body, #root {
 .settings-divider {
   display: block;
   height: 1px;
-  background: #f0f0f0;
+  background: var(--semi-App-grey-1);
   flex-shrink: 0;
 }
 
@@ -502,14 +506,14 @@ html, body, #root {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #ddd;
+  background: var(--semi-App-grey-1m);
   flex-shrink: 0;
 }
 
 .account-username {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   flex: 1;
 }
 
@@ -520,14 +524,14 @@ html, body, #root {
 }
 
 .account-row-label {
-  font-size: 15px;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--semi-color-app-text-0);
 }
 
 .account-row-sub {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
   line-height: 1.5;
 }
 
@@ -540,10 +544,10 @@ html, body, #root {
 .settings-btn {
   padding: 7px 14px;
   border-radius: 999px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #1a1a1a;
-  font-size: 13px;
+  border: 1px solid var(--semi-App-grey-1m);
+  background: var(--semi-color-bg-0);
+  color: var(--semi-color-app-text-0);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
@@ -551,15 +555,15 @@ html, body, #root {
 }
 
 .settings-btn:hover {
-  background: #f5f5f5;
-  border-color: #d0d0d0;
+  background: var(--semi-App-grey-1);
+  border-color: var(--semi-App-grey-2);
 }
 
 /* Theme selector */
 .theme-selector {
   display: flex;
   gap: 0;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--semi-App-grey-1m);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -568,8 +572,8 @@ html, body, #root {
   padding: 7px 14px;
   border: none;
   background: transparent;
-  color: #888;
-  font-size: 13px;
+  color: var(--semi-App-grey-4);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
@@ -577,27 +581,27 @@ html, body, #root {
 }
 
 .theme-btn + .theme-btn {
-  border-left: 1px solid #e0e0e0;
+  border-left: 1px solid var(--semi-App-grey-1m);
 }
 
 .theme-btn:hover {
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .theme-btn.active {
-  background: #FF9F1C;
-  color: #fff;
+  background: var(--semi-color-APP);
+  color: var(--semi-color-bg-0);
 }
 
 /* ── Restore split button ── */
 .restore-split-btn {
   display: flex;
   align-items: center;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--semi-App-grey-1m);
   border-radius: 999px;
   overflow: visible;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   position: relative;
 }
 
@@ -605,8 +609,8 @@ html, body, #root {
   padding: 7px 12px;
   border: none;
   background: transparent;
-  color: #1a1a1a;
-  font-size: 13px;
+  color: var(--semi-color-app-text-0);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s;
@@ -615,13 +619,13 @@ html, body, #root {
 }
 
 .restore-main:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .restore-divider {
   width: 1px;
   height: 18px;
-  background: #e0e0e0;
+  background: var(--semi-App-grey-1m);
   flex-shrink: 0;
 }
 
@@ -631,21 +635,21 @@ html, body, #root {
   cursor: pointer;
   display: flex;
   align-items: center;
-  color: #888;
+  color: var(--semi-App-grey-4);
   transition: background 0.15s, color 0.15s;
   border-radius: 999px;
 }
 
 .restore-arrow-wrap:hover {
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .restore-dropdown {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.07);
   padding: 4px;
@@ -661,8 +665,8 @@ html, body, #root {
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #1a1a1a;
-  font-size: 13px;
+  color: var(--semi-color-app-text-0);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   width: 100%;
@@ -671,7 +675,7 @@ html, body, #root {
 }
 
 .restore-dropdown-item:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .restore-check {
@@ -679,7 +683,7 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   flex-shrink: 0;
 }
 
@@ -706,21 +710,21 @@ html, body, #root {
 .subscription-plan-name {
   font-size: 18px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .subscription-plan-ends {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
 }
 
 .subscription-upgrade-btn {
   padding: 8px 20px;
   border-radius: 999px;
   border: none;
-  background: #FF9F1C;
-  color: #fff;
-  font-size: 13px;
+  background: var(--semi-color-APP);
+  color: var(--semi-color-bg-0);
+  font-size: 14px;
   font-family: inherit;
   font-weight: 600;
   cursor: pointer;
@@ -728,12 +732,12 @@ html, body, #root {
 }
 
 .subscription-upgrade-btn:hover {
-  background: #333;
+  background: var(--semi-color-app-text-0);
 }
 
 .subscription-desc {
-  font-size: 13px;
-  color: #888;
+  font-size: 14px;
+  color: var(--semi-App-grey-4);
   line-height: 1.6;
   padding: 18px 0;
   max-width: 560px;
@@ -758,21 +762,21 @@ html, body, #root {
 .usage-bar {
   flex: 1;
   height: 10px;
-  background: #ebebeb;
+  background: var(--semi-App-grey-1);
   border-radius: 99px;
   overflow: hidden;
 }
 
 .usage-bar-fill {
   height: 100%;
-  background: #FF9F1C;
+  background: var(--semi-color-APP);
   border-radius: 99px;
   transition: width 0.3s;
 }
 
 .usage-label {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
   white-space: nowrap;
 }
 
@@ -784,14 +788,14 @@ html, body, #root {
 .skills-section-title {
   font-size: 18px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 
 .skills-section-desc {
-  font-size: 13px;
-  color: #888;
+  font-size: 14px;
+  color: var(--semi-App-grey-4);
   line-height: 1.6;
   margin-bottom: 24px;
   max-width: 600px;
@@ -800,7 +804,7 @@ html, body, #root {
 .skills-list {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--semi-App-grey-1);
 }
 
 .skill-item {
@@ -808,7 +812,7 @@ html, body, #root {
   align-items: center;
   gap: 16px;
   padding: 18px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--semi-App-grey-1);
 }
 
 .skill-text {
@@ -820,14 +824,14 @@ html, body, #root {
 }
 
 .skill-name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .skill-desc {
-  font-size: 13px;
-  color: #888;
+  font-size: 14px;
+  color: var(--semi-App-grey-4);
   line-height: 1.6;
 }
 
@@ -844,7 +848,7 @@ html, body, #root {
   height: 20px;
   border-radius: 20px;
   border: none;
-  background: #ddd;
+  background: var(--semi-App-grey-1m);
   cursor: pointer;
   position: relative;
   transition: background 0.2s;
@@ -853,7 +857,7 @@ html, body, #root {
 }
 
 .skill-toggle.on {
-  background: #FF9F1C;
+  background: var(--semi-color-APP);
 }
 
 .skill-toggle-thumb {
@@ -863,7 +867,7 @@ html, body, #root {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   transition: transform 0.2s;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
@@ -878,7 +882,7 @@ html, body, #root {
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #aaa;
+  color: var(--semi-App-grey-3);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -888,7 +892,7 @@ html, body, #root {
 
 .skill-more-btn:hover {
   background: rgba(0, 0, 0, 0.05);
-  color: #555;
+  color: var(--semi-App-grey-6);
 }
 
 .skill-more-wrap {
@@ -899,7 +903,7 @@ html, body, #root {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.07);
   padding: 4px;
@@ -915,8 +919,8 @@ html, body, #root {
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #1a1a1a;
-  font-size: 13px;
+  color: var(--semi-color-app-text-0);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   width: 100%;
@@ -925,15 +929,15 @@ html, body, #root {
 }
 
 .skill-dropdown-item:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .skill-dropdown-item.danger {
-  color: #d93025;
+  color: var(--semi-color-danger-hover);
 }
 
 .skill-dropdown-item.danger:hover {
-  background: #fef2f2;
+  background: var(--semi-color-danger-light-default);
 }
 
 /* ── Integrations Tab ── */
@@ -954,8 +958,8 @@ html, body, #root {
   gap: 12px;
   padding: 14px 16px;
   border-radius: 12px;
-  border: 1px solid #ebebeb;
-  background: #fff;
+  border: 1px solid var(--semi-App-grey-1);
+  background: var(--semi-color-bg-0);
 }
 
 .integration-logo {
@@ -971,9 +975,9 @@ html, body, #root {
 }
 
 .integration-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -984,12 +988,12 @@ html, body, #root {
 .integration-btn {
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #1a1a1a;
+  border: 1px solid var(--semi-App-grey-1m);
+  background: var(--semi-color-bg-0);
+  color: var(--semi-color-app-text-0);
   font-size: 12px;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
   white-space: nowrap;
@@ -997,17 +1001,17 @@ html, body, #root {
 }
 
 .integration-btn:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .integration-btn.connected {
-  background: #f0faf0;
-  border-color: #b8e6b8;
-  color: #2d7a2d;
+  background: var(--semi-color-success-light-default);
+  border-color: var(--semi-color-success-disabled);
+  color: var(--semi-color-success-active);
 }
 
 .integration-btn.connected:hover {
-  background: #e6f7e6;
+  background: var(--semi-color-success-light-hover);
 }
 
 /* ── Memories View ── */
@@ -1022,7 +1026,7 @@ html, body, #root {
 .memories-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   margin-bottom: 28px;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -1042,7 +1046,7 @@ html, body, #root {
   cursor: pointer;
   border-radius: 10px;
   padding: 8px;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   transition: background 0.15s;
 }
 
@@ -1065,8 +1069,8 @@ html, body, #root {
   height: 28px;
   border-radius: 999px;
   border: none;
-  background: rgba(255, 255, 255, 0.9);
-  color: #555;
+  background: var(--app-float-surface);
+  color: var(--semi-App-grey-6);
   cursor: pointer;
   display: none;
   align-items: center;
@@ -1075,7 +1079,7 @@ html, body, #root {
 }
 
 .memory-more-btn:hover {
-  background: #fff;
+  background: var(--semi-color-bg-0);
 }
 
 .memory-card:hover .memory-more-btn {
@@ -1086,7 +1090,7 @@ html, body, #root {
   position: absolute;
   top: 42px;
   right: 8px;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.07);
   padding: 4px;
@@ -1102,8 +1106,8 @@ html, body, #root {
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #1a1a1a;
-  font-size: 13px;
+  color: var(--semi-color-app-text-0);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   width: 100%;
@@ -1112,15 +1116,15 @@ html, body, #root {
 }
 
 .memory-dropdown-item:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .memory-dropdown-item.danger {
-  color: #d93025;
+  color: var(--semi-color-danger-hover);
 }
 
 .memory-dropdown-item.danger:hover {
-  background: #fef2f2;
+  background: var(--semi-color-danger-light-default);
 }
 
 .memory-info {
@@ -1131,17 +1135,17 @@ html, body, #root {
 }
 
 .memory-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .memory-date {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
 }
 
 /* ── Chat View ── */
@@ -1167,7 +1171,7 @@ html, body, #root {
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #555;
+  color: var(--semi-App-grey-6);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1189,9 +1193,9 @@ html, body, #root {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: #FFF4E0;
-  color: #FF9F1C;
-  font-size: 15px;
+  background: var(--semi-orange-0);
+  color: var(--semi-color-APP);
+  font-size: 16px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -1201,7 +1205,7 @@ html, body, #root {
 .chat-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 /* Messages */
@@ -1219,7 +1223,7 @@ html, body, #root {
 }
 
 .message-list::-webkit-scrollbar-thumb {
-  background: #e8e8e8;
+  background: var(--semi-App-grey-1);
   border-radius: 2px;
 }
 
@@ -1251,26 +1255,26 @@ html, body, #root {
 .bubble {
   padding: 10px 14px;
   border-radius: 14px;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.55;
   word-break: break-word;
 }
 
 .bubble.user {
-  background: #FF9F1C;
-  color: #ffffff;
+  background: var(--semi-color-APP);
+  color: var(--semi-color-bg-0);
   border-bottom-right-radius: 4px;
 }
 
 .bubble.agent {
   background: transparent;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   padding-left: 0;
 }
 
 .msg-time {
-  font-size: 11px;
-  color: #bbb;
+  font-size: 12px;
+  color: var(--semi-App-grey-2);
   padding: 0 2px;
 }
 
@@ -1283,15 +1287,15 @@ html, body, #root {
 .chat-input-box {
   display: flex;
   flex-direction: column;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--semi-App-grey-1);
   border-radius: 24px;
-  background: #fafafa;
+  background: var(--semi-App-grey-0);
   transition: border-color 0.15s;
 }
 
 .chat-input-box:focus-within {
-  border-color: #ccc;
-  background: #fff;
+  border-color: var(--semi-App-grey-2);
+  background: var(--semi-color-bg-0);
 }
 
 .attachments-preview {
@@ -1305,11 +1309,11 @@ html, body, #root {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: #f0f0f0;
+  background: var(--semi-App-grey-1);
   border-radius: 6px;
   padding: 3px 8px;
   font-size: 12px;
-  color: #555;
+  color: var(--semi-App-grey-6);
   max-width: 200px;
 }
 
@@ -1323,7 +1327,7 @@ html, body, #root {
   background: none;
   border: none;
   cursor: pointer;
-  color: #999;
+  color: var(--semi-App-grey-3);
   font-size: 14px;
   line-height: 1;
   padding: 0;
@@ -1331,7 +1335,7 @@ html, body, #root {
 }
 
 .attachment-remove:hover {
-  color: #555;
+  color: var(--semi-App-grey-6);
 }
 
 .chat-input-bottom {
@@ -1346,8 +1350,8 @@ html, body, #root {
   height: 32px;
   border-radius: 999px;
   border: none;
-  background: #ebebeb;
-  color: #888;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-App-grey-4);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1357,8 +1361,8 @@ html, body, #root {
 }
 
 .attach-btn:hover {
-  background: #f0f0f0;
-  color: #555;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-App-grey-6);
 }
 
 .chat-input {
@@ -1369,7 +1373,7 @@ html, body, #root {
   padding: 10px 12px 4px;
   font-size: 14px;
   font-family: inherit;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   background: transparent;
   outline: none;
   line-height: 1.5;
@@ -1379,7 +1383,7 @@ html, body, #root {
 }
 
 .chat-input::placeholder {
-  color: #bbb;
+  color: var(--semi-App-grey-2);
 }
 
 .send-btn {
@@ -1387,8 +1391,8 @@ html, body, #root {
   height: 38px;
   border-radius: 999px;
   border: none;
-  background: #e8e8e8;
-  color: #aaa;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-App-grey-3);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1398,29 +1402,29 @@ html, body, #root {
 }
 
 .send-btn.active {
-  background: #FF9F1C;
-  color: #ffffff;
+  background: var(--semi-color-APP);
+  color: var(--semi-color-bg-0);
 }
 
 .send-btn.active:hover {
-  background: #e88e0a;
+  background: var(--semi-color-APP-hover);
 }
 
 /* modal-input is used as a child inside Modal component */
 .modal-input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--semi-App-grey-1m);
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   outline: none;
   transition: border-color 0.15s;
 }
 
 .modal-input:focus {
-  border-color: #bbb;
+  border-color: var(--semi-App-grey-2);
 }
 
 /* Memories page styles */
@@ -1428,7 +1432,7 @@ html, body, #root {
   display: flex;
   gap: 16px;
   padding: 0 8px 0 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--semi-App-grey-1);
   margin-bottom: 20px;
 }
 
@@ -1437,10 +1441,10 @@ html, body, #root {
   padding: 8px 0;
   border: none;
   background: transparent;
-  color: #999;
+  color: var(--semi-App-grey-3);
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   transition: all 0.15s;
@@ -1448,8 +1452,8 @@ html, body, #root {
 }
 
 .memory-tab.active {
-  color: #FF9F1C;
-  border-bottom-color: #FF9F1C;
+  color: var(--semi-color-APP);
+  border-bottom-color: var(--semi-color-APP);
   font-weight: 600;
 }
 
@@ -1468,10 +1472,10 @@ html, body, #root {
   padding: 4px 8px 4px 4px;
   border-radius: 999px;
   background: rgba(255, 159, 28, 0.12);
-  border: 1px solid #FF9F1C;
-  font-size: 13px;
-  font-weight: 500;
-  color: #b37000;
+  border: 1px solid var(--semi-color-APP);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--semi-color-APP-active);
 }
 
 .person-filter-avatar {
@@ -1488,7 +1492,7 @@ html, body, #root {
   border-radius: 50%;
   border: none;
   background: rgba(255, 159, 28, 0.3);
-  color: #b37000;
+  color: var(--semi-color-APP-active);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1498,8 +1502,8 @@ html, body, #root {
 }
 
 .person-filter-clear:hover {
-  background: #FF9F1C;
-  color: #fff;
+  background: var(--semi-color-APP);
+  color: var(--semi-color-bg-0);
 }
 
 .person-filter-select-wrap {
@@ -1512,9 +1516,9 @@ html, body, #root {
   appearance: none;
   border: none;
   background: transparent;
-  font-size: 13px;
+  font-size: 14px;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 400;
   color: inherit;
   cursor: pointer;
   padding-right: 16px;
@@ -1531,10 +1535,10 @@ html, body, #root {
 .memory-filter-btn {
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #666;
-  font-size: 13px;
+  border: 1px solid var(--semi-App-grey-1m);
+  background: var(--semi-color-bg-0);
+  color: var(--semi-App-grey-5);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
@@ -1542,14 +1546,14 @@ html, body, #root {
 }
 
 .memory-filter-btn:hover {
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .memory-filter-btn.active {
   background: rgba(255, 159, 28, 0.12);
-  border-color: #FF9F1C;
-  color: #b37000;
+  border-color: var(--semi-color-APP);
+  color: var(--semi-color-APP-active);
   font-weight: 600;
 }
 
@@ -1578,19 +1582,19 @@ html, body, #root {
   background: transparent;
   border-radius: 6px;
   cursor: pointer;
-  color: #888;
+  color: var(--semi-App-grey-4);
   transition: background 0.15s;
 }
 
 .daily-nav-btn:hover {
-  background: #f0f0f0;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .daily-date-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .daily-timeline {
@@ -1620,9 +1624,9 @@ html, body, #root {
 }
 
 .daily-hour-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  color: #bbb;
+  color: var(--semi-App-grey-2);
   width: 20px;
   text-align: right;
   padding-top: 2px;
@@ -1630,7 +1634,7 @@ html, body, #root {
 }
 
 .daily-hour-row.active .daily-hour-label {
-  color: #888;
+  color: var(--semi-App-grey-4);
 }
 
 .daily-hour-track {
@@ -1650,8 +1654,8 @@ html, body, #root {
   flex: 1;
   background: repeating-linear-gradient(
     to bottom,
-    #d0d0d0 0px,
-    #d0d0d0 6px,
+    var(--semi-App-grey-2) 0px,
+    var(--semi-App-grey-2) 6px,
     transparent 6px,
     transparent 10px
   );
@@ -1668,7 +1672,7 @@ html, body, #root {
 }
 
 .daily-card {
-  background: #fff;
+  background: var(--semi-color-bg-0);
   border-radius: 8px;
   padding: 6px 12px;
   display: flex;
@@ -1691,9 +1695,9 @@ html, body, #root {
 }
 
 .daily-card-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -1701,14 +1705,14 @@ html, body, #root {
 }
 
 .daily-card-time {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
   flex-shrink: 0;
 }
 
 .daily-card-summary {
   font-size: 12px;
-  color: #888;
+  color: var(--semi-App-grey-4);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1746,22 +1750,22 @@ html, body, #root {
   font-size: 12px;
   padding: 3px 10px;
   border-radius: 999px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #555;
+  border: 1px solid var(--semi-App-grey-1m);
+  background: var(--semi-color-bg-0);
+  color: var(--semi-App-grey-6);
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
 
 .library-section-btn:hover {
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .library-section-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #888;
+  color: var(--semi-App-grey-4);
   margin: 0 0 10px 0;
   letter-spacing: 0.02em;
 }
@@ -1779,22 +1783,22 @@ html, body, #root {
   padding: 10px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   transition: background 0.15s;
 }
 
 .project-card:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .project-card-icon {
-  color: #888;
+  color: var(--semi-App-grey-4);
   flex-shrink: 0;
 }
 
 .project-card-name {
   font-size: 14px;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   flex: 1;
 }
 
@@ -1819,18 +1823,18 @@ html, body, #root {
   background: transparent;
   border-radius: 6px;
   cursor: pointer;
-  color: #888;
+  color: var(--semi-App-grey-4);
   transition: background 0.15s, color 0.15s;
 }
 
 .project-card-action-btn:hover {
-  background: #e8e8e8;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .project-card-action-btn.danger:hover {
-  background: #fee2e2;
-  color: #dc2626;
+  background: var(--semi-color-danger-light-default);
+  color: var(--semi-color-danger-hover);
 }
 
 /* People Tab */
@@ -1840,7 +1844,7 @@ html, body, #root {
 
 .library-people-card {
   position: relative;
-  background: #fff;
+  background: var(--semi-color-bg-0);
 }
 
 .people-card-actions {
@@ -1874,7 +1878,7 @@ html, body, #root {
 }
 
 .people-card:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .people-avatar {
@@ -1893,17 +1897,17 @@ html, body, #root {
 }
 
 .people-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .people-email {
-  font-size: 11px;
-  color: #999;
+  font-size: 12px;
+  color: var(--semi-App-grey-3);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1923,7 +1927,7 @@ html, body, #root {
 .em-label {
   font-size: 12px;
   font-weight: 600;
-  color: #999;
+  color: var(--semi-App-grey-3);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -1937,24 +1941,24 @@ html, body, #root {
 .em-project-pill {
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #666;
-  font-size: 13px;
+  border: 1px solid var(--semi-App-grey-1m);
+  background: var(--semi-color-bg-0);
+  color: var(--semi-App-grey-5);
+  font-size: 14px;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .em-project-pill:hover {
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .em-project-pill.active {
   background: rgba(255, 159, 28, 0.12);
-  border-color: #FF9F1C;
-  color: #b37000;
+  border-color: var(--semi-color-APP);
+  color: var(--semi-color-APP-active);
   font-weight: 600;
 }
 
@@ -1970,7 +1974,7 @@ html, body, #root {
   gap: 6px;
   padding: 4px 8px 4px 4px;
   border-radius: 999px;
-  background: #f0f0f0;
+  background: var(--semi-App-grey-1);
 }
 
 .em-participant-avatar {
@@ -1983,7 +1987,7 @@ html, body, #root {
 
 .em-participant-name {
   font-size: 12px;
-  color: #333;
+  color: var(--semi-color-app-text-0);
   white-space: nowrap;
 }
 
@@ -1992,8 +1996,8 @@ html, body, #root {
   height: 16px;
   border-radius: 50%;
   border: none;
-  background: #d0d0d0;
-  color: #555;
+  background: var(--semi-App-grey-2);
+  color: var(--semi-App-grey-6);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -2003,8 +2007,8 @@ html, body, #root {
 }
 
 .em-participant-remove:hover {
-  background: #e53e3e;
-  color: #fff;
+  background: var(--semi-color-danger);
+  color: var(--semi-color-bg-0);
 }
 
 .em-add-participants {
@@ -2019,19 +2023,19 @@ html, body, #root {
   gap: 6px;
   padding: 4px 8px 4px 4px;
   border-radius: 999px;
-  border: 1px dashed #d0d0d0;
+  border: 1px dashed var(--semi-App-grey-2);
   background: transparent;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
 }
 
 .em-add-participant:hover {
-  background: #f5f5f5;
-  border-color: #aaa;
+  background: var(--semi-App-grey-1);
+  border-color: var(--semi-App-grey-3);
 }
 
 .em-add-icon {
-  color: #888;
+  color: var(--semi-App-grey-4);
   flex-shrink: 0;
 }
 
@@ -2070,8 +2074,8 @@ html, body, #root {
 }
 
 .merge-rename-label {
-  font-size: 13px;
-  color: #666;
+  font-size: 14px;
+  color: var(--semi-App-grey-5);
   margin: 0;
 }
 
@@ -2100,7 +2104,7 @@ html, body, #root {
 }
 
 .merge-person-row:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .merge-person-avatar {
@@ -2113,13 +2117,13 @@ html, body, #root {
 
 .merge-person-name {
   font-size: 14px;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .merge-tag {
   font-size: 12px;
-  background: #f0f0f0;
-  color: #555;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-App-grey-6);
   padding: 2px 8px;
   border-radius: 4px;
 }
@@ -2127,7 +2131,7 @@ html, body, #root {
 .edit-project-name {
   flex: 1;
   font-size: 14px;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   padding: 6px 8px;
   border-radius: 6px;
   cursor: text;
@@ -2135,19 +2139,19 @@ html, body, #root {
 }
 
 .edit-project-name:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .edit-project-input {
   flex: 1;
   font-size: 14px;
   font-family: inherit;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   padding: 6px 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--semi-App-grey-2);
   border-radius: 6px;
   outline: none;
-  background: #fff;
+  background: var(--semi-color-bg-0);
 }
 
 .edit-project-add-row {
@@ -2155,7 +2159,7 @@ html, body, #root {
   align-items: center;
   gap: 8px;
   padding-top: 8px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--semi-App-grey-1);
   margin-top: 4px;
 }
 
@@ -2164,8 +2168,8 @@ html, body, #root {
   height: 28px;
   border-radius: 999px;
   border: none;
-  background: #1a1a1a;
-  color: #fff;
+  background: var(--semi-color-app-text-0);
+  color: var(--semi-color-bg-0);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -2175,7 +2179,7 @@ html, body, #root {
 }
 
 .edit-project-add-btn:hover {
-  background: #333;
+  background: var(--semi-color-app-text-0);
 }
 
 .edit-project-delete {
@@ -2184,7 +2188,7 @@ html, body, #root {
   border-radius: 999px;
   border: none;
   background: transparent;
-  color: #bbb;
+  color: var(--semi-App-grey-2);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -2194,8 +2198,8 @@ html, body, #root {
 }
 
 .edit-project-delete:hover {
-  background: #fde8e8;
-  color: #d32f2f;
+  background: var(--semi-color-danger-light-hover);
+  color: var(--semi-color-danger-hover);
 }
 
 .memory-filter-actions {
@@ -2209,9 +2213,9 @@ html, body, #root {
   width: 30px;
   height: 30px;
   border-radius: 999px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  color: #888;
+  border: 1px solid var(--semi-App-grey-1m);
+  background: var(--semi-color-bg-0);
+  color: var(--semi-App-grey-4);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -2221,8 +2225,8 @@ html, body, #root {
 }
 
 .memory-filter-add:hover {
-  background: #f5f5f5;
-  color: #1a1a1a;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-color-app-text-0);
 }
 
 .memories-list-container {
@@ -2268,14 +2272,14 @@ html, body, #root {
 .timeline-day {
   font-size: 18px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   line-height: 1;
 }
 
 .timeline-month {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  color: #666;
+  color: var(--semi-App-grey-5);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-top: 2px;
@@ -2286,9 +2290,9 @@ html, body, #root {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #1a1a1a;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 2px #e5e5e5;
+  background: var(--semi-color-app-text-0);
+  border: 3px solid var(--semi-color-bg-0);
+  box-shadow: 0 0 0 2px var(--semi-App-grey-1);
   z-index: 2;
   margin-top: 14px;
   margin-bottom: 8px;
@@ -2301,7 +2305,7 @@ html, body, #root {
   gap: 16px;
   padding: 14px 12px;
   border-radius: 10px;
-  background: #fff;
+  background: var(--semi-color-bg-0);
   transition: background 0.15s;
   cursor: pointer;
   position: relative;
@@ -2309,7 +2313,7 @@ html, body, #root {
 }
 
 .memory-list-item:hover {
-  background: #f5f5f5;
+  background: var(--semi-App-grey-1);
 }
 
 .memory-thumbnail {
@@ -2318,7 +2322,7 @@ html, body, #root {
   height: 72px;
   border-radius: 8px;
   overflow: hidden;
-  background: #f0f0f0;
+  background: var(--semi-App-grey-1);
 }
 
 .memory-thumbnail img {
@@ -2339,7 +2343,7 @@ html, body, #root {
 .memory-title {
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2352,22 +2356,22 @@ html, body, #root {
 }
 
 .memory-datetime {
-  font-size: 13px;
-  color: #666;
+  font-size: 14px;
+  color: var(--semi-App-grey-5);
 }
 
 
 .memory-project {
-  font-size: 13px;
-  font-weight: 500;
-  color: #666;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--semi-App-grey-5);
   white-space: nowrap;
 }
 
 .memory-meta-divider {
   width: 1px;
   height: 12px;
-  background: #d0d0d0;
+  background: var(--semi-App-grey-2);
   flex-shrink: 0;
 }
 
@@ -2376,7 +2380,7 @@ html, body, #root {
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: #666;
+  color: var(--semi-App-grey-5);
 }
 
 .participant-avatars {
@@ -2389,13 +2393,13 @@ html, body, #root {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 1px solid var(--semi-color-bg-0);
   object-fit: cover;
 }
 
 .timeline-line {
   width: 2px;
-  background: #e5e5e5;
+  background: var(--semi-App-grey-1);
   flex: 1;
   min-height: 0;
   position: relative;
@@ -2408,12 +2412,12 @@ html, body, #root {
   bottom: -12px;
   width: 100%;
   height: 12px;
-  background: #e5e5e5;
+  background: var(--semi-App-grey-1);
 }
 
 .participants-more {
   font-size: 12px;
-  color: #666;
+  color: var(--semi-App-grey-5);
 }
 
 .memory-actions {
@@ -2429,8 +2433,8 @@ html, body, #root {
   height: 30px;
   border-radius: 999px;
   border: none;
-  background: #ebebeb;
-  color: #555;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-App-grey-6);
   cursor: pointer;
   display: none;
   align-items: center;
@@ -2440,12 +2444,12 @@ html, body, #root {
 }
 
 .memory-action-btn:hover {
-  background: #e0e0e0;
+  background: var(--semi-App-grey-1m);
 }
 
 .memory-action-btn.danger:hover {
-  background: #fde8e8;
-  color: #d32f2f;
+  background: var(--semi-color-danger-light-hover);
+  color: var(--semi-color-danger-hover);
 }
 
 .memory-list-item:hover .memory-action-btn {
@@ -2476,7 +2480,7 @@ html, body, #root {
 }
 
 .personal-card {
-  background: #fff;
+  background: var(--semi-color-bg-0);
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -2499,9 +2503,9 @@ html, body, #root {
 }
 
 .personal-card-title {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  color: #aaa;
+  color: var(--semi-App-grey-3);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -2529,14 +2533,14 @@ html, body, #root {
 
 .personal-pie-label {
   font-size: 12px;
-  color: #555;
+  color: var(--semi-App-grey-6);
   flex: 1;
 }
 
 .personal-pie-pct {
   font-size: 12px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .personal-bar-chart {
@@ -2563,7 +2567,7 @@ html, body, #root {
 
 .personal-bar-fill {
   width: 100%;
-  background: #f28c4e;
+  background: var(--semi-color-APP-hover);
   border-radius: 2px 2px 0 0;
   opacity: 0.85;
   min-height: 2px;
@@ -2578,7 +2582,7 @@ html, body, #root {
 .personal-bar-x-axis span {
   position: absolute;
   font-size: 10px;
-  color: #bbb;
+  color: var(--semi-App-grey-2);
   transform: translateX(-50%);
   white-space: nowrap;
 }
@@ -2600,13 +2604,13 @@ html, body, #root {
 }
 
 .personal-list-item:hover {
-  background: #f7f7f7;
+  background: var(--semi-App-grey-0);
 }
 
 .personal-check-empty {
   width: 16px;
   height: 16px;
-  border: 1.5px solid #d0d0d0;
+  border: 1.5px solid var(--semi-App-grey-2);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -2614,23 +2618,23 @@ html, body, #root {
 .personal-check-done {
   width: 16px;
   height: 16px;
-  background: #1a1a1a;
+  background: var(--semi-color-app-text-0);
   border-radius: 50%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--semi-color-bg-0);
 }
 
 .personal-list-text {
-  font-size: 13px;
-  color: #1a1a1a;
+  font-size: 14px;
+  color: var(--semi-color-app-text-0);
   line-height: 1.4;
 }
 
 .personal-list-text.done {
-  color: #bbb;
+  color: var(--semi-App-grey-2);
   text-decoration: line-through;
 }
 
@@ -2650,7 +2654,7 @@ html, body, #root {
 
 .personal-highlight-item::before {
   content: "•";
-  color: #ccc;
+  color: var(--semi-App-grey-2);
   font-size: 14px;
   line-height: 1.6;
   flex-shrink: 0;
@@ -2658,6 +2662,6 @@ html, body, #root {
 
 .personal-highlight-text {
   font-size: 12px;
-  color: #444;
+  color: var(--semi-color-app-text-1);
   line-height: 1.6;
 }

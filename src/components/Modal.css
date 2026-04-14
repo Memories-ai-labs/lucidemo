@@ -11,7 +11,7 @@
 }
 
 .modal {
-  background: #fff;
+  background: var(--semi-color-bg-0);
   border-radius: 14px;
   padding: 24px;
   width: 340px;
@@ -24,7 +24,7 @@
 .modal-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--semi-color-app-text-0);
 }
 
 .modal-body {
@@ -45,41 +45,41 @@
   border: none;
   font-size: 14px;
   font-family: inherit;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .modal-btn.cancel {
-  background: #f0f0f0;
-  color: #555;
+  background: var(--semi-App-grey-1);
+  color: var(--semi-App-grey-6);
 }
 
 .modal-btn.cancel:hover {
-  background: #e8e8e8;
+  background: var(--semi-App-grey-1);
 }
 
 .modal-btn.confirm {
-  background: #1a1a1a;
-  color: #fff;
+  background: var(--semi-color-app-text-0);
+  color: var(--semi-color-bg-0);
 }
 
 .modal-btn.confirm:hover {
-  background: #333;
+  background: var(--semi-color-app-text-0);
 }
 
 .modal-btn.confirm.danger {
-  background: #e53e3e;
-  color: #fff;
+  background: var(--semi-color-danger);
+  color: var(--semi-color-bg-0);
 }
 
 .modal-btn.confirm.danger:hover {
-  background: #c53030;
+  background: var(--semi-color-danger-active);
 }
 
 .modal-desc {
   font-size: 14px;
-  color: #555;
+  color: var(--semi-App-grey-6);
   margin: 0;
   line-height: 1.5;
 }
