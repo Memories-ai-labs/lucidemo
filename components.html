@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUCI Component Gallery</title>
+  <style>
+    /* ─── Design Tokens ─── */
+    :root {
+      --semi-color-bg-0: #ffffff;
+      --semi-color-danger: #fc3332;
+      --semi-color-danger-hover: #d8242a;
+      --semi-color-danger-active: #b51923;
+      --semi-color-danger-light-default: #fff2ef;
+      --semi-color-danger-light-hover: #fedbd6;
+      --semi-color-success-light-default: #eff8ed;
+      --semi-color-success-light-hover: #d6f0d3;
+      --semi-color-success-disabled: #afe2aa;
+      --semi-color-success-active: #2d792c;
+      --semi-color-APP: #ef6915;
+      --semi-color-APP-hover: #db5c0b;
+      --semi-color-APP-active: #b84003;
+      --semi-color-app-text-0: #38302e;
+      --semi-App-grey-0: #f9f9f9;
+      --semi-App-grey-1: #eae8e6;
+      --semi-App-grey-1m: #dcd9d5;
+      --semi-App-grey-2: #cdc9c6;
+      --semi-App-grey-3: #b0aba7;
+      --semi-App-grey-4: #928d88;
+      --semi-App-grey-5: #756f6b;
+      --semi-App-grey-6: #615955;
+      --semi-App-grey-7: #4c4441;
+      --semi-App-grey-8: #38302e;
+      --semi-orange-0: #fff7ed;
+      --page-bg: #f0ede8;
+      --page-text: #38302e;
+      --card-bg: #ffffff;
+      --sidebar-bg: rgba(255,255,255,0.88);
+      --app-float-btn-bg: rgba(255,255,255,0.92);
+      --app-float-btn-bg-hover: rgba(255,255,255,1);
+    }
+    [data-theme="dark"] {
+      --semi-color-bg-0: #16161a;
+      --semi-color-danger: #fd615b;
+      --semi-color-danger-hover: #fd8c83;
+      --semi-color-danger-active: #feb5ac;
+      --semi-color-danger-light-default: #fd615b22;
+      --semi-color-danger-light-hover: #fd615b33;
+      --semi-color-success-light-default: #6ac56422;
+      --semi-color-success-light-hover: #6ac56433;
+      --semi-color-success-disabled: #2d792c;
+      --semi-color-success-active: #afe2aa;
+      --semi-color-APP: #db5c0b;
+      --semi-color-APP-hover: #ff7b1b;
+      --semi-color-APP-active: #ff9c43;
+      --semi-color-app-text-0: #f9f9f9;
+      --semi-App-grey-0: #221e1d;
+      --semi-App-grey-1: #37312f;
+      --semi-App-grey-1m: #443d3c;
+      --semi-App-grey-2: #4a4543;
+      --semi-App-grey-3: #5f5a57;
+      --semi-App-grey-4: #71706f;
+      --semi-App-grey-5: #8e8d8c;
+      --semi-App-grey-6: #ccc9c7;
+      --semi-App-grey-7: #cdc9c6;
+      --semi-App-grey-8: #e9e8e7;
+      --semi-orange-0: #1c1a18;
+      --page-bg: #0e0d0c;
+      --page-text: #e9e8e7;
+      --card-bg: #1c1b1a;
+      --sidebar-bg: rgba(30,28,26,0.92);
+      --app-float-btn-bg: rgba(40,40,48,0.92);
+      --app-float-btn-bg-hover: rgba(48,48,58,1);
+    }
+
+    /* ─── Page ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: var(--page-bg);
+      color: var(--page-text);
+      min-height: 100vh;
+      padding: 40px 32px 80px;
+    }
+
+    /* ─── Gallery Layout ─── */
+    .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 48px; }
+    .page-title { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+    .theme-toggle {
+      padding: 7px 16px; border-radius: 999px; border: 1.5px solid var(--semi-App-grey-2);
+      background: transparent; font-size: 13px; font-family: inherit; cursor: pointer;
+      color: inherit; transition: background 0.15s;
+    }
+    .theme-toggle:hover { background: var(--semi-App-grey-1); }
+    section { margin-bottom: 56px; }
+    .section-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--semi-App-grey-4); margin-bottom: 18px;
+    }
+    .row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+    .col { display: flex; flex-direction: column; gap: 16px; }
+    .label { font-size: 11px; color: var(--semi-App-grey-4); font-weight: 500; letter-spacing: 0.03em; margin-bottom: 6px; }
+    .card {
+      background: var(--card-bg); border-radius: 16px; padding: 20px;
+    }
+    .dark-card {
+      background: #181818; border-radius: 16px; padding: 20px;
+    }
+    hr.divider { border: none; border-top: 1px solid var(--semi-App-grey-1); margin: 20px 0; }
+
+    /* ─── Island ─── */
+    .island {
+      display: inline-flex; align-items: center; gap: 10px; background: #111111;
+      border-radius: 999px; padding: 0 14px; height: 36px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.35), 0 0 0 0.5px rgba(255,255,255,0.08);
+      user-select: none;
+    }
+    .island--idle { min-width: 130px; }
+    .island--listening { min-width: 175px; background: #0a0a0a; }
+    .island--loading { min-width: 155px; }
+    .island-logo { width: 18px; height: 18px; flex-shrink: 0; display: flex; align-items: center; }
+    .island-logo svg { width: 100%; height: 100%; filter: invert(1) brightness(1.2); }
+    .record-indicator { width: 10px; height: 10px; border-radius: 50%; background: #ff3b30; box-shadow: 0 0 6px rgba(255,59,48,0.6); }
+    .waveform { display: flex; align-items: center; gap: 3px; height: 20px; }
+    .wave-bar { width: 3px; background: #ff9f1c; border-radius: 999px; animation: wave 0.7s ease-in-out infinite alternate; }
+    .wave-bar:nth-child(1) { animation-duration: 0.65s; }
+    .wave-bar:nth-child(2) { animation-duration: 0.55s; }
+    .wave-bar:nth-child(3) { animation-duration: 0.75s; }
+    .wave-bar:nth-child(4) { animation-duration: 0.60s; }
+    .wave-bar:nth-child(5) { animation-duration: 0.70s; }
+    @keyframes wave { from { height: 4px; opacity: 0.6; } to { height: 18px; opacity: 1; } }
+    .loading-dots { display: flex; align-items: center; gap: 5px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.75); animation: bounce 0.7s ease-in-out infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); opacity: 0.4; } 50% { transform: translateY(-5px); opacity: 1; } }
+
+    /* ─── Regular Button ─── */
+    .regular-btn { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--semi-App-grey-1m); background: var(--semi-color-bg-0); color: var(--semi-color-app-text-0); font-size: 12px; font-family: inherit; font-weight: 400; cursor: pointer; transition: background 0.15s, border-color 0.15s; white-space: nowrap; flex-shrink: 0; }
+    .regular-btn:hover { background: var(--semi-App-grey-1); }
+    .regular-btn.primary { background: var(--semi-color-APP); border-color: var(--semi-color-APP); color: var(--semi-color-bg-0); }
+    .regular-btn.primary:hover { background: var(--semi-color-APP-hover); border-color: var(--semi-color-APP-hover); }
+
+    /* ─── Menu Bar Tab ─── */
+    .menu-bar-tab { display: flex; align-items: center; gap: 6px; padding: 12px 16px; border-radius: 999px; border: none; background: transparent; color: var(--semi-App-grey-6); font-size: 14px; font-family: inherit; font-weight: 400; cursor: pointer; text-align: left; width: 100%; transition: background 0.15s; }
+    .menu-bar-tab:hover { background: rgba(0,0,0,0.05); color: var(--semi-color-app-text-0); }
+    [data-theme="dark"] .menu-bar-tab:hover { background: rgba(255,255,255,0.06); }
+    .menu-bar-tab.active { background: rgba(255,159,28,0.12); color: var(--semi-color-APP-active); }
+
+    /* ─── Regular Icon Button ─── */
+    .regular-icon-btn { width: 30px; height: 30px; border-radius: 999px; border: 1px solid transparent; background: transparent; color: var(--semi-color-app-text-0); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+    .regular-icon-btn:hover { background: rgba(0,0,0,0.05); }
+    .regular-icon-btn.outlined { border-color: var(--semi-App-grey-1); }
+
+    /* ─── Sidebar ─── */
+    .sidebar-demo {
+      background: var(--sidebar-bg); backdrop-filter: blur(20px); border-radius: 22px;
+      width: 220px; padding: 16px 10px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .sidebar-brand { padding: 0 6px 12px; }
+    .sidebar-logo-img { height: 28px; width: auto; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+      border-radius: 999px; border: none; background: transparent;
+      color: var(--semi-App-grey-6); font-size: 14px; cursor: pointer;
+      text-align: left; width: 100%; font-family: inherit; transition: background 0.15s;
+    }
+    .nav-item:hover { background: rgba(0,0,0,0.05); color: var(--semi-color-app-text-0); }
+    [data-theme="dark"] .nav-item:hover { background: rgba(255,255,255,0.06); }
+    .nav-item.active {
+      background: rgba(255, 159, 28, 0.12); color: var(--semi-color-APP-active); font-weight: 400;
+    }
+    .nav-item span { flex: 1; }
+    .shortcut {
+      font-size: 12px; color: var(--semi-App-grey-3); padding: 1px 6px; border-radius: 4px;
+      border: 1px solid var(--semi-App-grey-2); font-family: inherit; font-weight: 600;
+    }
+    .sidebar-footer { display: flex; align-items: center; gap: 10px; padding: 12px 6px 4px; }
+    .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--semi-App-grey-1m); flex-shrink: 0; }
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-size: 14px; font-weight: 600; color: var(--semi-color-app-text-0); }
+    .user-plan { font-size: 12px; color: var(--semi-App-grey-3); }
+
+    /* ─── Home: Greeting + Stats ─── */
+    .greeting { font-size: 32px; font-weight: 700; color: var(--semi-color-app-text-0); letter-spacing: -0.03em; }
+    .stats-badge {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: rgba(255,159,28,0.1); border-radius: 20px; padding: 8px 16px;
+    }
+    .stat { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--semi-color-APP-active); }
+    .stat-divider { width: 1px; height: 16px; background: var(--semi-App-grey-1m); }
+
+    /* ─── ChannelItem ─── */
+    .channel-item {
+      display: flex; align-items: center; gap: 14px; padding: 14px 12px;
+      border-radius: 10px; cursor: pointer; transition: background 0.15s; width: 340px;
+    }
+    .channel-item.hovered, .channel-item:hover { background: var(--semi-App-grey-1); }
+    .channel-icon {
+      width: 36px; height: 36px; border-radius: 50%; background: var(--semi-orange-0);
+      color: var(--semi-color-APP); font-size: 18px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .channel-info { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .channel-name { font-size: 14px; font-weight: 600; color: var(--semi-color-app-text-0); }
+    .channel-desc { font-size: 14px; color: var(--semi-App-grey-4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .channel-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .channel-actions { display: flex; gap: 12px; }
+    .action-btn {
+      width: 30px; height: 30px; border-radius: 999px; border: none;
+      background: var(--semi-App-grey-1); color: var(--semi-App-grey-6); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+    }
+    .action-btn:hover { background: var(--semi-App-grey-1m); }
+    .channel-time { font-size: 12px; color: var(--semi-App-grey-3); min-width: 40px; text-align: right; }
+
+    /* ─── Chat ─── */
+    .chat-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 20px; border-bottom: 1px solid var(--semi-App-grey-1);
+    }
+    .back-btn {
+      width: 32px; height: 32px; border-radius: 999px; border: none;
+      background: transparent; color: var(--semi-App-grey-6); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+    }
+    .back-btn:hover { background: var(--semi-App-grey-1); }
+    .channel-icon-small {
+      width: 28px; height: 28px; border-radius: 6px; background: var(--semi-orange-0);
+      color: var(--semi-color-APP); font-size: 16px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .chat-title { font-size: 16px; font-weight: 600; color: var(--semi-color-app-text-0); }
+    .message-list { display: flex; flex-direction: column; gap: 16px; padding: 20px; }
+    .message-row { display: flex; gap: 10px; max-width: 72%; }
+    .message-row.user { align-self: flex-end; flex-direction: row-reverse; }
+    .message-row.agent { align-self: flex-start; }
+    .bubble-wrap { display: flex; flex-direction: column; gap: 4px; }
+    .message-row.user .bubble-wrap { align-items: flex-end; }
+    .bubble { padding: 10px 14px; border-radius: 14px; font-size: 16px; line-height: 1.55; }
+    .bubble.user { background: var(--semi-color-APP); color: var(--semi-color-bg-0); border-bottom-right-radius: 4px; }
+    .bubble.agent { background: transparent; color: var(--semi-color-app-text-0); padding-left: 0; }
+    .msg-time { font-size: 12px; color: var(--semi-App-grey-3); padding: 0 2px; }
+    .chat-input-area { padding: 12px 20px 20px; }
+    .chat-input-box {
+      display: flex; flex-direction: column; border: 1px solid var(--semi-App-grey-1);
+      border-radius: 24px; background: var(--semi-App-grey-0); transition: border-color 0.15s;
+    }
+    .chat-input {
+      width: 100%; resize: none; border: none; border-radius: 0;
+      padding: 12px 14px 4px; font-size: 14px; font-family: inherit;
+      color: var(--semi-color-app-text-0); background: transparent; outline: none;
+      line-height: 1.5; height: 80px;
+    }
+    .chat-input::placeholder { color: var(--semi-App-grey-3); }
+    .chat-input-bottom { display: flex; align-items: center; justify-content: space-between; padding: 4px 8px 8px; }
+    .attach-btn {
+      width: 32px; height: 32px; border-radius: 999px; border: none;
+      background: var(--semi-App-grey-1); color: var(--semi-App-grey-4); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+    }
+    .send-btn {
+      width: 38px; height: 38px; border-radius: 999px; border: none;
+      background: var(--semi-App-grey-1); color: var(--semi-App-grey-3); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+    }
+    .send-btn.active { background: var(--semi-color-APP); color: var(--semi-color-bg-0); }
+    .attachment-chip {
+      display: inline-flex; align-items: center; gap: 4px; background: var(--semi-App-grey-1);
+      border-radius: 6px; padding: 3px 8px; font-size: 12px; color: var(--semi-App-grey-6);
+    }
+
+    /* ─── Memory List Item ─── */
+    .memory-row { display: flex; gap: 12px; align-items: stretch; width: 560px; }
+    .memories-timeline-item { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; width: 50px; }
+    .timeline-date { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .timeline-day { font-size: 18px; font-weight: 700; color: var(--semi-color-app-text-0); line-height: 1; }
+    .timeline-month { font-size: 12px; font-weight: 600; color: var(--semi-App-grey-5); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+    .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--semi-color-app-text-0); border: 3px solid var(--semi-color-bg-0); box-shadow: 0 0 0 2px var(--semi-App-grey-1); margin: 10px 0 8px; }
+    .timeline-line { width: 2px; background: var(--semi-App-grey-1); flex: 1; min-height: 20px; }
+    .memory-list-item {
+      flex: 1; display: flex; gap: 16px; padding: 14px 12px; border-radius: 10px;
+      background: var(--semi-color-bg-0); cursor: pointer; position: relative; align-items: flex-start;
+    }
+    .memory-list-item:hover { background: var(--semi-App-grey-1); }
+    .memory-list-item:hover .memory-action-btn { display: flex; }
+    .memory-thumbnail { flex-shrink: 0; width: 120px; height: 72px; border-radius: 8px; overflow: hidden; background: var(--semi-App-grey-1); }
+    .memory-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+    .memory-content { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0; }
+    .memory-title { font-size: 14px; font-weight: 600; color: var(--semi-color-app-text-0); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .memory-meta { display: flex; align-items: center; gap: 8px; }
+    .memory-project { font-size: 14px; color: var(--semi-App-grey-5); }
+    .memory-meta-divider { width: 1px; height: 12px; background: var(--semi-App-grey-2); flex-shrink: 0; }
+    .memory-datetime { font-size: 14px; color: var(--semi-App-grey-5); }
+    .memory-participants { display: flex; align-items: center; gap: 8px; }
+    .participant-avatars { display: flex; align-items: center; height: 24px; }
+    .participant-avatar { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--semi-color-bg-0); object-fit: cover; margin-left: -8px; }
+    .participant-avatar:first-child { margin-left: 0; }
+    .participants-more { font-size: 12px; color: var(--semi-App-grey-5); }
+    .memory-actions { flex-shrink: 0; display: flex; align-items: center; align-self: center; gap: 6px; }
+    .memory-action-btn {
+      width: 30px; height: 30px; border-radius: 999px; border: none;
+      background: var(--semi-App-grey-1); color: var(--semi-App-grey-6); cursor: pointer;
+      display: none; align-items: center; justify-content: center; transition: background 0.15s;
+    }
+    .memory-action-btn.show { display: flex; }
+    .memory-action-btn:hover { background: var(--semi-App-grey-1m); }
+    .memory-action-btn.danger:hover { background: var(--semi-color-danger-light-hover); color: var(--semi-color-danger-hover); }
+
+    /* Memory filters / tabs */
+    .memories-tabs {
+      display: flex; gap: 16px;
+      border-bottom: 1px solid var(--semi-App-grey-1); margin-bottom: 16px;
+    }
+    .memory-tab {
+      padding: 8px 0; border: none; background: transparent; color: var(--semi-App-grey-3);
+      cursor: pointer; font-size: 14px; font-family: inherit; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: all 0.15s; min-width: 60px; text-align: center;
+    }
+    .memory-tab.active { color: var(--semi-color-APP); border-bottom-color: var(--semi-color-APP); font-weight: 600; }
+    .memory-filter-btn {
+      padding: 6px 14px; border-radius: 999px; border: 1px solid var(--semi-App-grey-1m);
+      background: var(--semi-color-bg-0); color: var(--semi-App-grey-5); font-size: 14px;
+      font-family: inherit; cursor: pointer; transition: background 0.15s; white-space: nowrap;
+    }
+    .memory-filter-btn:hover { background: var(--semi-App-grey-1); color: var(--semi-color-app-text-0); }
+    .memory-filter-btn.active { background: rgba(255,159,28,0.12); border-color: var(--semi-color-APP); color: var(--semi-color-APP-active); font-weight: 600; }
+
+    /* ─── Personal Cards ─── */
+    .personal-card { background: var(--semi-color-bg-0); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .personal-card-title { font-size: 12px; font-weight: 600; color: var(--semi-App-grey-3); text-transform: uppercase; letter-spacing: 0.06em; }
+    .personal-list { display: flex; flex-direction: column; gap: 2px; }
+    .personal-list-item { display: flex; align-items: center; gap: 10px; padding: 7px 4px; cursor: pointer; border-radius: 6px; transition: background 0.12s; }
+    .personal-list-item:hover { background: var(--semi-App-grey-0); }
+    .personal-check-empty { width: 16px; height: 16px; border: 1.5px solid var(--semi-App-grey-2); border-radius: 50%; flex-shrink: 0; }
+    .personal-check-done { width: 16px; height: 16px; background: var(--semi-color-app-text-0); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--semi-color-bg-0); }
+    .personal-list-text { font-size: 14px; color: var(--semi-color-app-text-0); }
+    .personal-list-text.done { color: var(--semi-App-grey-2); text-decoration: line-through; }
+    .personal-highlight-item { display: flex; align-items: flex-start; gap: 8px; padding: 4px 0; font-size: 12px; color: var(--semi-color-app-text-0); line-height: 1.6; }
+    .personal-highlight-item::before { content: "•"; color: var(--semi-App-grey-2); font-size: 14px; flex-shrink: 0; }
+
+    /* ─── Personal Charts ─── */
+    .personal-pie-content { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
+    .personal-pie-svg { width: 100%; height: 100%; max-height: 200px; }
+    .personal-bar-chart { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .personal-bar-area { flex: 1; display: flex; align-items: flex-end; gap: 3px; min-height: 80px; }
+    .personal-bar-slot { flex: 1; display: flex; align-items: flex-end; height: 100%; }
+    .personal-bar-fill { width: 100%; border-radius: 2px 2px 0 0; opacity: 0.85; min-height: 2px; }
+    .personal-bar-x-axis { position: relative; height: 16px; flex-shrink: 0; }
+    .personal-bar-x-axis span { position: absolute; font-size: 10px; color: var(--semi-App-grey-2); transform: translateX(-50%); white-space: nowrap; }
+
+    /* ─── Person Filter Chip ─── */
+    .person-filter-chip { display: flex; align-items: center; gap: 6px; padding: 4px 8px 4px 4px; border-radius: 999px; background: rgba(255,159,28,0.12); border: 1px solid var(--semi-color-APP); font-size: 14px; font-weight: 400; color: var(--semi-color-APP-active); }
+    .person-filter-avatar { width: 20px; height: 20px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .person-filter-select-wrap { position: relative; display: flex; align-items: center; }
+    .person-filter-select { appearance: none; border: none; background: transparent; font-size: 14px; font-family: inherit; font-weight: 400; color: inherit; cursor: pointer; padding-right: 16px; outline: none; }
+    .person-filter-chevron { position: absolute; right: 0; pointer-events: none; color: inherit; }
+    .person-filter-clear { width: 16px; height: 16px; border-radius: 50%; border: none; background: rgba(255,159,28,0.3); color: var(--semi-color-APP-active); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; }
+
+    /* ─── Sidebar Open Button ─── */
+    .sidebar-open-btn { width: 28px; height: 28px; border-radius: 999px; border: none; background: var(--app-float-btn-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 2px 8px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.06); color: var(--semi-App-grey-5); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, color 0.15s; }
+    .sidebar-open-btn:hover { background: var(--app-float-btn-bg-hover); color: var(--semi-color-app-text-0); }
+
+    /* ─── Project Cards ─── */
+    .project-cards-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .project-card {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+      border-radius: 8px; cursor: pointer; background: var(--semi-color-bg-0); transition: background 0.15s;
+    }
+    .project-card:hover { background: var(--semi-App-grey-1); }
+    .project-card:hover .project-card-actions { opacity: 1; }
+    .project-card-icon { color: var(--semi-App-grey-4); flex-shrink: 0; }
+    .project-card-name { font-size: 14px; color: var(--semi-color-app-text-0); flex: 1; }
+    .project-card-actions { display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s; }
+    .project-card-action-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border: none; background: transparent;
+      border-radius: 6px; cursor: pointer; color: var(--semi-App-grey-4); transition: background 0.15s;
+    }
+    .project-card-action-btn:hover { background: var(--semi-App-grey-1); color: var(--semi-color-app-text-0); }
+    .project-card-action-btn.danger:hover { background: var(--semi-color-danger-light-default); color: var(--semi-color-danger-hover); }
+
+    /* ─── People Cards ─── */
+    .people-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .people-card {
+      display: flex; align-items: center; gap: 10px; padding: 12px;
+      border-radius: 10px; cursor: pointer; background: var(--semi-color-bg-0); transition: background 0.15s;
+    }
+    .people-card:hover { background: var(--semi-App-grey-1); }
+    .people-card:hover .people-card-actions { opacity: 1; }
+    .people-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; object-fit: cover; }
+    .people-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+    .people-name { font-size: 14px; font-weight: 600; color: var(--semi-color-app-text-0); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .people-email { font-size: 12px; color: var(--semi-App-grey-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .people-card-actions { display: flex; gap: 4px; opacity: 0; transition: opacity 0.15s; flex-shrink: 0; }
+
+    /* ─── Settings Controls ─── */
+    .settings-divider { display: block; height: 1px; background: var(--semi-App-grey-1); }
+    .account-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; }
+    .account-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--semi-App-grey-1m); flex-shrink: 0; }
+    .account-username { font-size: 16px; font-weight: 600; color: var(--semi-color-app-text-0); }
+    .account-row-text { display: flex; flex-direction: column; gap: 3px; }
+    .account-row-label { font-size: 16px; font-weight: 400; color: var(--semi-color-app-text-0); }
+    .account-row-sub { font-size: 12px; color: var(--semi-App-grey-3); line-height: 1.5; }
+    .account-row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .settings-btn {
+      padding: 7px 14px; border-radius: 999px; border: 1px solid var(--semi-App-grey-1m);
+      background: var(--semi-color-bg-0); color: var(--semi-color-app-text-0); font-size: 14px;
+      font-family: inherit; cursor: pointer; transition: background 0.15s; white-space: nowrap;
+    }
+    .settings-btn:hover { background: var(--semi-App-grey-1); border-color: var(--semi-App-grey-2); }
+    .theme-selector { display: flex; border: 1px solid var(--semi-App-grey-1m); border-radius: 999px; overflow: hidden; }
+    .theme-btn { padding: 7px 14px; border: none; background: transparent; color: var(--semi-App-grey-4); font-size: 14px; font-family: inherit; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
+    .theme-btn + .theme-btn { border-left: 1px solid var(--semi-App-grey-1m); }
+    .theme-btn:hover { background: var(--semi-App-grey-1); color: var(--semi-color-app-text-0); }
+    .theme-btn.active { background: var(--semi-color-APP); color: var(--semi-color-bg-0); }
+
+    /* Restore split button */
+    .restore-split-btn { display: flex; align-items: center; border: 1px solid var(--semi-App-grey-1m); border-radius: 999px; background: var(--semi-color-bg-0); position: relative; }
+    .restore-main { padding: 7px 12px; border: none; background: transparent; color: var(--semi-color-app-text-0); font-size: 14px; font-family: inherit; cursor: pointer; border-radius: 999px; white-space: nowrap; }
+    .restore-main:hover { background: var(--semi-App-grey-1); }
+    .restore-divider { width: 1px; height: 18px; background: var(--semi-App-grey-1m); flex-shrink: 0; }
+    .restore-arrow-wrap { padding: 7px 8px; cursor: pointer; display: flex; align-items: center; color: var(--semi-App-grey-4); border-radius: 999px; }
+    .restore-arrow-wrap:hover { background: var(--semi-App-grey-1); color: var(--semi-color-app-text-0); }
+    .restore-dropdown {
+      position: absolute; top: calc(100% + 6px); right: 0; background: var(--semi-color-bg-0);
+      border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.07);
+      padding: 4px; z-index: 300; min-width: 160px;
+    }
+    .restore-dropdown-item {
+      display: flex; align-items: center; gap: 6px; padding: 7px 10px; border-radius: 999px;
+      border: none; background: transparent; color: var(--semi-color-app-text-0); font-size: 14px;
+      font-family: inherit; cursor: pointer; width: 100%; text-align: left; transition: background 0.12s;
+    }
+    .restore-dropdown-item:hover { background: var(--semi-App-grey-1); }
+    .restore-check { width: 16px; display: flex; align-items: center; justify-content: center; color: var(--semi-color-app-text-0); flex-shrink: 0; }
+
+    /* Subscription */
+    .subscription-header { display: flex; align-items: center; justify-content: space-between; }
+    .subscription-plan-name { font-size: 18px; font-weight: 700; color: var(--semi-color-app-text-0); }
+    .subscription-plan-ends { font-size: 12px; color: var(--semi-App-grey-3); }
+    .subscription-upgrade-btn { padding: 8px 20px; border-radius: 999px; border: none; background: var(--semi-color-APP); color: var(--semi-color-bg-0); font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer; }
+    .subscription-usage-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .subscription-usage-right { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 320px; }
+    .usage-bar { flex: 1; height: 10px; background: var(--semi-App-grey-1); border-radius: 99px; overflow: hidden; }
+    .usage-bar-fill { height: 100%; background: var(--semi-color-APP); border-radius: 99px; }
+    .usage-label { font-size: 12px; color: var(--semi-App-grey-3); white-space: nowrap; }
+
+    /* Settings tabs */
+    .settings-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--semi-App-grey-1); padding-bottom: 0; }
+    .settings-tab { padding: 8px 14px; border: none; background: transparent; font-size: 14px; font-family: inherit; color: var(--semi-App-grey-4); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s; white-space: nowrap; }
+    .settings-tab:hover { color: var(--semi-color-app-text-0); }
+    .settings-tab.active { color: var(--semi-color-APP); font-weight: 600; border-bottom-color: var(--semi-color-APP); }
+
+    /* Skills */
+    .skills-list { display: flex; flex-direction: column; border-top: 1px solid var(--semi-App-grey-1); }
+    .skill-item { display: flex; align-items: center; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--semi-App-grey-1); }
+    .skill-text { flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .skill-name { font-size: 16px; font-weight: 600; color: var(--semi-color-app-text-0); }
+    .skill-desc { font-size: 14px; color: var(--semi-App-grey-4); line-height: 1.6; }
+    .skill-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .skill-toggle { width: 36px; height: 20px; border-radius: 20px; border: none; background: var(--semi-App-grey-1m); cursor: pointer; position: relative; transition: background 0.2s; padding: 0; }
+    .skill-toggle.on { background: var(--semi-color-APP); }
+    .skill-toggle-thumb { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--semi-color-bg-0); transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+    .skill-toggle.on .skill-toggle-thumb { transform: translateX(16px); }
+    .skill-more-btn { width: 28px; height: 28px; border-radius: 999px; border: none; background: transparent; color: var(--semi-App-grey-3); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+    .skill-more-btn:hover { background: rgba(0,0,0,0.05); color: var(--semi-App-grey-6); }
+    .skill-more-wrap { position: relative; }
+    .skill-dropdown { background: var(--semi-color-bg-0); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.07); padding: 4px; min-width: 160px; }
+    .skill-dropdown-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 999px; border: none; background: transparent; color: var(--semi-color-app-text-0); font-size: 14px; font-family: inherit; cursor: pointer; width: 100%; text-align: left; transition: background 0.12s; }
+    .skill-dropdown-item:hover { background: var(--semi-App-grey-1); }
+    .skill-dropdown-item.danger { color: var(--semi-color-danger-hover); }
+    .skill-dropdown-item.danger:hover { background: var(--semi-color-danger-light-default); }
+
+    /* Integrations */
+    .integrations-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .integration-card { display: flex; flex-direction: row; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--semi-App-grey-1); background: var(--semi-color-bg-0); }
+    .integration-logo { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+    .integration-name { font-size: 14px; font-weight: 600; color: var(--semi-color-app-text-0); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .integration-btn { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--semi-App-grey-1m); background: var(--semi-color-bg-0); color: var(--semi-color-app-text-0); font-size: 12px; font-family: inherit; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
+    .integration-btn:hover { background: var(--semi-App-grey-1); }
+    .integration-btn.connected { background: var(--semi-color-success-light-default); border-color: var(--semi-color-success-disabled); color: var(--semi-color-success-active); }
+    .integration-btn.connected:hover { background: var(--semi-color-success-light-hover); }
+
+    /* ─── Modals ─── */
+    .modal {
+      background: var(--semi-color-bg-0); border-radius: 14px; padding: 24px; width: 340px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12); display: flex; flex-direction: column; gap: 16px;
+    }
+    .modal--wide { width: 480px; }
+    .modal-title { font-size: 16px; font-weight: 600; color: var(--semi-color-app-text-0); }
+    .modal-body { display: flex; flex-direction: column; gap: 12px; }
+    .modal-desc { font-size: 14px; color: var(--semi-App-grey-6); margin: 0; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .modal-btn { padding: 8px 18px; border-radius: 999px; border: none; font-size: 14px; font-family: inherit; cursor: pointer; transition: background 0.15s; }
+    .modal-btn.cancel { background: var(--semi-App-grey-1); color: var(--semi-App-grey-6); }
+    .modal-btn.cancel:hover { background: var(--semi-App-grey-1m); }
+    .modal-btn.confirm { background: var(--semi-color-app-text-0); color: var(--semi-color-bg-0); }
+    .modal-btn.confirm:hover { opacity: 0.88; }
+    .modal-btn.confirm.danger { background: var(--semi-color-danger); color: #fff; }
+    .modal-btn.confirm.danger:hover { background: var(--semi-color-danger-active); }
+    .modal-input { width: 100%; padding: 10px 12px; border: 1px solid var(--semi-App-grey-1m); border-radius: 8px; font-size: 14px; font-family: inherit; color: var(--semi-color-app-text-0); outline: none; background: var(--semi-color-bg-0); transition: border-color 0.15s; }
+    .modal-input:focus { border-color: var(--semi-App-grey-2); }
+
+    /* Edit Meeting modal */
+    .em-section { display: flex; flex-direction: column; gap: 10px; }
+    .em-label { font-size: 12px; font-weight: 600; color: var(--semi-App-grey-3); text-transform: uppercase; letter-spacing: 0.06em; }
+    .em-project-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .em-project-pill { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--semi-App-grey-1m); background: var(--semi-color-bg-0); color: var(--semi-App-grey-5); font-size: 14px; font-family: inherit; cursor: pointer; transition: background 0.15s; }
+    .em-project-pill.active { background: rgba(255,159,28,0.12); border-color: var(--semi-color-APP); color: var(--semi-color-APP-active); font-weight: 600; }
+    .em-participants { display: flex; flex-wrap: wrap; gap: 8px; }
+    .em-participant-chip { display: flex; align-items: center; gap: 6px; padding: 4px 8px 4px 4px; border-radius: 999px; background: var(--semi-App-grey-1); }
+    .em-participant-avatar { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .em-participant-name { font-size: 12px; color: var(--semi-color-app-text-0); white-space: nowrap; }
+    .em-participant-remove { width: 16px; height: 16px; border-radius: 50%; border: none; background: var(--semi-App-grey-2); color: var(--semi-App-grey-6); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .em-participant-remove:hover { background: var(--semi-color-danger); color: var(--semi-color-bg-0); }
+    .em-add-participant { display: flex; align-items: center; gap: 6px; padding: 4px 8px 4px 4px; border-radius: 999px; border: 1px dashed var(--semi-App-grey-2); background: transparent; cursor: pointer; font-size: 12px; color: var(--semi-App-grey-5); transition: background 0.15s; }
+    .em-add-participant:hover { background: var(--semi-App-grey-1); border-color: var(--semi-App-grey-3); }
+
+    /* ─── Daily View ─── */
+    .daily-date-nav { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .daily-nav-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: none; background: transparent; border-radius: 6px; cursor: pointer; color: var(--semi-App-grey-4); transition: background 0.15s; }
+    .daily-nav-btn:hover { background: var(--semi-App-grey-1); color: var(--semi-color-app-text-0); }
+    .daily-date-label { font-size: 14px; font-weight: 600; color: var(--semi-color-app-text-0); }
+    .daily-timeline { display: flex; flex-direction: column; }
+    .daily-hour-row { display: flex; gap: 12px; align-items: stretch; min-height: 56px; flex-shrink: 0; }
+    .daily-hour-left { display: flex; gap: 8px; align-items: stretch; flex-shrink: 0; width: 48px; }
+    .daily-hour-label { font-size: 12px; font-weight: 600; color: var(--semi-App-grey-2); width: 20px; text-align: right; padding-top: 2px; flex-shrink: 0; }
+    .daily-hour-row.active .daily-hour-label { color: var(--semi-App-grey-4); }
+    .daily-hour-track { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; }
+    .daily-hour-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--semi-color-app-text-0); margin-top: 3px; margin-bottom: 3px; flex-shrink: 0; }
+    .daily-hour-line { width: 0.5px; flex: 1; background: repeating-linear-gradient(to bottom, var(--semi-App-grey-2) 0px, var(--semi-App-grey-2) 6px, transparent 6px, transparent 10px); }
+    .daily-hour-right { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px; overflow: hidden; padding: 4px 0; }
+    .daily-card { background: var(--semi-color-bg-0); border-radius: 8px; padding: 6px 12px; display: flex; flex-direction: column; gap: 3px; overflow: hidden; }
+    .daily-card-header { display: flex; align-items: center; gap: 8px; }
+    .daily-app-icon { font-size: 16px; flex-shrink: 0; line-height: 1; }
+    .daily-card-title { font-size: 14px; font-weight: 600; color: var(--semi-color-app-text-0); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .daily-card-time { font-size: 12px; color: var(--semi-App-grey-3); flex-shrink: 0; }
+    .daily-card-summary { font-size: 12px; color: var(--semi-App-grey-4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Edit Projects list */
+    .edit-projects-list { display: flex; flex-direction: column; gap: 4px; }
+    .edit-project-row { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+    .edit-project-name { flex: 1; font-size: 14px; color: var(--semi-color-app-text-0); padding: 6px 8px; border-radius: 6px; cursor: text; transition: background 0.15s; }
+    .edit-project-name:hover { background: var(--semi-App-grey-1); }
+    .edit-project-input { flex: 1; font-size: 14px; font-family: inherit; color: var(--semi-color-app-text-0); padding: 6px 8px; border: 1px solid var(--semi-App-grey-2); border-radius: 6px; outline: none; background: var(--semi-color-bg-0); }
+    .edit-project-delete { width: 28px; height: 28px; border-radius: 999px; border: none; background: transparent; color: var(--semi-App-grey-2); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s, color 0.15s; flex-shrink: 0; }
+    .edit-project-delete:hover { background: var(--semi-color-danger-light-hover); color: var(--semi-color-danger-hover); }
+    .edit-project-add-row { display: flex; align-items: center; gap: 8px; padding-top: 8px; border-top: 1px solid var(--semi-App-grey-1); margin-top: 4px; }
+    .edit-project-add-btn { width: 28px; height: 28px; border-radius: 999px; border: none; background: var(--semi-color-app-text-0); color: var(--semi-color-bg-0); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* Merge people */
+    .merge-person-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
+    .merge-person-row:hover { background: var(--semi-App-grey-1); }
+    .merge-person-avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+    .merge-person-name { font-size: 14px; color: var(--semi-color-app-text-0); }
+    .merge-checkbox { width: 15px; height: 15px; cursor: pointer; flex-shrink: 0; accent-color: var(--semi-color-APP); }
+    .merge-tag { font-size: 12px; background: var(--semi-App-grey-1); color: var(--semi-App-grey-6); padding: 2px 8px; border-radius: 4px; }
+
+    /* ─── Spec Annotations ─── */
+    .section-demo { display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; cursor: pointer; }
+    .spec-block { display: none; }
+    .spec-h { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--semi-App-grey-3); margin: 8px 0 1px; display: block; }
+    .spec-h:first-child { margin-top: 0; }
+    .spec-token { font-family: "SF Mono", "Fira Code", "Consolas", monospace; font-size: 10.5px; color: var(--semi-color-APP-active); background: rgba(239,105,21,0.08); padding: 1px 4px; border-radius: 3px; }
+
+    /* ─── Spec Panel (draggable) ─── */
+    .spec-panel {
+      position: fixed; z-index: 9999; display: none;
+      width: 300px;
+      background: var(--semi-App-grey-0); border: 1px solid var(--semi-App-grey-1);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 0 0 0.5px rgba(0,0,0,0.06);
+      overflow: hidden; user-select: none;
+    }
+    .spec-panel.visible { display: block; }
+    .spec-panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--semi-App-grey-1);
+      cursor: grab;
+    }
+    .spec-panel-header:active { cursor: grabbing; }
+    .spec-panel-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--semi-App-grey-6);
+    }
+    .spec-panel-close {
+      background: none; border: none; cursor: pointer;
+      font-size: 18px; line-height: 1; padding: 0 2px;
+      color: var(--semi-App-grey-4);
+    }
+    .spec-panel-close:hover { color: var(--semi-App-grey-8); }
+    .spec-panel-body {
+      padding: 14px 16px;
+      font-size: 11.5px; line-height: 1.75; color: var(--semi-App-grey-6);
+      white-space: nowrap; overflow-x: auto;
+    }
+  
+    /* ─── Tab Bar ─── */
+    .tab-bar {
+      display: flex; gap: 4px;
+      background: var(--semi-App-grey-1);
+      border-radius: 999px;
+      padding: 3px;
+    }
+    .tab-btn {
+      padding: 6px 18px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      font-family: inherit;
+      font-weight: 500;
+      color: var(--semi-App-grey-5);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .tab-btn.active {
+      background: var(--semi-color-bg-0);
+      color: var(--semi-color-app-text-0);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+</style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="page-title">LUCI Components</div>
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="components">Components</button>
+      <button class="tab-btn" data-tab="views">Views</button>
+    </div>
+    <button class="theme-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">Toggle Dark</button>
+  </div>
+
+  <div id="tab-components" class="tab-content active">
+
+  <!-- ───────────────── ISLAND ───────────────── -->
+  <section>
+    <div class="section-title">Island · 3 States</div>
+    <div class="section-demo">
+    <div class="dark-card" style="display:flex;gap:32px;flex-wrap:wrap;align-items:center;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div class="island island--idle">
+          <div class="island-logo"><svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="17.6" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M18.7864 12.4443C16.1894 12.4443 14.082 14.5454 14.082 17.1398V26.8606C14.082 29.4551 16.1894 31.5561 18.7864 31.5561L29.9409 31.5561L29.9409 28.6456L18.7864 28.6457C17.7966 28.6457 16.9963 27.8453 16.9963 26.8606V17.1398C16.9963 16.1552 17.7966 15.3548 18.7864 15.3548L29.9409 15.3548L29.9409 12.4443L18.7864 12.4443Z" fill="#201F26"/><circle cx="20.0725" cy="18.8967" r="1.86154" fill="#EF6915"/></svg></div>
+          <div class="record-indicator"></div>
+        </div>
+        <span style="font-size:11px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.06em;">Idle</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div class="island island--listening">
+          <div class="island-logo"><svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="17.6" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M18.7864 12.4443C16.1894 12.4443 14.082 14.5454 14.082 17.1398V26.8606C14.082 29.4551 16.1894 31.5561 18.7864 31.5561L29.9409 31.5561L29.9409 28.6456L18.7864 28.6457C17.7966 28.6457 16.9963 27.8453 16.9963 26.8606V17.1398C16.9963 16.1552 17.7966 15.3548 18.7864 15.3548L29.9409 15.3548L29.9409 12.4443L18.7864 12.4443Z" fill="#201F26"/><circle cx="20.0725" cy="18.8967" r="1.86154" fill="#EF6915"/></svg></div>
+          <div class="waveform"><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div></div>
+        </div>
+        <span style="font-size:11px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.06em;">Listening</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div class="island island--loading">
+          <div class="island-logo"><svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="17.6" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M18.7864 12.4443C16.1894 12.4443 14.082 14.5454 14.082 17.1398V26.8606C14.082 29.4551 16.1894 31.5561 18.7864 31.5561L29.9409 31.5561L29.9409 28.6456L18.7864 28.6457C17.7966 28.6457 16.9963 27.8453 16.9963 26.8606V17.1398C16.9963 16.1552 17.7966 15.3548 18.7864 15.3548L29.9409 15.3548L29.9409 12.4443L18.7864 12.4443Z" fill="#201F26"/><circle cx="20.0725" cy="18.8967" r="1.86154" fill="#EF6915"/></svg></div>
+          <div class="loading-dots"><div class="dot" style="animation-delay:0s"></div><div class="dot" style="animation-delay:.18s"></div><div class="dot" style="animation-delay:.36s"></div></div>
+        </div>
+        <span style="font-size:11px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.06em;">Loading</span>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">容器</b>
+        bg <span class="spec-token">#111111</span>（固定深色，不跟随主题）<br>
+        高 36px · radius 999px · padding 0 14px<br>
+        <b class="spec-h">Idle</b>
+        红点 10×10，<span class="spec-token">#ff3b30</span>，带红色光晕<br>
+        <b class="spec-h">Listening</b>
+        wave-bar：3px 宽，<span class="spec-token">#ff9f1c</span><br>
+        高度动画 4→18px，各 bar 独立时长<br>
+        <b class="spec-h">Loading</b>
+        dot：6×6，rgba(255,255,255,0.75)<br>
+        bounce Y轴 −5px，间隔 0.18s
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── REGULAR BUTTON ───────────────── -->
+  <section>
+    <div class="section-title">Regular Button</div>
+    <div class="section-demo">
+      <div class="row">
+      <div>
+        <div class="label">Default</div>
+        <button class="regular-btn">Cancel</button>
+      </div>
+      <div>
+        <div class="label">Default · Hover</div>
+        <button class="regular-btn" style="background:var(--semi-App-grey-1);">Cancel</button>
+      </div>
+      <div>
+        <div class="label">Primary</div>
+        <button class="regular-btn primary">Confirm</button>
+      </div>
+      <div>
+        <div class="label">Primary · Hover</div>
+        <button class="regular-btn primary" style="background:var(--semi-color-APP-hover);border-color:var(--semi-color-APP-hover);">Confirm</button>
+      </div>
+      </div>
+      <div class="spec-block">
+        <b class="spec-h">共有</b>
+        radius 999px · 12px · padding 6px 14px<br>
+        <b class="spec-h">Default</b>
+        bg <span class="spec-token">--bg-0</span> · border <span class="spec-token">--grey-1m</span><br>
+        文字 <span class="spec-token">--app-text-0</span><br>
+        hover → bg <span class="spec-token">--grey-1</span><br>
+        <b class="spec-h">Primary</b>
+        bg <span class="spec-token">--APP</span>（橙色）· border <span class="spec-token">--APP</span><br>
+        文字 <span class="spec-token">--bg-0</span>（白色）<br>
+        hover → bg <span class="spec-token">--APP-hover</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── REGULAR ICON BUTTON ───────────────── -->
+  <section>
+    <div class="section-title">Regular Icon Button</div>
+    <div class="section-demo">
+      <div class="row">
+        <div>
+          <div class="label">Default</div>
+          <button class="regular-icon-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </button>
+        </div>
+        <div>
+          <div class="label">Default · Hover</div>
+          <button class="regular-icon-btn" style="background:rgba(0,0,0,0.05);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </button>
+        </div>
+        <div>
+          <div class="label">Outlined</div>
+          <button class="regular-icon-btn outlined">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </button>
+        </div>
+        <div>
+          <div class="label">Outlined · Hover</div>
+          <button class="regular-icon-btn outlined" style="background:rgba(0,0,0,0.05);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="spec-block">
+        <b class="spec-h">共有</b>
+        30×30 · radius 999px<br>
+        <b class="spec-h">Default</b>
+        bg transparent · border transparent · 文字 <span class="spec-token">--app-text-0</span><br>
+        hover → bg rgba(0,0,0,0.05)<br>
+        <b class="spec-h">Outlined</b>
+        border <span class="spec-token">--grey-1</span><br>
+        hover → bg rgba(0,0,0,0.05)
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── MENU BAR TAB ───────────────── -->
+  <section>
+    <div class="section-title">Menu Bar Tab</div>
+    <div class="section-demo">
+      <div style="width:220px;display:flex;flex-direction:column;gap:2px;">
+        <div>
+          <div class="label" style="padding:0 6px 4px;">Default</div>
+          <button class="menu-bar-tab">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+            <span>Memories</span>
+          </button>
+        </div>
+        <div>
+          <div class="label" style="padding:0 6px 4px;">Hover</div>
+          <button class="menu-bar-tab" style="background:rgba(0,0,0,0.05);color:var(--semi-color-app-text-0);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+            <span>Memories</span>
+          </button>
+        </div>
+        <div>
+          <div class="label" style="padding:0 6px 4px;">Active</div>
+          <button class="menu-bar-tab active">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+            <span>Memories</span>
+          </button>
+        </div>
+      </div>
+      <div class="spec-block">
+        <b class="spec-h">共有</b>
+        radius 999px · 14px · padding 12px 16px · width 100%<br>
+        <b class="spec-h">Default</b>
+        文字 <span class="spec-token">--grey-6</span> · bg transparent<br>
+        <b class="spec-h">Hover</b>
+        bg rgba(0,0,0,0.05) · 文字 <span class="spec-token">--app-text-0</span><br>
+        dark: rgba(255,255,255,0.06)<br>
+        <b class="spec-h">Active</b>
+        bg rgba(255,159,28,0.12) · 文字 <span class="spec-token">--APP-active</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── CHANNEL ITEM ───────────────── -->
+  <section>
+    <div class="section-title">Channel Item</div>
+    <div class="section-demo">
+      <div style="display:flex;flex-direction:column;gap:4px;width:380px;">
+        <div class="label">Default</div>
+        <div class="channel-item">
+          <div class="channel-icon">#</div>
+          <div class="channel-info"><span class="channel-name">General</span><span class="channel-desc">最近一条消息内容预览</span></div>
+          <div class="channel-right"><span class="channel-time">09:41</span></div>
+        </div>
+        <div class="label" style="margin-top:8px;">Hover（显示操作按钮）</div>
+        <div class="channel-item hovered">
+          <div class="channel-icon">#</div>
+          <div class="channel-info"><span class="channel-name">Design Review</span><span class="channel-desc">上次讨论了新的界面方案</span></div>
+          <div class="channel-right">
+            <div class="channel-actions">
+              <button class="action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></button>
+              <button class="action-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+            </div>
+            <span class="channel-time">昨天</span>
+          </div>
+        </div>
+      </div>
+      <div class="spec-block">
+        <b class="spec-h">容器</b>
+        radius 10px · padding 14px 12px · width 100%<br>
+        hover → bg <span class="spec-token">--grey-1</span><br>
+        <b class="spec-h">Icon</b>
+        36×36 · radius 50% · bg <span class="spec-token">--orange-0</span> · 文字 <span class="spec-token">--APP</span><br>
+        <b class="spec-h">Info</b>
+        name：14px 600 · <span class="spec-token">--app-text-0</span><br>
+        desc：14px · <span class="spec-token">--grey-4</span>，省略号截断<br>
+        <b class="spec-h">时间戳</b>
+        12px · <span class="spec-token">--grey-3</span><br>
+        <b class="spec-h">Action Buttons（hover 时显示）</b>
+        30×30 · radius 50% · <span class="spec-token">--grey-1</span> 背景<br>
+        文字 <span class="spec-token">--grey-6</span> · hover → <span class="spec-token">--grey-1m</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── MODALS ───────────────── -->
+  <section>
+    <div class="section-title">Modals</div>
+    <div class="section-demo">
+      <div class="row" style="align-items:flex-start;">
+
+      <div>
+        <div class="label">Create / Rename Channel</div>
+        <div class="modal">
+          <h2 class="modal-title">重命名频道</h2>
+          <div class="modal-body"><input class="modal-input" type="text" value="General" /></div>
+          <div class="modal-actions"><button class="modal-btn cancel">取消</button><button class="modal-btn confirm">确认</button></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Delete Confirm (Danger)</div>
+        <div class="modal">
+          <h2 class="modal-title">删除频道</h2>
+          <div class="modal-body"><p class="modal-desc">确定要删除「General」吗？该操作无法撤销。</p></div>
+          <div class="modal-actions"><button class="modal-btn cancel">取消</button><button class="modal-btn confirm danger">删除</button></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Edit Meeting (Wide)</div>
+        <div class="modal modal--wide">
+          <h2 class="modal-title">Edit Meeting</h2>
+          <div class="modal-body">
+            <div class="em-section">
+              <div class="em-label">Project</div>
+              <div class="em-project-pills">
+                <button class="em-project-pill active">Project A</button>
+                <button class="em-project-pill">Project B</button>
+                <button class="em-project-pill">Untitled</button>
+              </div>
+            </div>
+            <div class="em-section">
+              <div class="em-label">Participants</div>
+              <div class="em-participants">
+                <div class="em-participant-chip">
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=1" class="em-participant-avatar" alt="Alice" />
+                  <span class="em-participant-name">Alice</span>
+                  <button class="em-participant-remove"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                </div>
+                <div class="em-participant-chip">
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=2" class="em-participant-avatar" alt="Bob" />
+                  <span class="em-participant-name">Bob</span>
+                  <button class="em-participant-remove"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="em-section">
+              <div class="em-label">Add participants</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                <button class="em-add-participant">
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=3" class="em-participant-avatar" alt="Charlie" />
+                  <span class="em-participant-name">Charlie</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--semi-App-grey-4);"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                </button>
+                <button class="em-add-participant">
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=4" class="em-participant-avatar" alt="Diana" />
+                  <span class="em-participant-name">Diana</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--semi-App-grey-4);"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-actions"><button class="modal-btn cancel">Cancel</button><button class="modal-btn confirm">Save</button></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Edit Projects（内联编辑列表）</div>
+        <div class="modal">
+          <h2 class="modal-title">Edit Projects</h2>
+          <div class="modal-body">
+            <div class="edit-projects-list">
+              <div class="edit-project-row">
+                <span class="edit-project-name">Project A</span>
+                <button class="edit-project-delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+              </div>
+              <div class="edit-project-row">
+                <input class="edit-project-input" value="Project B" />
+                <button class="edit-project-delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+              </div>
+              <div class="edit-project-row">
+                <span class="edit-project-name">Project C</span>
+                <button class="edit-project-delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+              </div>
+              <div class="edit-project-add-row">
+                <input class="edit-project-input" placeholder="New project name..." />
+                <button class="edit-project-add-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-actions"><button class="modal-btn cancel">Merge</button><button class="modal-btn confirm">Done</button></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Merge Contacts</div>
+        <div class="modal">
+          <h2 class="modal-title">Merge Contacts</h2>
+          <div class="modal-body">
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <label class="merge-person-row">
+                <input type="checkbox" class="merge-checkbox" checked />
+                <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=1" class="merge-person-avatar" alt="Alice" />
+                <span class="merge-person-name">Alice</span>
+              </label>
+              <label class="merge-person-row">
+                <input type="checkbox" class="merge-checkbox" checked />
+                <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=2" class="merge-person-avatar" alt="Bob" />
+                <span class="merge-person-name">Bob</span>
+              </label>
+              <label class="merge-person-row">
+                <input type="checkbox" class="merge-checkbox" />
+                <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=3" class="merge-person-avatar" alt="Charlie" />
+                <span class="merge-person-name">Charlie</span>
+              </label>
+            </div>
+          </div>
+          <div class="modal-actions"><button class="modal-btn cancel">Cancel</button><button class="modal-btn confirm">Next (2)</button></div>
+        </div>
+      </div>
+      </div>
+
+      <div class="spec-block">
+        <b class="spec-h">容器</b>
+        宽 340px（wide: 480px）<br>
+        radius 14px · padding 24px<br>
+        shadow 0 20px 60px rgba(0,0,0,0.12)<br>
+        <b class="spec-h">Title</b>
+        16px 600 · <span class="spec-token">--app-text-0</span><br>
+        <b class="spec-h">Buttons</b>
+        confirm：<span class="spec-token">--app-text-0</span> 深色底<br>
+        danger：<span class="spec-token">--danger</span> 红底，白字<br>
+        cancel：<span class="spec-token">--grey-1</span> 底，<span class="spec-token">--grey-6</span> 文字<br>
+        padding 8px 18px · radius 999px<br>
+        <b class="spec-h">Input</b>
+        radius 8px · <span class="spec-token">--grey-1m</span> 描边 · 14px<br>
+        focus → <span class="spec-token">--grey-2</span> 描边<br>
+        <b class="spec-h">Edit Projects</b>
+        项目名：点击变 input，radius 6px<br>
+        delete：28×28 透明 → danger-light 背景<br>
+        add-btn：<span class="spec-token">--app-text-0</span> 实心圆 28×28<br>
+        <b class="spec-h">Merge Contacts</b>
+        checkbox accent <span class="spec-token">--APP</span> 橙色<br>
+        头像 28×28 · name 14px
+      </div>
+
+    </div>
+  </section>
+
+  </div><!-- /tab-components -->
+
+  <div id="tab-views" class="tab-content">
+
+  <!-- ───────────────── SIDEBAR ───────────────── -->
+  <section>
+    <div class="section-title">Sidebar</div>
+    <div class="section-demo">
+    <div class="sidebar-demo">
+      <div class="sidebar-brand">
+        <svg height="28" viewBox="0 0 122 44" fill="none"><rect width="44" height="44" rx="17.6" fill="#201F26"/><path fill-rule="evenodd" clip-rule="evenodd" d="M18.7864 12.4443C16.1894 12.4443 14.082 14.5454 14.082 17.1398V26.8606C14.082 29.4551 16.1894 31.5561 18.7864 31.5561L29.9409 31.5561L29.9409 28.6456L18.7864 28.6457C17.7966 28.6457 16.9963 27.8453 16.9963 26.8606V17.1398C16.9963 16.1552 17.7966 15.3548 18.7864 15.3548L29.9409 15.3548L29.9409 12.4443L18.7864 12.4443Z" fill="white"/><circle cx="20.0725" cy="18.8967" r="1.86154" fill="#EF6915"/><path fill-rule="evenodd" clip-rule="evenodd" d="M101.797 10.2666C98.608 10.2666 96.0205 12.8464 96.0205 16.032V27.9678C96.0205 31.1534 98.608 33.7333 101.797 33.7333L113.969 33.7332L113.969 30.1596L101.797 30.1596C100.581 30.1596 99.5988 29.1769 99.5988 27.9678V16.032C99.5988 14.823 100.581 13.8403 101.797 13.8403L113.969 13.8403L113.969 10.2666L101.797 10.2666ZM55.7344 10.2666L55.7344 27.9678C55.7344 31.1534 58.322 33.7333 61.5107 33.7333H70.8589V30.1596H61.5107C60.2953 30.1596 59.3127 29.1769 59.3127 27.9678L59.3127 10.2666H55.7344ZM74.075 10.2666V27.9678C74.075 31.1534 76.6626 33.7333 79.8514 33.7333H86.5797C89.7684 33.7333 92.356 31.1534 92.356 27.9678V10.2666H88.7777V27.9678C88.7777 29.1769 87.7951 30.1596 86.5797 30.1596H79.8514C78.636 30.1596 77.6533 29.1769 77.6533 27.9678V10.2666H74.075ZM117.442 10.2666V33.7333H121.021V13.3796C121.021 11.6589 119.623 10.2666 117.902 10.2666H117.442Z" fill="#201F26"/></svg>
+      </div>
+      <button class="nav-item active">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Ask LUCI</span>
+        <span class="shortcut">Fn</span>
+      </button>
+      <button class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+        <span>Memories</span>
+      </button>
+      <button class="nav-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Settings</span>
+      </button>
+      <div class="sidebar-footer">
+        <div class="avatar"></div>
+        <div class="user-info">
+          <span class="user-name">Username</span>
+          <span class="user-plan">Free Plan</span>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">容器</b>
+        宽 220px · radius 22px<br>
+        bg 半透明毛玻璃 blur 20px<br>
+        <b class="spec-h">Nav Item</b>
+        14px · radius 999px · padding 8px 10px<br>
+        默认：<span class="spec-token">--grey-6</span> 文字，无背景<br>
+        hover：rgba(0,0,0,0.05)，<span class="spec-token">--app-text-0</span><br>
+        active：orange-0.12 背景，<span class="spec-token">--APP-active</span><br>
+        <b class="spec-h">Shortcut Badge</b>
+        12px · <span class="spec-token">--grey-2</span> 描边 · <span class="spec-token">--grey-3</span> 文字<br>
+        <b class="spec-h">Footer</b>
+        头像 34×34 圆形 · username 14px 600
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── HOME VIEW ───────────────── -->
+  <section>
+    <div class="section-title">Home View</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:560px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;">
+        <div class="greeting">Hello, Shawn</div>
+        <div class="stats-badge">
+          <div class="stat">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+            <span>999 Tasks</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            <span>120% Productivity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Greeting</b>
+        32px · 700 · −0.03em 字距 · <span class="spec-token">--app-text-0</span><br>
+        <b class="spec-h">Stats Badge</b>
+        bg rgba(255,159,28,0.1) · radius 20px · padding 8px 16px<br>
+        stat 文字 <span class="spec-token">--APP-active</span> 14px<br>
+        分隔线 1×16px，<span class="spec-token">--grey-1m</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── CHAT VIEW ───────────────── -->
+  <section>
+    <div class="section-title">Chat View</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:560px;padding:0;overflow:hidden;">
+      <div class="chat-header">
+        <button class="back-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="channel-icon-small">#</div>
+          <span class="chat-title">General</span>
+        </div>
+      </div>
+      <div class="message-list" style="min-height:0;">
+        <div class="message-row agent">
+          <div class="bubble-wrap"><div class="bubble agent">你好！有什么我可以帮到你的吗？</div><span class="msg-time">09:40</span></div>
+        </div>
+        <div class="message-row user">
+          <div class="bubble-wrap"><div class="bubble user">帮我整理一下今天的会议记录</div><span class="msg-time">09:41</span></div>
+        </div>
+        <div class="message-row agent">
+          <div class="bubble-wrap"><div class="bubble agent">好的，我来帮你整理。请稍等……</div><span class="msg-time">09:41</span></div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <div class="chat-input-box">
+          <div style="padding:6px 12px 0;display:flex;flex-wrap:wrap;gap:6px;">
+            <div class="attachment-chip"><span>meeting_notes.txt</span><button style="background:none;border:none;cursor:pointer;color:var(--semi-App-grey-3);font-size:14px;line-height:1;padding:0;">×</button></div>
+          </div>
+          <textarea class="chat-input" placeholder="Press Fn to ask" style="height:72px;"></textarea>
+          <div class="chat-input-bottom">
+            <button class="attach-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg></button>
+            <button class="send-btn active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">AI Bubble</b>
+        bg <span class="spec-token">--bg-0</span> · 文字 <span class="spec-token">--app-text-0</span><br>
+        radius 18px 18px 18px 4px（右下切角）<br>
+        <b class="spec-h">User Bubble</b>
+        bg <span class="spec-token">--APP</span> · 文字 <span class="spec-token">--bg-0</span>（白）<br>
+        radius 18px 18px 4px 18px（左下切角）<br>
+        时间戳：11px，<span class="spec-token">--grey-3</span><br>
+        <b class="spec-h">Input Box</b>
+        chat-input-box：radius 999px，<span class="spec-token">--grey-1</span> 背景<br>
+        textarea：14px，无边框<br>
+        <b class="spec-h">Attachment Chip</b>
+        radius 999px · <span class="spec-token">--grey-0</span> bg · 12px<br>
+        <span class="spec-token">--grey-3</span> 描边<br>
+        <b class="spec-h">Send 按钮</b>
+        32×32 · <span class="spec-token">--app-text-0</span> 深色（有内容激活）
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── MEMORIES · PROJECT TAB ───────────────── -->
+  <section>
+    <div class="section-title">Memories · Project Tab</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:660px;">
+      <!-- Tabs -->
+      <div class="memories-tabs">
+        <button class="memory-tab">Personal</button>
+        <button class="memory-tab active">Project</button>
+        <button class="memory-tab">People</button>
+        <button class="memory-tab">Library</button>
+        <button class="memory-tab" style="opacity:.15;">Daily</button>
+      </div>
+      <!-- Filters -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+        <button class="memory-filter-btn active">All</button>
+        <button class="memory-filter-btn">Project A</button>
+        <button class="memory-filter-btn">Project B</button>
+        <button class="memory-filter-btn">Untitled</button>
+      </div>
+      <!-- Memory rows -->
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <!-- First item with date + forced hover -->
+        <div class="memory-row">
+          <div class="memories-timeline-item">
+            <div class="timeline-date"><div class="timeline-day">15</div><div class="timeline-month">Mar</div></div>
+            <div class="timeline-dot"></div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="memory-list-item" style="background:var(--semi-App-grey-1);">
+            <div class="memory-thumbnail"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="" /></div>
+            <div class="memory-content">
+              <div class="memory-title">Q1 Planning Meeting</div>
+              <div class="memory-meta">
+                <span class="memory-project">Project C</span>
+                <span class="memory-meta-divider"></span>
+                <span class="memory-datetime">2025/03/15 14:03</span>
+              </div>
+              <div class="memory-participants">
+                <div class="participant-avatars">
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=1" class="participant-avatar" alt="Alice" />
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=2" class="participant-avatar" alt="Bob" />
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=3" class="participant-avatar" alt="Charlie" />
+                </div>
+                <span class="participants-more">and 9 more</span>
+              </div>
+            </div>
+            <div class="memory-actions">
+              <button class="memory-action-btn show"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></button>
+              <button class="memory-action-btn show danger"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <!-- Second item, same date (no date label) -->
+        <div class="memory-row">
+          <div class="memories-timeline-item">
+            <div class="timeline-dot" style="margin-top:24px;"></div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="memory-list-item">
+            <div class="memory-thumbnail"><div style="width:100%;height:100%;background:linear-gradient(135deg,#fde8f0,#f8c3d4);"></div></div>
+            <div class="memory-content">
+              <div class="memory-title">Design Review Sprint 4</div>
+              <div class="memory-meta">
+                <span class="memory-project">Project A</span>
+                <span class="memory-meta-divider"></span>
+                <span class="memory-datetime">2025/03/15 15:30</span>
+              </div>
+              <div class="memory-participants">
+                <div class="participant-avatars">
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=1" class="participant-avatar" alt="Alice" />
+                  <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=2" class="participant-avatar" alt="Bob" />
+                </div>
+              </div>
+            </div>
+            <div class="memory-actions"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Tab Bar</b>
+        12px 600 · active：<span class="spec-token">--APP-active</span> 文字<br>
+        active 底边 2px <span class="spec-token">--APP</span><br>
+        <b class="spec-h">Filter Buttons</b>
+        radius 999px · padding 6px 14px · 14px<br>
+        active：orange-0.12 背景，<span class="spec-token">--APP</span> 描边<br>
+        <b class="spec-h">Timeline</b>
+        date-day 14px 600 · month 10px <span class="spec-token">--grey-3</span><br>
+        dot 8×8 · line 1px 虚线 <span class="spec-token">--grey-2</span><br>
+        <b class="spec-h">Memory Card</b>
+        缩略图 56×56 · radius 8px<br>
+        title 14px 600 · project tag orange-0 bg<br>
+        头像 20×20 重叠 −6px<br>
+        hover → 显示 sliders/trash 操作按钮
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── PERSONAL TAB ───────────────── -->
+  <section>
+    <div class="section-title">Memories · Personal Tab</div>
+    <div class="section-demo">
+    <div style="display:flex;flex-direction:column;gap:20px;">
+    <div class="row">
+      <div>
+        <div class="label">Todo Card</div>
+        <div class="personal-card" style="width:220px;">
+          <div class="personal-card-title">Todo</div>
+          <div class="personal-list">
+            <div class="personal-list-item"><span class="personal-check-empty"></span><span class="personal-list-text">整理会议记录</span></div>
+            <div class="personal-list-item"><span class="personal-check-done"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="personal-list-text done">发周报</span></div>
+            <div class="personal-list-item"><span class="personal-check-empty"></span><span class="personal-list-text">Review PR #42</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="label">Highlights Card</div>
+        <div class="personal-card" style="width:220px;">
+          <div class="personal-card-title">Highlights</div>
+          <div>
+            <div class="personal-highlight-item">完成了 Q1 规划文档</div>
+            <div class="personal-highlight-item">新功能通过 UAT 测试</div>
+            <div class="personal-highlight-item">团队 Sprint 回顾会议</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Activity Types（饼图）</div>
+        <div class="personal-card" style="width:220px;height:200px;">
+          <div class="personal-card-title">Activity Types</div>
+          <div class="personal-pie-content">
+            <svg viewBox="-30 -20 260 240" class="personal-pie-svg" overflow="visible">
+              <!-- Meeting 40% -->
+              <circle cx="100" cy="100" r="60" fill="none" stroke="#ef6915" stroke-width="26"
+                stroke-dasharray="150.8 226.2" transform="rotate(-90 100 100)" />
+              <polyline points="136,62 151,47 165,47" fill="none" stroke="#ccc" stroke-width="1"/>
+              <text x="168" y="40" font-size="11" fill="#333" font-weight="500" text-anchor="start" dominant-baseline="middle">Meeting</text>
+              <text x="168" y="54" font-size="10" fill="#999" text-anchor="start" dominant-baseline="middle">40%</text>
+              <!-- Focus 30% -->
+              <circle cx="100" cy="100" r="60" fill="none" stroke="#f28c4e" stroke-width="26"
+                stroke-dasharray="113.1 263.9" transform="rotate(54 100 100)" />
+              <!-- Chat 20% -->
+              <circle cx="100" cy="100" r="60" fill="none" stroke="#fad0aa" stroke-width="26"
+                stroke-dasharray="75.4 301.6" transform="rotate(162 100 100)" />
+              <!-- Other 10% -->
+              <circle cx="100" cy="100" r="60" fill="none" stroke="#fdeedd" stroke-width="26"
+                stroke-dasharray="37.7 339.3" transform="rotate(234 100 100)" />
+              <!-- Center label -->
+              <text x="100" y="93" font-size="10" fill="#aaa" text-anchor="middle" dominant-baseline="middle">Total</text>
+              <text x="100" y="109" font-size="14" font-weight="600" fill="#1a1a1a" text-anchor="middle" dominant-baseline="middle">3h 20min</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Hourly App Usage（柱状图）</div>
+        <div class="personal-card" style="width:300px;height:180px;">
+          <div class="personal-card-title">Hourly App Usage</div>
+          <div class="personal-bar-chart">
+            <div class="personal-bar-area">
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:5%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:3%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:2%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:2%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:2%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:5%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:12%;background:#fad0aa"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:30%;background:#fad0aa"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:65%;background:#f28c4e"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:90%;background:#e8621a"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:75%;background:#e8621a"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:40%;background:#f7b07e"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:55%;background:#f28c4e"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:35%;background:#f7b07e"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:20%;background:#fad0aa"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:15%;background:#fad0aa"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:45%;background:#f7b07e"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:60%;background:#f28c4e"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:80%;background:#e8621a"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:70%;background:#e8621a"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:25%;background:#fad0aa"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:10%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:5%;background:#fdeedd"></div></div>
+              <div class="personal-bar-slot"><div class="personal-bar-fill" style="height:3%;background:#fdeedd"></div></div>
+            </div>
+            <div class="personal-bar-x-axis">
+              <span style="left:0%">00</span>
+              <span style="left:26%">06</span>
+              <span style="left:52%">12</span>
+              <span style="left:78%">18</span>
+              <span style="left:100%">23</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="label">Person Filter Chip（People 过滤器）</div>
+        <div class="memory-filters" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="person-filter-chip">
+            <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=1" alt="Alice" class="person-filter-avatar" />
+            <div class="person-filter-select-wrap">
+              <select class="person-filter-select">
+                <option>Alice</option>
+                <option>Bob</option>
+                <option>Charlie</option>
+              </select>
+              <svg class="person-filter-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <button class="memory-filter-btn active">All</button>
+          <button class="memory-filter-btn">Work</button>
+          <button class="memory-filter-btn">Personal</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Sidebar Open Button（侧栏关闭时的浮动按钮）</div>
+        <button class="sidebar-open-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>
+        </button>
+      </div>
+    </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Card 容器</b>
+        bg <span class="spec-token">--bg-0</span> · radius 12px · padding 16px<br>
+        title：12px 600 大写 <span class="spec-token">--grey-3</span><br>
+        <b class="spec-h">Todo 勾选</b>
+        empty：16px 圆形，1.5px <span class="spec-token">--grey-2</span> 描边<br>
+        done：<span class="spec-token">--app-text-0</span> 实心，check 白色 10px<br>
+        done 文字：<span class="spec-token">--grey-2</span> + 删除线<br>
+        <b class="spec-h">饼图</b>
+        SVG 圆环 r=60，stroke-width=26<br>
+        4色段：<span class="spec-token">#ef6915</span> / <span class="spec-token">#f28c4e</span> / <span class="spec-token">#fad0aa</span> / <span class="spec-token">#fdeedd</span><br>
+        折线引注，中央显示总时长<br>
+        <b class="spec-h">柱状图</b>
+        24列，高度 = 分钟/60<br>
+        5档颜色 <span class="spec-token">fdeedd</span>→<span class="spec-token">e8621a</span><br>
+        <b class="spec-h">Person Filter Chip</b>
+        radius 999px · orange-0.12 背景<br>
+        <span class="spec-token">--APP</span> 描边 · avatar 20×20<br>
+        select 隐藏原生样式 + chevron 绝对定位<br>
+        <b class="spec-h">Sidebar Open Btn</b>
+        28×28 · 毛玻璃 blur 12px · shadow<br>
+        <span class="spec-token">--grey-5</span> 图标 · hover → <span class="spec-token">--app-text-0</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── LIBRARY TAB ───────────────── -->
+  <section>
+    <div class="section-title">Library · Projects + People</div>
+    <div class="section-demo">
+      <div class="row" style="align-items:flex-start;">
+      <div style="flex:1;min-width:300px;">
+        <div class="label">Projects</div>
+        <div class="project-cards-list">
+          <div class="project-card">
+            <svg class="project-card-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+            <span class="project-card-name">Project A</span>
+            <div class="project-card-actions">
+              <button class="project-card-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>
+              <button class="project-card-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+          <div class="project-card">
+            <svg class="project-card-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+            <span class="project-card-name">Project B</span>
+            <div class="project-card-actions">
+              <button class="project-card-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>
+              <button class="project-card-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+          <div class="project-card">
+            <svg class="project-card-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+            <span class="project-card-name">Untitled</span>
+            <div class="project-card-actions">
+              <button class="project-card-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;min-width:300px;">
+        <div class="label">People</div>
+        <div class="people-grid">
+          <div class="people-card">
+            <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=1" class="people-avatar" alt="Alice" />
+            <div class="people-info"><span class="people-name">Alice</span><span class="people-email">alice@company.com</span></div>
+            <div class="people-card-actions">
+              <button class="project-card-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>
+              <button class="project-card-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+          <div class="people-card">
+            <img src="https://api.dicebear.com/9.x/lorelei/svg?seed=2" class="people-avatar" alt="Bob" />
+            <div class="people-info"><span class="people-name">Bob</span><span class="people-email">bob@company.com</span></div>
+            <div class="people-card-actions">
+              <button class="project-card-action-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button>
+              <button class="project-card-action-btn danger"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="spec-block">
+        <b class="spec-h">Project Card</b>
+        bg <span class="spec-token">--bg-0</span> · radius 8px · padding 10px 12px<br>
+        grid 3列 · gap 12px<br>
+        folder icon <span class="spec-token">--APP</span> 橙色 · name 14px 600<br>
+        hover → edit/trash 按钮（24×24 圆形）<br>
+        <b class="spec-h">People Card</b>
+        bg <span class="spec-token">--bg-0</span> · radius 12px<br>
+        头像 48×48 · name 13px 600<br>
+        email 12px <span class="spec-token">--grey-4</span><br>
+        hover → edit/trash 按钮
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── DAILY VIEW ───────────────── -->
+  <section>
+    <div class="section-title">Memories · Daily Tab</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:600px;">
+      <div class="daily-date-nav">
+        <button class="daily-nav-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg></button>
+        <span class="daily-date-label">Sunday, April 13</span>
+        <button class="daily-nav-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      </div>
+      <div class="daily-timeline">
+        <!-- Empty hour -->
+        <div class="daily-hour-row empty">
+          <div class="daily-hour-left">
+            <span class="daily-hour-label">08</span>
+            <div class="daily-hour-track"><div class="daily-hour-line"></div></div>
+          </div>
+          <div class="daily-hour-right"></div>
+        </div>
+        <!-- Active hour with card -->
+        <div class="daily-hour-row active">
+          <div class="daily-hour-left">
+            <span class="daily-hour-label">09</span>
+            <div class="daily-hour-track">
+              <div class="daily-hour-dot"></div>
+              <div class="daily-hour-line"></div>
+            </div>
+          </div>
+          <div class="daily-hour-right">
+            <div class="daily-card" style="height:72px;">
+              <div class="daily-card-header">
+                <span class="daily-app-icon">✉️</span>
+                <span class="daily-card-title">Checked morning emails</span>
+                <span class="daily-card-time">09:05</span>
+              </div>
+              <div class="daily-card-summary">Reviewed 14 emails, replied to 6 including client feedback and team standup notes.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Active hour with card -->
+        <div class="daily-hour-row active">
+          <div class="daily-hour-left">
+            <span class="daily-hour-label">10</span>
+            <div class="daily-hour-track">
+              <div class="daily-hour-dot"></div>
+              <div class="daily-hour-line"></div>
+            </div>
+          </div>
+          <div class="daily-hour-right">
+            <div class="daily-card" style="height:80px;">
+              <div class="daily-card-header">
+                <span class="daily-app-icon">🎨</span>
+                <span class="daily-card-title">Iterated on dashboard layout</span>
+                <span class="daily-card-time">10:30</span>
+              </div>
+              <div class="daily-card-summary">Explored 4 layout variations for the analytics dashboard and aligned components to the 8px grid.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Empty hour -->
+        <div class="daily-hour-row empty">
+          <div class="daily-hour-left">
+            <span class="daily-hour-label">11</span>
+            <div class="daily-hour-track"><div class="daily-hour-line"></div></div>
+          </div>
+          <div class="daily-hour-right"></div>
+        </div>
+        <!-- Active hour with card -->
+        <div class="daily-hour-row active">
+          <div class="daily-hour-left">
+            <span class="daily-hour-label">13</span>
+            <div class="daily-hour-track">
+              <div class="daily-hour-dot"></div>
+              <div class="daily-hour-line"></div>
+            </div>
+          </div>
+          <div class="daily-hour-right">
+            <div class="daily-card" style="height:60px;">
+              <div class="daily-card-header">
+                <span class="daily-app-icon">💻</span>
+                <span class="daily-card-title">Refactored state management</span>
+                <span class="daily-card-time">13:20</span>
+              </div>
+              <div class="daily-card-summary">Extracted 3 custom hooks and reduced component re-renders by consolidating related state.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Date Nav</b>
+        箭头按钮 28×28 · radius 6px<br>
+        date-label：14px 600<br>
+        <b class="spec-h">Timeline 行</b>
+        min-height 56px<br>
+        dot：8×8，<span class="spec-token">--app-text-0</span><br>
+        track：0.5px 虚线，<span class="spec-token">--grey-2</span><br>
+        repeating-gradient 6px实 + 4px透明<br>
+        <b class="spec-h">Activity Card</b>
+        bg <span class="spec-token">--bg-0</span> · radius 8px · padding 6px 12px<br>
+        emoji 16px · title 14px 600<br>
+        时间 12px <span class="spec-token">--grey-3</span><br>
+        摘要 12px <span class="spec-token">--grey-4</span>，省略号截断
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── SETTINGS ───────────────── -->
+  <section>
+    <div class="section-title">Settings</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:660px;">
+      <!-- Tabs -->
+      <div class="settings-tabs" style="margin-bottom:24px;">
+        <button class="settings-tab active">Account</button>
+        <button class="settings-tab">Integrations</button>
+        <button class="settings-tab">Skills</button>
+        <button class="settings-tab">Subscription</button>
+      </div>
+
+      <!-- Account rows -->
+      <div class="account-row">
+        <div class="account-avatar"></div>
+        <span class="account-username">Username</span>
+      </div>
+      <div class="settings-divider"></div>
+      <div class="account-row">
+        <span class="account-row-label">Theme</span>
+        <div class="theme-selector">
+          <button class="theme-btn">System Mode</button>
+          <button class="theme-btn active">Light Mode</button>
+          <button class="theme-btn">Dark Mode</button>
+        </div>
+      </div>
+      <div class="settings-divider"></div>
+      <div class="account-row">
+        <div class="account-row-text">
+          <span class="account-row-label">Luci's computer</span>
+          <span class="account-row-sub">A secure virtual environment where Luci runs</span>
+        </div>
+        <div class="account-row-actions">
+          <button class="settings-btn">Restart</button>
+          <button class="settings-btn">Manual backup</button>
+          <div class="restore-split-btn">
+            <button class="restore-main">Restore</button>
+            <div class="restore-divider"></div>
+            <div class="restore-arrow-wrap">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="settings-divider"></div>
+      <div class="account-row">
+        <span class="account-row-label">Import memory to LUCI</span>
+        <div class="account-row-actions"><button class="settings-btn">Import</button></div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Tab Bar</b>
+        14px · active：<span class="spec-token">--APP</span> 文字<br>
+        active 底边 2px <span class="spec-token">--APP</span><br>
+        <b class="spec-h">Theme Selector</b>
+        整体 <span class="spec-token">--grey-1m</span> 描边，overflow hidden<br>
+        active：<span class="spec-token">--APP</span> 橙色底，<span class="spec-token">--bg-0</span> 白字<br>
+        hover：<span class="spec-token">--grey-1</span> 背景<br>
+        <b class="spec-h">Settings Btn</b>
+        12px · radius 999px · <span class="spec-token">--grey-1m</span> 描边<br>
+        <b class="spec-h">Restore 分体按钮</b>
+        主按钮 + 分隔竖线（18px）+ 下拉箭头<br>
+        整体 <span class="spec-token">--grey-1m</span> 描边 · radius 999px<br>
+        dropdown：bg-0 · radius 8px · shadow
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── SETTINGS · SKILLS ───────────────── -->
+  <section>
+    <div class="section-title">Settings · Skills Tab</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:560px;">
+      <div class="skills-list">
+        <!-- Toggle OFF -->
+        <div class="skill-item">
+          <div class="skill-text">
+            <span class="skill-name">Web Search</span>
+            <span class="skill-desc">让 LUCI 自动搜索互联网上的最新信息。</span>
+          </div>
+          <div class="skill-actions">
+            <button class="skill-toggle"><span class="skill-toggle-thumb"></span></button>
+            <div class="skill-more-wrap">
+              <button class="skill-more-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <!-- Toggle ON + dropdown visible -->
+        <div class="skill-item">
+          <div class="skill-text">
+            <span class="skill-name">Code Executor</span>
+            <span class="skill-desc">在安全沙盒中自动运行代码并返回结果。</span>
+          </div>
+          <div class="skill-actions">
+            <button class="skill-toggle on"><span class="skill-toggle-thumb"></span></button>
+            <div class="skill-more-wrap">
+              <button class="skill-more-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+              <div class="skill-dropdown">
+                <button class="skill-dropdown-item">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  API key manage
+                </button>
+                <button class="skill-dropdown-item">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                  Download skill
+                </button>
+                <button class="skill-dropdown-item danger">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                  Delete skill
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Skill Row</b>
+        name：16px 600 · desc：14px <span class="spec-token">--grey-4</span><br>
+        padding 18px 0 · <span class="spec-token">--grey-1</span> 分隔线<br>
+        <b class="spec-h">Toggle</b>
+        36×20 · radius 20px<br>
+        off：<span class="spec-token">--grey-1m</span> 底色<br>
+        on：<span class="spec-token">--APP</span> 橙色<br>
+        thumb：14×14 白色，translateX 0→16px<br>
+        <b class="spec-h">More 菜单</b>
+        more-btn：28×28 透明圆形<br>
+        dropdown：bg-0 · radius 8px · shadow<br>
+        danger item：<span class="spec-token">--danger-hover</span> 文字<br>
+        hover → <span class="spec-token">--danger-light</span> 背景
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── SETTINGS · INTEGRATIONS ───────────────── -->
+  <section>
+    <div class="section-title">Settings · Integrations Tab</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:480px;">
+      <div class="integrations-grid">
+        <div class="integration-card">
+          <div class="integration-logo" style="background:#e7f0fd;color:#1a73e8;">G</div>
+          <span class="integration-name">Google Calendar</span>
+          <button class="integration-btn connected">Connected</button>
+        </div>
+        <div class="integration-card">
+          <div class="integration-logo" style="background:#f3f0ff;color:#5b4cf5;">N</div>
+          <span class="integration-name">Notion</span>
+          <button class="integration-btn">Connect</button>
+        </div>
+        <div class="integration-card">
+          <div class="integration-logo" style="background:#e8f5e9;color:#388e3c;">S</div>
+          <span class="integration-name">Slack</span>
+          <button class="integration-btn connected">Connected</button>
+        </div>
+        <div class="integration-card">
+          <div class="integration-logo" style="background:#fff3e0;color:#e65100;">J</div>
+          <span class="integration-name">Jira</span>
+          <button class="integration-btn">Connect</button>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Card</b>
+        grid 2列 · radius 12px<br>
+        <span class="spec-token">--grey-1</span> 描边 · padding 14px 16px<br>
+        logo：36×36 · radius 9px（品牌配色）<br>
+        name：14px 600<br>
+        <b class="spec-h">Connect Button</b>
+        12px · radius 999px · <span class="spec-token">--grey-1m</span> 描边<br>
+        hover → <span class="spec-token">--grey-1</span> 背景<br>
+        <b class="spec-h">Connected State</b>
+        bg <span class="spec-token">--success-light</span><br>
+        描边 <span class="spec-token">--success-disabled</span><br>
+        文字 <span class="spec-token">--success-active</span>（绿色）
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────── SETTINGS · SUBSCRIPTION ───────────────── -->
+  <section>
+    <div class="section-title">Settings · Subscription Tab</div>
+    <div class="section-demo">
+    <div class="card" style="max-width:560px;display:flex;flex-direction:column;gap:0;">
+      <div class="subscription-header" style="padding-bottom:18px;">
+        <div style="display:flex;flex-direction:column;gap:3px;">
+          <span class="subscription-plan-name">Free Plan</span>
+          <span style="font-size:12px;color:var(--semi-App-grey-3);">Ends on 9999/01/01</span>
+        </div>
+        <button class="subscription-upgrade-btn">Upgrade</button>
+      </div>
+      <div class="settings-divider"></div>
+      <p style="font-size:14px;color:var(--semi-App-grey-4);line-height:1.6;padding:18px 0;max-width:500px;">The Free Plan gives you access to core LUCI features including up to 5 channels, basic AI assistance, and 1 GB of memory storage.</p>
+      <div class="settings-divider"></div>
+      <div class="subscription-usage-row">
+        <span class="account-row-label">Usage</span>
+        <div class="subscription-usage-right">
+          <div class="usage-bar"><div class="usage-bar-fill" style="width:12%;"></div></div>
+          <span class="usage-label">12% used</span>
+        </div>
+      </div>
+    </div>
+      <div class="spec-block">
+        <b class="spec-h">Plan Header</b>
+        plan-name：18px 700 · ends：12px <span class="spec-token">--grey-3</span><br>
+        <b class="spec-h">Upgrade Button</b>
+        bg <span class="spec-token">--APP</span> · 14px 600<br>
+        radius 999px · padding 8px 20px<br>
+        <b class="spec-h">Usage Bar</b>
+        高 10px · <span class="spec-token">--grey-1</span> 底<br>
+        fill：<span class="spec-token">--APP</span> 橙色 · radius 99px
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /tab-views -->
+
+  <script>
+    // ── Tab switching ──
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ── Draggable spec panel ──
+    const panel = document.createElement('div');
+    panel.className = 'spec-panel';
+    panel.innerHTML = `
+      <div class="spec-panel-header">
+        <span class="spec-panel-title"></span>
+        <button class="spec-panel-close" title="关闭">×</button>
+      </div>
+      <div class="spec-panel-body"></div>
+    `;
+    document.body.appendChild(panel);
+
+    const panelTitle = panel.querySelector('.spec-panel-title');
+    const panelBody  = panel.querySelector('.spec-panel-body');
+    const panelHeader = panel.querySelector('.spec-panel-header');
+
+    panel.querySelector('.spec-panel-close').addEventListener('click', () => {
+      panel.classList.remove('visible');
+    });
+
+    // Click on section-demo to open panel
+    let hasDragged = false;
+    document.querySelectorAll('.section-demo').forEach(demo => {
+      const spec = demo.querySelector('.spec-block');
+      if (!spec) return;
+
+      demo.addEventListener('click', e => {
+        const section = demo.closest('section');
+        const titleEl = section && section.querySelector('.section-title');
+        panelTitle.textContent = titleEl ? titleEl.textContent : 'Design Spec';
+        panelBody.innerHTML = spec.innerHTML;
+
+        // Position near click only when panel is hidden or hasn't been manually moved
+        if (!panel.classList.contains('visible') || !hasDragged) {
+          hasDragged = false;
+          const px = Math.min(e.clientX + 20, window.innerWidth - 320);
+          const py = Math.max(8, Math.min(e.clientY - 30, window.innerHeight - 200));
+          panel.style.left = px + 'px';
+          panel.style.top  = py + 'px';
+        }
+        panel.classList.add('visible');
+      });
+    });
+
+    // Drag logic
+    let dragging = false, ox = 0, oy = 0;
+    panelHeader.addEventListener('mousedown', e => {
+      if (e.target.classList.contains('spec-panel-close')) return;
+      dragging = true;
+      ox = e.clientX - panel.getBoundingClientRect().left;
+      oy = e.clientY - panel.getBoundingClientRect().top;
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      hasDragged = true;
+      panel.style.left = (e.clientX - ox) + 'px';
+      panel.style.top  = (e.clientY - oy) + 'px';
+    });
+    document.addEventListener('mouseup', () => { dragging = false; });
+  </script>
+</body>
+</html>

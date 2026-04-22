@@ -12,15 +12,14 @@ import {
   MessageCircle,
   BookMarked,
   Settings,
+  Clock,
   Layers,
   TrendingUp,
   Plus,
   ArrowLeft,
   Send,
-  Paperclip,
   PanelLeftClose,
   PanelLeftOpen,
-  MoreHorizontal,
   MoreVertical,
   Pencil,
   Trash2,
@@ -33,6 +32,7 @@ import {
   Folder,
   UserPlus,
   UsersRound,
+  Sparkles,
 } from "lucide-react";
 import "./App.css";
 
@@ -431,38 +431,55 @@ const mockDailyActivities = [
   { id: 409, date: "2026-04-09", time: "17:10", duration: 18, app: "Notion", appIcon: "📝", title: "End-of-day summary", summary: "Logged completed tasks, updated the project status to In Progress and set tomorrow's top 3 priorities." },
 ];
 
-const mockActivityTypes = [
-  { label: "Coding", value: 35, color: "#e8621a" },
-  { label: "Communication", value: 25, color: "#f28c4e" },
-  { label: "Design", value: 20, color: "#f7b07e" },
-  { label: "Research", value: 15, color: "#fad0aa" },
-  { label: "Other", value: 5, color: "#fdeedd" },
-];
 
-const mockHourlyUsage = [
-  { hour: 0, minutes: 0 }, { hour: 1, minutes: 0 }, { hour: 2, minutes: 0 },
-  { hour: 3, minutes: 0 }, { hour: 4, minutes: 0 }, { hour: 5, minutes: 5 },
-  { hour: 6, minutes: 8 }, { hour: 7, minutes: 15 }, { hour: 8, minutes: 32 },
-  { hour: 9, minutes: 52 }, { hour: 10, minutes: 48 }, { hour: 11, minutes: 55 },
-  { hour: 12, minutes: 20 }, { hour: 13, minutes: 18 }, { hour: 14, minutes: 50 },
-  { hour: 15, minutes: 58 }, { hour: 16, minutes: 45 }, { hour: 17, minutes: 42 },
-  { hour: 18, minutes: 25 }, { hour: 19, minutes: 32 }, { hour: 20, minutes: 28 },
-  { hour: 21, minutes: 20 }, { hour: 22, minutes: 12 }, { hour: 23, minutes: 5 },
-];
-
-const mockPersonalTodos = [
+const mockMomentsTodos = [
   { id: 1, text: "Review design feedback from team", done: false },
   { id: 2, text: "Update project documentation", done: true },
   { id: 3, text: "Schedule weekly sync meeting", done: false },
   { id: 4, text: "Fix navigation animation bug", done: false },
 ];
 
-const mockPersonalDone = [
-  { id: 101, text: "You spent 75 minutes refining the dashboard layout — 4 layout variations explored, all snapped to the 8px grid." },
-  { id: 102, text: "A focused 55-minute Notion session wrapped up the week's priorities with 9 tasks organized across 3 projects." },
-  { id: 103, text: "You shipped the sidebar navigation today — collapsible, icon-driven, with smooth active state transitions." },
-  { id: 104, text: "Back-to-back deep work blocks from 14:00–17:00 — your longest focus streak this week." },
-  { id: 105, text: "Wrapped the day with a clear end-of-day summary and tomorrow's top 3 priorities already set." },
+const mockUpcomingMeetings = [
+  {
+    id: 1,
+    title: "Product Review",
+    datetime: "Apr 22 · 10:00 AM",
+    duration: "1h",
+    brief: [
+      "You committed to finishing the onboarding flow mockups by Apr 20 — confirm before the meeting.",
+      "Bob raised API rate limit concerns last time; you said you'd follow up with infra. Sara's design system audit is still pending.",
+      "The Q2 roadmap cut two features to the next cycle — expect pushback from stakeholders; prepare a rationale for the scope change.",
+    ],
+    participants: [
+      { name: "Alice Chen", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", role: "Product Manager", linkedin: "https://linkedin.com/in/alicechen" },
+      { name: "Bob Kim", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", role: "Engineering Lead", linkedin: "https://linkedin.com/in/bobkim" },
+      { name: "Sara Lim", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", role: "Designer", linkedin: "https://linkedin.com/in/saralim" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Engineering Weekly",
+    datetime: "Apr 23 · 2:00 PM",
+    duration: "45m",
+    brief: ["Weekly engineering sync covering sprint progress, blockers, and upcoming deployment schedule for v1.3."],
+    participants: [
+      { name: "David Park", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", role: "Backend Engineer", linkedin: "https://linkedin.com/in/davidpark" },
+      { name: "Mia Torres", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=5", role: "Frontend Engineer", linkedin: "https://linkedin.com/in/miatorres" },
+      { name: "Jake Wu", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=6", role: "DevOps", linkedin: "https://linkedin.com/in/jakewu" },
+      { name: "Nina Patel", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=7", role: "QA Engineer", linkedin: "https://linkedin.com/in/ninapatel" },
+    ],
+  },
+  {
+    id: 3,
+    title: "Design Critique",
+    datetime: "Apr 24 · 11:30 AM",
+    duration: "1h 30m",
+    brief: ["Design review session for the new onboarding flow. Sharing Figma prototypes and collecting structured feedback."],
+    participants: [
+      { name: "Bob Kim", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", role: "Engineering Lead", linkedin: "https://linkedin.com/in/bobkim" },
+      { name: "Lily Zhao", avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=8", role: "UX Researcher", linkedin: "https://linkedin.com/in/lilyzhao" },
+    ],
+  },
 ];
 
 const mockPeople = [
@@ -518,7 +535,7 @@ const mockMessages: Record<number, Message[]> = {
   4: [{ id: 1, role: "agent", text: "CRM channel ready.", time: "5:44 pm" }],
 };
 
-type NavItem = "ask" | "memories" | "settings";
+type NavItem = "ask" | "memories" | "moments" | "settings";
 
 const skillList = [
   { id: "skill-creator",   name: "Skill Creator",       desc: "Create new reusable skills and best practices for your agent." },
@@ -553,7 +570,7 @@ function handleDragStart(e: React.MouseEvent) {
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activeNav, setActiveNav] = useState<NavItem>("ask");
+  const [activeNav, setActiveNav] = useState<NavItem>("moments");
   const [activeChannel, setActiveChannel] = useState<Channel | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -611,9 +628,11 @@ export default function App() {
   const [renameMemoryTarget, setRenameMemoryTarget] = useState<Memory | null>(null);
   const [renameMemoryValue, setRenameMemoryValue] = useState("");
   const [deleteMemoryTarget, setDeleteMemoryTarget] = useState<Memory | null>(null);
-  const [memoryTab, setMemoryTab] = useState<"daily" | "meetings" | "people" | "library" | "personal">("personal");
+  const [memoryTab, setMemoryTab] = useState<"daily" | "meetings" | "people" | "library">("meetings");
   const [dailyDate, setDailyDate] = useState("2026-04-11");
   const dailyScrollRef = useRef<HTMLDivElement>(null);
+  const ptScrollRef = useRef<HTMLDivElement>(null);
+  const chartScrollRef = useRef<HTMLDivElement>(null);
   const [people, setPeople] = useState(mockPeople);
   const [memoryFilters, setMemoryFilters] = useState(["All", "Project A", "Project B", "Project C", "Untitled"]);
   const [memoryFilter, setMemoryFilter] = useState(() => memoryFilters.find((f) => f !== "All" && f !== "Untitled") ?? "Untitled");
@@ -640,8 +659,7 @@ export default function App() {
   const [mergeStep, setMergeStep] = useState<"select" | "rename">("select");
   const [mergeNewName, setMergeNewName] = useState("");
   const [personFilter, setPersonFilter] = useState<number>(mockPeople[0].id);
-  const [personalTodos, setPersonalTodos] = useState<{ id: number; text: string; done: boolean }[]>(mockPersonalTodos);
-  const [personalDone, setPersonalDone] = useState<{ id: number; text: string }[]>(mockPersonalDone);
+  const [momentsTodos, setMomentsTodos] = useState(mockMomentsTodos);
   const [editMeetingTarget, setEditMeetingTarget] = useState<Memory | null>(null);
   const [editMeetingProject, setEditMeetingProject] = useState("");
   const [editMeetingParticipants, setEditMeetingParticipants] = useState<Memory["participants"]>([]);
@@ -672,6 +690,23 @@ export default function App() {
       dailyScrollRef.current.scrollTop = 9 * 56;
     }
   }, [dailyDate, memoryTab]);
+
+  useEffect(() => {
+    if (ptScrollRef.current) {
+      const acts = mockDailyActivities.filter(a => a.date === dailyDate).sort((a, b) => a.time.localeCompare(b.time));
+      if (acts.length > 0) {
+        const [h] = acts[0].time.split(":").map(Number);
+        ptScrollRef.current.scrollTop = Math.max(0, h - 1) * 80;
+      }
+    }
+  }, [memoryTab, dailyDate]);
+
+  useEffect(() => {
+    if (chartScrollRef.current) {
+      const COL_WIDTH = 40;
+      chartScrollRef.current.scrollLeft = 9 * COL_WIDTH;
+    }
+  }, [activeNav]);
 
   // Receive transcribed voice text from island window → add to channel 1
   useEffect(() => {
@@ -941,18 +976,12 @@ export default function App() {
         </div>
 
         <nav className="sidebar-nav">
+          <MenuBarTab icon={<Clock size={16} />} label="Moments" active={activeNav === "moments"} onClick={() => setActiveNav("moments")} />
           <MenuBarTab icon={<MessageCircle size={16} />} label="Ask LUCI" active={activeNav === "ask"} onClick={() => setActiveNav("ask")} />
           <MenuBarTab icon={<BookMarked size={16} />} label="Memories" active={activeNav === "memories"} onClick={() => setActiveNav("memories")} />
           <MenuBarTab icon={<Settings size={16} />} label="Settings" active={activeNav === "settings"} onClick={() => setActiveNav("settings")} />
         </nav>
 
-        <div className="sidebar-footer">
-          <div className="avatar" />
-          <div className="user-info">
-            <span className="user-name">Username</span>
-            <span className="user-plan">Free Plan</span>
-          </div>
-        </div>
       </aside>
 
       {/* ── Main ── */}
@@ -963,14 +992,14 @@ export default function App() {
           <div className="memories-view">
             <h1 className="memories-title">Memories</h1>
             <div className="memories-tabs">
-              {(["personal", "meetings", "people", "library", "daily"] as const).map((tab) => (
+              {(["meetings", "people", "library", "daily"] as const).map((tab) => (
                 <button
                   key={tab}
                   className={`memory-tab ${memoryTab === tab ? "active" : ""}`}
                   style={tab === "daily" ? { opacity: 0.1 } : undefined}
                   onClick={() => { setMemoryTab(tab); }}
                 >
-                  {tab === "daily" ? "Daily" : tab === "meetings" ? "Project" : tab === "people" ? "People" : tab === "personal" ? "Personal" : "Library"}
+                  {tab === "daily" ? "Daily" : tab === "meetings" ? "Project" : tab === "people" ? "People" : "Library"}
                 </button>
               ))}
             </div>
@@ -1112,129 +1141,6 @@ export default function App() {
             </div>
             </>
             </>}
-            {memoryTab === "personal" && (
-              <div className="personal-view">
-                <div className="personal-row personal-row2">
-                  <div className="personal-card personal-todo-card">
-                    <div className="personal-card-title">Todo</div>
-                    <div className="personal-list">
-                      {personalTodos.map((item) => (
-                        <div key={item.id} className="personal-list-item" onClick={() => setPersonalTodos((prev) => prev.map((t) => t.id === item.id ? { ...t, done: !t.done } : t))}>
-                          {item.done
-                            ? <span className="personal-check-done"><Check size={10} /></span>
-                            : <span className="personal-check-empty" />}
-                          <span className={`personal-list-text${item.done ? " done" : ""}`}>{item.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="personal-card personal-done-card">
-                    <div className="personal-card-title">Highlights</div>
-                    <div className="personal-highlight-list">
-                      {personalDone.map((item) => (
-                        <div key={item.id} className="personal-highlight-item">
-                          <span className="personal-highlight-text">{item.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="personal-row">
-                  <div className="personal-card personal-pie-card">
-                    <div className="personal-card-title">Activity Types</div>
-                    <div className="personal-pie-content">
-                      <svg viewBox="-30 -20 260 240" className="personal-pie-svg" overflow="visible">
-                        {(() => {
-                          let offset = 0;
-                          const r = 60, cx = 100, cy = 100, circ = 2 * Math.PI * r;
-                          return mockActivityTypes.map((item) => {
-                            const dash = (item.value / 100) * circ;
-                            const startAngle = (offset / 100) * 360 - 90;
-                            const midAngleDeg = startAngle + (item.value / 100) * 180;
-                            const midRad = (midAngleDeg * Math.PI) / 180;
-                            offset += item.value;
-                            const lineR1 = 75, lineR2 = 90, horizLen = 14;
-                            const lx1 = cx + lineR1 * Math.cos(midRad);
-                            const ly1 = cy + lineR1 * Math.sin(midRad);
-                            const lx2 = cx + lineR2 * Math.cos(midRad);
-                            const ly2 = cy + lineR2 * Math.sin(midRad);
-                            const isRight = Math.cos(midRad) >= 0;
-                            const lx3 = lx2 + (isRight ? horizLen : -horizLen);
-                            return (
-                              <g key={item.label}>
-                                <circle
-                                  cx={cx} cy={cy} r={r}
-                                  fill="none"
-                                  stroke={item.color}
-                                  strokeWidth={26}
-                                  strokeDasharray={`${dash} ${circ - dash}`}
-                                  transform={`rotate(${startAngle} ${cx} ${cy})`}
-                                />
-                                {item.value >= 8 && (
-                                  <>
-                                    <polyline
-                                      points={`${lx1},${ly1} ${lx2},${ly2} ${lx3},${ly2}`}
-                                      fill="none"
-                                      stroke="#ccc"
-                                      strokeWidth={1}
-                                    />
-                                    <text
-                                      x={lx3 + (isRight ? 3 : -3)}
-                                      y={ly2 - 7}
-                                      fontSize={11}
-                                      fill="#333"
-                                      fontWeight="500"
-                                      textAnchor={isRight ? "start" : "end"}
-                                      dominantBaseline="middle"
-                                    >{item.label}</text>
-                                    <text
-                                      x={lx3 + (isRight ? 3 : -3)}
-                                      y={ly2 + 7}
-                                      fontSize={10}
-                                      fill="#999"
-                                      textAnchor={isRight ? "start" : "end"}
-                                      dominantBaseline="middle"
-                                    >{item.value}%</text>
-                                  </>
-                                )}
-                              </g>
-                            );
-                          });
-                        })()}
-                        {(() => {
-                          const totalMins = mockHourlyUsage.reduce((s, h) => s + h.minutes, 0);
-                          const h = Math.floor(totalMins / 60);
-                          const m = totalMins % 60;
-                          return (
-                            <>
-                              <text x={100} y={93} fontSize={10} fill="#aaa" textAnchor="middle" dominantBaseline="middle">Total</text>
-                              <text x={100} y={109} fontSize={14} fontWeight="600" fill="#1a1a1a" textAnchor="middle" dominantBaseline="middle">{h}h {m}min</text>
-                            </>
-                          );
-                        })()}
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="personal-card personal-bar-card">
-                    <div className="personal-card-title">Hourly App Usage</div>
-                    <div className="personal-bar-chart">
-                      <div className="personal-bar-area">
-                        {mockHourlyUsage.map((item) => (
-                          <div key={item.hour} className="personal-bar-slot">
-                            <div className="personal-bar-fill" style={{ height: `${(item.minutes / 60) * 100}%`, background: item.minutes >= 50 ? "#e8621a" : item.minutes >= 35 ? "#f28c4e" : item.minutes >= 20 ? "#f7b07e" : item.minutes >= 8 ? "#fad0aa" : "#fdeedd" }} />
-                          </div>
-                        ))}
-                      </div>
-                      <div className="personal-bar-x-axis">
-                        {[0, 6, 12, 18, 23].map((h) => (
-                          <span key={h} style={{ left: `${(h / 23) * 100}%` }}>{String(h).padStart(2, "0")}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
             {memoryTab === "daily" && (() => {
               const byHour: Record<number, typeof mockDailyActivities> = {};
               mockDailyActivities
@@ -1349,7 +1255,114 @@ export default function App() {
               </div>
             )}
           </div>
-        ) : activeNav === "settings" && !activeChannel ? (
+        ) : activeNav === "moments" && !activeChannel ? (() => {
+          const activities = mockDailyActivities.filter(a => a.date === dailyDate).sort((a, b) => a.time.localeCompare(b.time));
+          const appUsageMap: Record<string, { app: string; appIcon: string; totalMins: number }> = {};
+          activities.forEach(a => {
+            if (!appUsageMap[a.app]) appUsageMap[a.app] = { app: a.app, appIcon: a.appIcon, totalMins: 0 };
+            appUsageMap[a.app].totalMins += a.duration;
+          });
+          const orangeShades = ["#FFD08A", "#FFD9A0", "#FFE2B5", "#FFEACC", "#FFF1DD", "#FFF7EE"];
+          const appColors: Record<string, string> = {};
+          [...new Set(activities.map(a => a.app))].forEach((app, i) => { appColors[app] = orangeShades[i % orangeShades.length]; });
+          const byHour: Record<number, Array<{ app: string; duration: number }>> = {};
+          activities.forEach(a => {
+            const h = parseInt(a.time.split(":")[0]);
+            if (!byHour[h]) byHour[h] = [];
+            byHour[h].push({ app: a.app, duration: a.duration });
+          });
+          const maxHourMins = Math.max(...Object.values(byHour).map(acts => acts.reduce((s, a) => s + a.duration, 0)), 1);
+          return (
+            <div className="memories-view moments-view">
+              <div className="moments-title-row">
+                <h1 className="memories-title">Hello, Shawn</h1>
+                <span className="moments-date">
+                  {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
+                </span>
+              </div>
+              <div className="moments-body">
+                <div className="moments-right">
+                  <div className="moments-panel">
+                    <div className="moments-panel-title">Todo</div>
+                    <div className="moments-todo-list">
+                      {momentsTodos.map(item => (
+                        <div key={item.id} className="moments-todo-item" onClick={() => setMomentsTodos(prev => prev.map(t => t.id === item.id ? { ...t, done: !t.done } : t))}>
+                          {item.done
+                            ? <span className="personal-check-done"><Check size={10} /></span>
+                            : <span className="personal-check-empty" />}
+                          <span className={`moments-todo-text${item.done ? " done" : ""}`}>{item.text}</span>
+                          {!item.done && <button className="moments-todo-ask-btn" onClick={e => { e.stopPropagation(); setActiveNav("ask"); }}>Ask LUCI</button>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="moments-left">
+                  <div className="moments-panel">
+                    <div className="moments-panel-title">Upcoming Meeting</div>
+                    {(() => {
+                      const m = mockUpcomingMeetings[0];
+                      return (
+                        <div className="moments-next-meeting">
+                          <div className="moments-meeting-header">
+                            <span className="moments-meeting-title">{m.title}</span>
+                            <button className="moments-record-btn">Start Recording</button>
+                          </div>
+                          <span className="moments-meeting-datetime">{m.datetime}</span>
+                          <div className="moments-meeting-body">
+                            <div className="moments-panel-title"><Sparkles size={10} style={{ marginRight: 4, verticalAlign: "middle", color: "#FF8C00", fill: "#FF8C00" }} />Context from last time</div>
+                            <ul className="moments-meeting-brief">
+                              {m.brief.map((line, i) => <li key={i}>{line}</li>)}
+                            </ul>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                  <div className="moments-panel">
+                    <div className="moments-panel-title">Screen Activity</div>
+                    <div className="moments-chart-wrap">
+                      <div className="moments-chart-scroll" ref={chartScrollRef}>
+                      <div className="moments-chart-area">
+                        <div className="moments-chart-cols">
+                          {Array.from({ length: 24 }, (_, h) => {
+                            const acts = byHour[h] || [];
+                            const totalMins = acts.reduce((s, a) => s + a.duration, 0);
+                            const heightPct = (totalMins / maxHourMins) * 100;
+                            return (
+                              <div key={h} className="moments-chart-col">
+                                {totalMins > 0 ? (
+                                  <>
+                                    <div className="moments-chart-bar" style={{ height: `${heightPct}%` }}>
+                                      {acts.sort((a, b) => b.duration - a.duration).map((a, i) => (
+                                        <div key={i} className="moments-chart-seg" style={{ flex: a.duration, background: appColors[a.app] }} />
+                                      ))}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <div className="moments-chart-bar-empty" />
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <div className="moments-chart-baseline" />
+                        <div className="moments-chart-xaxis">
+                          {Array.from({ length: 24 }, (_, h) => (
+                            <span key={h} className="moments-chart-xtick">
+                              {h % 4 === 0 ? `${String(h).padStart(2, "0")}:00` : ""}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })() : activeNav === "settings" && !activeChannel ? (
           <div className="settings-view">
             <h1 className="settings-title">Settings</h1>
             <div className="settings-tabs">
@@ -1628,7 +1641,7 @@ export default function App() {
         ) : (
           <div className="home-view">
             <div className="main-header">
-              <h1 className="greeting">Hello, Shawn</h1>
+              <h1 className="greeting">How can I help you?</h1>
               <div className="stats-badge">
                 <div className="stat">
                   <Layers size={15} />

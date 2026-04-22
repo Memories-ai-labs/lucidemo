@@ -3,19 +3,19 @@
   align-items: center;
   gap: 14px;
   padding: 12px 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .channel-item.hovered {
-  background: rgba(255, 159, 28, 0.06);
+  background: var(--semi-grey-0);
 }
 
 .channel-icon {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 50%;
   background: var(--semi-orange-0);
   color: var(--semi-color-APP);
   font-size: 18px;
