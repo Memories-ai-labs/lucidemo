@@ -5,7 +5,7 @@
 }
 
 :root {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Inter, sans-serif;
+  font-family: var(--luci-font-sans);
   -webkit-font-smoothing: antialiased;
 }
 

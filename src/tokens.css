@@ -1,20 +1,72 @@
 /* Auto-generated from Semi Design tokens */
+/* LUCI Design System tokens layered on top — claude.ai/design */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap");
 
 :root {
+  /* ── LUCI Design System tokens ── */
+  --luci-font-sans: "Manrope", "Inter", -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --luci-font-ui:   "Inter", "Manrope", -apple-system, system-ui, sans-serif;
+  --luci-font-mono: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+  --luci-orange-50:  #FFF7ED;
+  --luci-orange-300: #FFB459;
+  --luci-orange-400: #FF9C43;
+  --luci-orange-500: #FF9F1C;
+  --luci-orange-600: #EF6915;
+  --luci-orange-700: #DB5C0B;
+
+  --luci-fg-1:   #201F26;
+  --luci-fg-2:   #32313B;
+  --luci-fg-3:   #1E1E1E;
+  --luci-fg-4:   rgba(32,31,38,0.80);
+  --luci-fg-5:   rgba(32,31,38,0.60);
+  --luci-fg-6:   rgba(32,31,38,0.35);
+  --luci-fg-mute: #A9A8B1;
+  --luci-fg-dim:  #99A1AF;
+
+  --luci-bg-app:     #FFFFFF;
+  --luci-bg-canvas:  #F9F9F9;
+  --luci-bg-surface: #F0F0F0;
+  --luci-bg-elev:    #FFFFFF;
+  --luci-bg-mute:    #ECEDEF;
+  --luci-bg-tag:     #E9EAEB;
+
+  --luci-border-1:    #E7E7EA;
+  --luci-border-2:    #C7C7CE;
+  --luci-border-soft: #ECEDEF;
+
+  --luci-shadow-1:     0 1px 2px rgba(0,0,0,0.06);
+  --luci-shadow-2:     0 4px 12px rgba(0,0,0,0.08);
+  --luci-shadow-3:     0 8px 24px rgba(0,0,0,0.10);
+  --luci-shadow-modal: 0 24px 48px rgba(0,0,0,0.18);
+
+  --luci-radius-xs:   6px;
+  --luci-radius-sm:   8px;
+  --luci-radius-md:   12px;
+  --luci-radius-lg:   16px;
+  --luci-radius-xl:   24px;
+  --luci-radius-2xl:  28px;
+  --luci-radius-pill: 9999px;
+
+  --luci-success:      #95B10C;
+  --luci-info:         #9747FF;
+  --luci-danger:       #E5484D;
+
+  /* ── Remap key semi vars to LUCI values ── */
   /* App-specific surface tokens (with opacity) */
   --app-sidebar-bg: rgba(250, 249, 247, 0.97);
   --app-float-btn-bg: rgba(255, 255, 255, 0.92);
   --app-float-btn-bg-hover: rgba(255, 255, 255, 1);
   --app-float-surface: rgba(255, 255, 255, 0.9);
 
-  --semi-shadow-elevated: 0;
-  --semi-shadow-2: 0;
-  --semi-shadow-knob: 0;
+  --semi-shadow-elevated: 0 4px 12px rgba(0,0,0,0.08);
+  --semi-shadow-2: 0 4px 12px rgba(0,0,0,0.08);
+  --semi-shadow-knob: 0 1px 2px rgba(0,0,0,0.06);
   --semi-border-radius-full: 9999px;
   --semi-border-radius-large: 12px;
-  --semi-border-radius-small: 3px;
-  --semi-border-radius-medium: 6px;
-  --semi-border-radius-extra-small: 3px;
+  --semi-border-radius-small: 6px;
+  --semi-border-radius-medium: 8px;
+  --semi-border-radius-extra-small: 6px;
   --semi-color-bg-0: #ffffff;
   --semi-color-white-PIN: #ffffff;
   --semi-color-bg-1: #ffffff;
@@ -115,14 +167,14 @@
   --semi-color-secondary-light-hover: #d0ebff;
   --semi-color-secondary-light-active: #a1d5fe;
   --semi-color-secondary-light-default: #ebf9fe;
-  --semi-color-APP: #ef6915;
-  --semi-color-APP-hover: #db5c0b;
-  --semi-color-APP-active: #b84003;
-  --semi-color-APP-disabled: #ffb972;
-  --semi-color-app-text-0: #38302e;
-  --semi-color-app-text-1: #38302e;
-  --semi-color-app-text-2: #38302e;
-  --semi-color-app-text-3: #38302e;
+  --semi-color-APP: #FF9F1C;
+  --semi-color-APP-hover: #EF6915;
+  --semi-color-APP-active: #DB5C0B;
+  --semi-color-APP-disabled: #FFB459;
+  --semi-color-app-text-0: #201F26;
+  --semi-color-app-text-1: #201F26;
+  --semi-color-app-text-2: #201F26;
+  --semi-color-app-text-3: #201F26;
   --semi-black: #000000;
   --semi-red-0: #fff2ef;
   --semi-red-1: #fedbd6;
@@ -166,17 +218,17 @@
   --semi-grey-7: #45444f;
   --semi-grey-8: #32313b;
   --semi-grey-9: #201f26;
-  --semi-App-grey-0: #f9f9f9;
-  --semi-App-grey-1: #eae8e6;
-  --semi-App-grey-1m: #dcd9d5;
-  --semi-App-grey-2: #cdc9c6;
-  --semi-App-grey-3: #b0aba7;
-  --semi-App-grey-4: #928d88;
-  --semi-App-grey-5: #756f6b;
-  --semi-App-grey-6: #615955;
-  --semi-App-grey-7: #4c4441;
-  --semi-App-grey-8: #38302e;
-  --semi-App-grey-9: #231e1c;
+  --semi-App-grey-0: #F9F9F9;
+  --semi-App-grey-1: #E7E7EA;
+  --semi-App-grey-1m: #ECEDEF;
+  --semi-App-grey-2: #C7C7CE;
+  --semi-App-grey-3: #A9A8B1;
+  --semi-App-grey-4: #8C8B95;
+  --semi-App-grey-5: #6F6E78;
+  --semi-App-grey-6: #5A5864;
+  --semi-App-grey-7: #45444F;
+  --semi-App-grey-8: #32313B;
+  --semi-App-grey-9: #201F26;
   --semi-lime-0: #f5fbe9;
   --semi-lime-1: #eaf6c9;
   --semi-lime-2: #d8ee96;
@@ -248,7 +300,7 @@
   --semi-indigo-8: #26357b;
   --semi-indigo-9: #1c2966;
   --semi-orange-0: #fff7ed;
-  --semi-orange-0 luci: #fff7ed;
+
   --semi-orange-1: #ffebd0;
   --semi-orange-2: #ffd4a1;
   --semi-orange-3: #ffb972;
@@ -311,14 +363,37 @@
 }
 
 [data-theme="dark"] {
-  --semi-shadow-elevated: 0;
-  --semi-shadow-2: 0;
-  --semi-shadow-knob: 0;
+  /* LUCI dark tokens */
+  --luci-fg-1:   #F9F9F9;
+  --luci-fg-2:   #E7E7EA;
+  --luci-fg-3:   #D7D7DA;
+  --luci-fg-4:   rgba(255,255,255,0.85);
+  --luci-fg-5:   rgba(255,255,255,0.60);
+  --luci-fg-6:   rgba(255,255,255,0.35);
+  --luci-fg-mute: rgba(255,255,255,0.45);
+  --luci-fg-dim:  rgba(255,255,255,0.55);
+  --luci-bg-app:     #16161A;
+  --luci-bg-canvas:  #1E1E1E;
+  --luci-bg-surface: #28272D;
+  --luci-bg-elev:    #32313B;
+  --luci-bg-mute:    #3E3E3E;
+  --luci-bg-tag:     rgba(255,255,255,0.08);
+  --luci-border-1:    rgba(255,255,255,0.08);
+  --luci-border-2:    rgba(255,255,255,0.18);
+  --luci-border-soft: rgba(255,255,255,0.06);
+  --luci-shadow-1: 0 1px 2px rgba(0,0,0,0.45);
+  --luci-shadow-2: 0 4px 12px rgba(0,0,0,0.45);
+  --luci-shadow-3: 0 8px 24px rgba(0,0,0,0.55);
+  --luci-shadow-modal: 0 24px 48px rgba(0,0,0,0.65);
+
+  --semi-shadow-elevated: 0 4px 12px rgba(0,0,0,0.08);
+  --semi-shadow-2: 0 4px 12px rgba(0,0,0,0.08);
+  --semi-shadow-knob: 0 1px 2px rgba(0,0,0,0.06);
   --semi-border-radius-full: 9999px;
   --semi-border-radius-large: 12px;
-  --semi-border-radius-small: 3px;
-  --semi-border-radius-medium: 6px;
-  --semi-border-radius-extra-small: 3px;
+  --semi-border-radius-small: 6px;
+  --semi-border-radius-medium: 8px;
+  --semi-border-radius-extra-small: 6px;
   --semi-color-bg-0: #16161a;
   --semi-color-white-PIN: #1c1c1e;
   --semi-color-bg-1: #232429;
@@ -552,7 +627,7 @@
   --semi-indigo-8: #d4dcf1;
   --semi-indigo-9: #eef1f8;
   --semi-orange-0: #701b00;
-  --semi-orange-0 luci: #16161a;
+
   --semi-orange-1: #942b00;
   --semi-orange-2: #b84003;
   --semi-orange-3: #db5c0b;
