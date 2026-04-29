@@ -300,8 +300,7 @@ html, body, #root {
 
 .greeting {
   font-size: 28px;
-  line-height: 32px;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--text-0);
   letter-spacing: -0.02em;
   margin-bottom: 24px;
@@ -380,12 +379,10 @@ html, body, #root {
 
 .settings-title {
   font-size: 28px;
-  line-height: 32px;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--text-0);
   margin-bottom: 24px;
   letter-spacing: -0.02em;
-  line-height: 1.15;
 }
 
 .settings-tabs {
@@ -1346,12 +1343,10 @@ html, body, #root {
 
 .memories-title {
   font-size: 28px;
-  line-height: 32px;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--text-0);
-  margin-bottom: 24px;
+  margin-bottom: 48px;
   letter-spacing: -0.02em;
-  line-height: 1.15;
   padding-right: 40px;
 }
 
@@ -1366,7 +1361,7 @@ html, body, #root {
   flex-direction: column;
   gap: 10px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 8px;
   background: var(--semi-color-bg-0);
   transition: background 0.15s;
@@ -1752,30 +1747,30 @@ html, body, #root {
 /* Memories page styles */
 .memories-tabs {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   padding: 0 8px 0 0;
-  border-bottom: 1px solid var(--semi-App-grey-1);
   margin-bottom: 20px;
 }
 
 .memory-tab {
-  width: 72px;
-  padding: 8px 0;
-  border: none;
+  min-width: 80px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--grey-1);
   background: transparent;
-  color: var(--semi-App-grey-3);
+  color: var(--text-1);
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 400;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
   transition: all 0.15s;
   text-align: center;
+  white-space: nowrap;
 }
 
 .memory-tab.active {
-  color: var(--semi-color-APP);
-  border-bottom-color: var(--semi-color-APP);
+  background: var(--luci-accent);
+  border-color: var(--luci-accent);
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -1783,6 +1778,7 @@ html, body, #root {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  margin-top: 12px;
   margin-bottom: 20px;
   padding-right: 8px;
 }
@@ -1811,8 +1807,16 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 12px;
   margin-bottom: 20px;
   padding-right: 32px;
+}
+
+.memory-filter-btns {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .memory-filter-row-right {
@@ -1830,42 +1834,46 @@ html, body, #root {
   border-radius: 7px;
   border: 1px solid var(--semi-App-grey-1);
   background: var(--semi-color-bg-0);
-  color: var(--semi-App-grey-5);
+  color: var(--text-1);
   cursor: pointer;
   transition: background 0.12s, color 0.12s;
 }
 
 .memory-create-btn:hover {
-  background: var(--semi-color-primary);
-  color: #fff;
-  border-color: var(--semi-color-primary);
+  background: var(--grey-0);
 }
 
 .memory-view-toggle {
   display: flex;
-  background: var(--semi-App-grey-1);
+  border: 1px solid var(--semi-App-grey-1);
   border-radius: 7px;
-  padding: 2px;
-  gap: 2px;
+  overflow: hidden;
 }
 
 .memory-view-btn {
-  background: none;
-  border: none;
-  padding: 4px 7px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--semi-App-grey-5);
-  border-radius: 5px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--text-1);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.12s, color 0.12s;
+}
+
+.memory-view-btn + .memory-view-btn {
+  border-left: 1px solid var(--semi-App-grey-1);
+}
+
+.memory-view-btn:hover {
+  background: var(--grey-0);
 }
 
 .memory-view-btn.active {
-  background: var(--semi-color-bg-0);
-  color: var(--semi-color-app-text-0);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  background: var(--grey-1);
+  color: var(--text-1);
 }
 
 .person-filter-chip {
@@ -2127,6 +2135,7 @@ html, body, #root {
   flex-direction: column;
   gap: 28px;
   padding-right: 8px;
+  margin-top: 12px;
 }
 
 .library-section-header {
@@ -2729,12 +2738,9 @@ html, body, #root {
 
 .memory-card-time {
   flex-shrink: 0;
-  font-size: 12px;
-  color: var(--semi-App-grey-5);
+  font-size: 11px;
+  color: var(--text-2);
   white-space: nowrap;
-  height: 26px;
-  display: flex;
-  align-items: center;
 }
 
 .memory-card-actions {
@@ -2757,9 +2763,9 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   border: 1px solid var(--semi-App-grey-1);
   background: var(--semi-color-bg-0);
   color: var(--semi-App-grey-5);
@@ -2948,7 +2954,7 @@ html, body, #root {
 }
 
 .participants-names {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--semi-App-grey-5);
   white-space: nowrap;
   overflow: hidden;

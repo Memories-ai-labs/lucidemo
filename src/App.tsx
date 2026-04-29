@@ -15,6 +15,11 @@ import {
   IconSettings,
   IconCollapse,
 } from "../luci-frontend-standalone/app/App";
+import RegularToggleBtn from "../luci-frontend-standalone/app/components/ui/RegularToggleBtn";
+import IconBtn from "../luci-frontend-standalone/app/components/ui/IconBtn";
+import SegmentBtn from "../luci-frontend-standalone/app/components/ui/SegmentBtn";
+import SettingsTab from "../luci-frontend-standalone/app/components/ui/SettingsTab";
+import DropdownButton from "../luci-frontend-standalone/app/components/ui/DropdownButton";
 import {
   Clock,
   Layers,
@@ -770,7 +775,7 @@ export default function App() {
   const [renameMemoryTarget, setRenameMemoryTarget] = useState<Memory | null>(null);
   const [renameMemoryValue, setRenameMemoryValue] = useState("");
   const [deleteMemoryTarget, setDeleteMemoryTarget] = useState<Memory | null>(null);
-  const [memoryTab, setMemoryTab] = useState<"daily" | "meetings" | "people" | "library">("meetings");
+  const [memoryTab, setMemoryTab] = useState<"meetings" | "people" | "library">("meetings");
   const [dailyDate, setDailyDate] = useState("2026-04-11");
   const dailyScrollRef = useRef<HTMLDivElement>(null);
   const ptScrollRef = useRef<HTMLDivElement>(null);
@@ -1189,47 +1194,34 @@ export default function App() {
         {activeNav === "memories" && !activeChannel ? (
           <div className="memories-view">
             <h1 className="memories-title">Memories</h1>
-            <div className="memories-tabs">
-              {(["meetings", "people", "library", "daily"] as const).map((tab) => (
-                <button
+            <div className="settings-tabs">
+              {(["meetings", "people", "library"] as const).map((tab) => (
+                <SettingsTab
                   key={tab}
-                  className={`memory-tab ${memoryTab === tab ? "active" : ""}`}
-                  style={tab === "daily" ? { opacity: 0.1 } : undefined}
+                  label={tab === "meetings" ? "Project" : tab === "people" ? "People" : "Library"}
+                  active={memoryTab === tab}
                   onClick={() => { setMemoryTab(tab); }}
-                >
-                  {tab === "daily" ? "Daily" : tab === "meetings" ? "Project" : tab === "people" ? "People" : "Library"}
-                </button>
+                />
               ))}
             </div>
             {(memoryTab === "meetings" || memoryTab === "people") && <>
             {memoryTab === "meetings" && (
               <div className="memory-filter-row">
-                <select
-                  className="project-filter-select"
+                <DropdownButton
                   value={memoryFilter}
-                  onChange={(e) => setMemoryFilter(e.target.value)}
-                >
-                  <option value="All">All Projects</option>
-                  {[...memoryFilters.filter((f) => f !== "Untitled" && f !== "All"), "Untitled"].map((f) => (
-                    <option key={f} value={f}>{f}</option>
-                  ))}
-                </select>
+                  options={["All", ...memoryFilters.filter((f) => f !== "All" && f !== "Untitled"), "Untitled"]}
+                  onChange={setMemoryFilter}
+                />
                 <div className="memory-filter-row-right">
-                <button className="memory-create-btn" onClick={openCreateMemory}>
-                  <Plus size={13} />
-                </button>
-                <div className="memory-view-toggle">
-                  <button
-                    className={`memory-view-btn${cardViewMode === "compact" ? " active" : ""}`}
-                    onClick={() => setCardViewMode("compact")}
-                    title="Compact"
-                  ><AlignJustify size={13} /></button>
-                  <button
-                    className={`memory-view-btn${cardViewMode === "expanded" ? " active" : ""}`}
-                    onClick={() => setCardViewMode("expanded")}
-                    title="Expanded"
-                  ><LayoutList size={13} /></button>
-                </div>
+                  <IconBtn icon={<Plus size={16} />} onClick={openCreateMemory} />
+                  <SegmentBtn
+                    value={cardViewMode}
+                    onChange={(v) => setCardViewMode(v as "compact" | "expanded")}
+                    options={[
+                      { value: "compact", icon: <AlignJustify size={16} />, title: "Compact" },
+                      { value: "expanded", icon: <LayoutList size={16} />, title: "Expanded" },
+                    ]}
+                  />
                 </div>
               </div>
             )}
@@ -1253,15 +1245,16 @@ export default function App() {
                       <ChevronDown size={11} className="person-filter-chevron" />
                     </div>
                   </div>
-                  {[...memoryFilters.filter((f) => f !== "Untitled"), "Untitled"].map((f) => (
-                    <button
-                      key={f}
-                      className={`memory-filter-btn ${memoryFilter === f ? "active" : ""}`}
-                      onClick={() => setMemoryFilter(f)}
-                    >
-                      {f}
-                    </button>
-                  ))}
+                  <div className="memory-filter-btns">
+                    {[...memoryFilters.filter((f) => f !== "Untitled"), "Untitled"].map((f) => (
+                      <RegularToggleBtn
+                        key={f}
+                        label={f}
+                        selected={memoryFilter === f}
+                        onClick={() => setMemoryFilter(f)}
+                      />
+                    ))}
+                  </div>
                 </div>
               ) : null;
             })()}
@@ -1310,9 +1303,9 @@ export default function App() {
                                     <div className="memory-subject">{m.title}</div>
                                     <span className="memory-card-time">{m.date.split(" ")[1]?.slice(0, 5)}</span>
                                     <div className="memory-card-actions" onClick={(e) => e.stopPropagation()}>
-                                      <button className="memory-card-action-btn" title="Edit" onClick={() => openEditContent(m)}><Pencil size={12} /></button>
-                                      <button className="memory-card-action-btn" title="Configure" onClick={() => openEditMeeting(m)}><SlidersHorizontal size={12} /></button>
-                                      <button className="memory-card-action-btn danger" title="Delete" onClick={() => setDeleteMemoryTarget(m)}><Trash2 size={12} /></button>
+                                      <IconBtn icon={<Pencil size={16} />} onClick={() => openEditContent(m)} />
+                                      <IconBtn icon={<SlidersHorizontal size={16} />} onClick={() => openEditMeeting(m)} />
+                                      <IconBtn icon={<Trash2 size={16} />} onClick={() => setDeleteMemoryTarget(m)} />
                                     </div>
                                   </div>
                                   {(cardViewMode === "expanded" || expandedCards.has(m.id)) ? (
@@ -1596,13 +1589,12 @@ export default function App() {
                 { id: "subscription", label: "Subscription" },
                 { id: "recording",    label: "Recording Preference" },
               ].map((tab) => (
-                <button
+                <SettingsTab
                   key={tab.id}
-                  className={`settings-tab ${settingsTab === tab.id ? "active" : ""}`}
+                  label={tab.label}
+                  active={settingsTab === tab.id}
                   onClick={() => setSettingsTab(tab.id)}
-                >
-                  {tab.label}
-                </button>
+                />
               ))}
             </div>
 

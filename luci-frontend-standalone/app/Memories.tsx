@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AlignJustify, LayoutList, Plus, ArrowUpRight, ArrowLeft } from "lucide-react";
 import { ScrollArea } from "~/components/ui/scroll-area";
+import SettingsTab from "./components/ui/SettingsTab";
 
 interface Memory {
   id: number;
@@ -147,7 +148,7 @@ const mockMemoryList: Memory[] = [
 
 const ALL_PROJECTS = ["All", "Project A", "Project B", "Project C", "Untitled"];
 
-type MemoryTab = "meetings" | "people" | "library" | "daily";
+type MemoryTab = "meetings" | "people" | "library";
 
 const TAB_LABELS: Record<MemoryTab, string> = {
   meetings: "Project",
@@ -207,24 +208,19 @@ export function MemoriesMock() {
 
   return (
     <div className="flex h-full flex-col overflow-hidden bg-[var(--luci-surface-bg)] pt-[60px] pl-10">
-      <h1 className="text-[28px] font-bold tracking-[-0.02em] leading-[1.15] mb-7 pr-10 text-[var(--text-0)]">
+      <h1 className="text-[28px] font-black tracking-[-0.02em] mb-[48px] pr-10 text-[var(--text-0)]">
         Memories
       </h1>
 
       {/* Tabs */}
-      <div className="flex gap-4 border-b border-[var(--luci-border)] mb-5 pr-8">
-        {(["meetings", "people", "library", "daily"] as MemoryTab[]).map((tab) => (
-          <button
+      <div className="flex gap-0 border-b border-[var(--semi-App-grey-1)] mb-5 pr-8">
+        {(["meetings", "people", "library"] as MemoryTab[]).map((tab) => (
+          <SettingsTab
             key={tab}
+            label={TAB_LABELS[tab]}
+            active={memoryTab === tab}
             onClick={() => setMemoryTab(tab)}
-            className={`w-[72px] pb-2 text-sm border-b-2 mb-[-1px] transition-all text-center ${
-              memoryTab === tab
-                ? "border-[var(--luci-accent)] text-[var(--luci-accent)] font-semibold"
-                : "border-transparent text-[var(--luci-text-muted)] hover:text-[var(--text-1)]"
-            } ${tab === "daily" ? "opacity-10" : ""}`}
-          >
-            {TAB_LABELS[tab]}
-          </button>
+          />
         ))}
       </div>
 

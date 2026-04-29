@@ -1,0 +1,31 @@
+.segment_btn {
+  display: flex;
+  border: 1px solid var(--semi-App-grey-1);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.segment_btn_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--text-1);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.segment_btn_item + .segment_btn_item {
+  border-left: 1px solid var(--semi-App-grey-1);
+}
+
+.segment_btn_item:hover {
+  background: var(--grey-0);
+}
+
+.segment_btn_item.active {
+  background: var(--grey-1);
+}

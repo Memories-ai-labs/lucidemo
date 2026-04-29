@@ -1,0 +1,85 @@
+.filter_dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.filter_dropdown_trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 120px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--grey-1);
+  background: transparent;
+  color: var(--text-1);
+  font-size: var(--font-size-sm);
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  white-space: nowrap;
+}
+
+.filter_dropdown_trigger:hover {
+  background: var(--grey-0);
+}
+
+.filter_dropdown_trigger.open {
+  background: var(--grey-0);
+}
+
+.filter_dropdown_label {
+  flex: 1;
+  text-align: left;
+}
+
+.filter_dropdown_chevron {
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.filter_dropdown_chevron.open {
+  transform: rotate(180deg);
+}
+
+.filter_dropdown_menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--semi-color-bg-0);
+  border: 1px solid var(--grey-1);
+  border-radius: 8px;
+  padding: 4px;
+  min-width: 100%;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.filter_dropdown_option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-1);
+  font-size: var(--font-size-sm);
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.1s;
+  white-space: nowrap;
+}
+
+.filter_dropdown_option:hover {
+  background: var(--grey-0);
+}
+
+.filter_dropdown_option.selected {
+  font-weight: 600;
+}

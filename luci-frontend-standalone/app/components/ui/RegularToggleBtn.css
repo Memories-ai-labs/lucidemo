@@ -1,0 +1,26 @@
+.regular_btn {
+  min-width: 80px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1px solid;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-family: "Manrope", sans-serif;
+  transition: all 0.15s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.regular_btn.selected {
+  background: var(--luci-accent);
+  border-color: var(--luci-accent);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.regular_btn.unselected {
+  background: transparent;
+  border-color: var(--grey-1);
+  color: var(--text-1);
+  font-weight: 400;
+}
