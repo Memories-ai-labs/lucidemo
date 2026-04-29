@@ -141,7 +141,7 @@
     .regular-btn.primary:hover { background: var(--semi-color-APP-hover); border-color: var(--semi-color-APP-hover); }
 
     /* ─── Menu Bar Tab ─── */
-    .menu-bar-tab { display: flex; align-items: center; gap: 6px; padding: 12px 16px; border-radius: 999px; border: none; background: transparent; color: var(--semi-App-grey-6); font-size: 14px; font-family: inherit; font-weight: 400; cursor: pointer; text-align: left; width: 100%; transition: background 0.15s; }
+    .menu-bar-tab { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; border: none; background: transparent; color: var(--semi-App-grey-6); font-size: 14px; font-family: inherit; font-weight: 400; cursor: pointer; text-align: left; width: 100%; transition: background 0.15s; }
     .menu-bar-tab:hover { background: rgba(0,0,0,0.05); color: var(--semi-color-app-text-0); }
     [data-theme="dark"] .menu-bar-tab:hover { background: rgba(255,255,255,0.06); }
     .menu-bar-tab.active { background: rgba(255,159,28,0.12); color: var(--semi-color-APP-active); }
@@ -789,7 +789,7 @@
       </div>
       <div class="spec-block">
         <b class="spec-h">共有</b>
-        radius 999px · 14px · padding 12px 16px · width 100%<br>
+        radius 999px · 14px · padding 8px 16px · width 100%<br>
         <b class="spec-h">Default</b>
         文字 <span class="spec-token">--grey-6</span> · bg transparent<br>
         <b class="spec-h">Hover</b>
@@ -1010,16 +1010,15 @@
       <div class="sidebar-brand">
         <svg height="28" viewBox="0 0 122 44" fill="none"><rect width="44" height="44" rx="17.6" fill="#201F26"/><path fill-rule="evenodd" clip-rule="evenodd" d="M18.7864 12.4443C16.1894 12.4443 14.082 14.5454 14.082 17.1398V26.8606C14.082 29.4551 16.1894 31.5561 18.7864 31.5561L29.9409 31.5561L29.9409 28.6456L18.7864 28.6457C17.7966 28.6457 16.9963 27.8453 16.9963 26.8606V17.1398C16.9963 16.1552 17.7966 15.3548 18.7864 15.3548L29.9409 15.3548L29.9409 12.4443L18.7864 12.4443Z" fill="white"/><circle cx="20.0725" cy="18.8967" r="1.86154" fill="#EF6915"/><path fill-rule="evenodd" clip-rule="evenodd" d="M101.797 10.2666C98.608 10.2666 96.0205 12.8464 96.0205 16.032V27.9678C96.0205 31.1534 98.608 33.7333 101.797 33.7333L113.969 33.7332L113.969 30.1596L101.797 30.1596C100.581 30.1596 99.5988 29.1769 99.5988 27.9678V16.032C99.5988 14.823 100.581 13.8403 101.797 13.8403L113.969 13.8403L113.969 10.2666L101.797 10.2666ZM55.7344 10.2666L55.7344 27.9678C55.7344 31.1534 58.322 33.7333 61.5107 33.7333H70.8589V30.1596H61.5107C60.2953 30.1596 59.3127 29.1769 59.3127 27.9678L59.3127 10.2666H55.7344ZM74.075 10.2666V27.9678C74.075 31.1534 76.6626 33.7333 79.8514 33.7333H86.5797C89.7684 33.7333 92.356 31.1534 92.356 27.9678V10.2666H88.7777V27.9678C88.7777 29.1769 87.7951 30.1596 86.5797 30.1596H79.8514C78.636 30.1596 77.6533 29.1769 77.6533 27.9678V10.2666H74.075ZM117.442 10.2666V33.7333H121.021V13.3796C121.021 11.6589 119.623 10.2666 117.902 10.2666H117.442Z" fill="#201F26"/></svg>
       </div>
-      <button class="nav-item active">
+      <button class="menu-bar-tab active">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <span>Ask LUCI</span>
-        <span class="shortcut">Fn</span>
       </button>
-      <button class="nav-item">
+      <button class="menu-bar-tab">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
         <span>Memories</span>
       </button>
-      <button class="nav-item">
+      <button class="menu-bar-tab">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
         <span>Settings</span>
       </button>
@@ -1035,13 +1034,11 @@
         <b class="spec-h">容器</b>
         宽 220px · radius 22px<br>
         bg 半透明毛玻璃 blur 20px<br>
-        <b class="spec-h">Nav Item</b>
-        14px · radius 999px · padding 8px 10px<br>
+        <b class="spec-h">MenuBarTab</b>
+        14px · radius 999px · padding 8px 16px · width 100%<br>
         默认：<span class="spec-token">--grey-6</span> 文字，无背景<br>
         hover：rgba(0,0,0,0.05)，<span class="spec-token">--app-text-0</span><br>
-        active：orange-0.12 背景，<span class="spec-token">--APP-active</span><br>
-        <b class="spec-h">Shortcut Badge</b>
-        12px · <span class="spec-token">--grey-2</span> 描边 · <span class="spec-token">--grey-3</span> 文字<br>
+        active：rgba(255,159,28,0.12) 背景，<span class="spec-token">--APP-active</span><br>
         <b class="spec-h">Footer</b>
         头像 34×34 圆形 · username 14px 600
       </div>
