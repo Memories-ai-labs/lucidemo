@@ -1,18 +1,23 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 import { resolve } from "path";
 
 // @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig(async () => ({
-  plugins: [react()],
+  plugins: [tailwindcss(), react()],
+  resolve: {
+    alias: {
+      "~": resolve(__dirname, "luci-frontend-standalone/app"),
+    },
+  },
 
   build: {
     rollupOptions: {
       input: {
-        main:   resolve(__dirname, "index.html"),
-        island: resolve(__dirname, "island.html"),
+        main: resolve(__dirname, "index.html"),
       },
     },
   },

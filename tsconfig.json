@@ -13,6 +13,15 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["luci-frontend-standalone/app/*"],
+      "react": ["node_modules/@types/react"],
+      "react/jsx-runtime": ["node_modules/@types/react/jsx-runtime.d.ts"],
+      "react-dom": ["node_modules/@types/react-dom"],
+      "react-dom/client": ["node_modules/@types/react-dom/client.d.ts"]
+    },
+    "typeRoots": ["./node_modules/@types"],
 
     /* Linting */
     "strict": true,
@@ -20,6 +29,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src/main.tsx", "src/island", "src/vite-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

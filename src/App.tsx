@@ -1,24 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { listen } from "@tauri-apps/api/event";
-import logoUrl from "./assets/logo.svg";
-import Modal from "./components/Modal";
-import RegularButton from "./components/RegularButton";
-import MenuBarTab from "./components/MenuBarTab";
-import RegularIconButton from "./components/RegularIconButton";
-import Title from "./components/Title";
-import ChannelItem from "./components/ChannelItem";
 import {
-  MessageCircle,
-  BookMarked,
-  Settings,
+  LogoIcon,
+  LuciWordmark,
+  Modal,
+  RegularButton,
+  MenuBarTab,
+  RegularIconButton,
+  Title,
+  ChannelItem,
+  IconAskLuci,
+  IconMemories,
+  IconSettings,
+  IconCollapse,
+} from "../luci-frontend-standalone/app/App";
+import {
   Clock,
   Layers,
   TrendingUp,
   Plus,
   ArrowLeft,
   Send,
-  PanelLeftClose,
   PanelLeftOpen,
   MoreVertical,
   Pencil,
@@ -1158,23 +1161,24 @@ export default function App() {
 
       {/* ── Floating Sidebar ── */}
       <aside className={`sidebar ${sidebarOpen ? "open" : "closed"}`}>
-        {/* drag region + space for traffic lights, close btn at top-right */}
         <div className="sidebar-header" onMouseDown={handleDragStart}>
           <button className="sidebar-close-btn" onClick={() => setSidebarOpen(false)}>
-            <PanelLeftClose size={16} />
+            <IconCollapse size={20} />
           </button>
         </div>
 
         <div className="sidebar-brand">
-          <img src={logoUrl} alt="LUCI" className="sidebar-logo-img" />
+          <LogoIcon />
+          <LuciWordmark />
         </div>
 
         <nav className="sidebar-nav">
-          <MenuBarTab icon={<Clock size={16} />} label="Moments" active={activeNav === "moments"} onClick={() => setActiveNav("moments")} />
-          <MenuBarTab icon={<MessageCircle size={16} />} label="Ask LUCI" active={activeNav === "ask"} onClick={() => setActiveNav("ask")} />
-          <MenuBarTab icon={<BookMarked size={16} />} label="Memories" active={activeNav === "memories"} onClick={() => setActiveNav("memories")} />
-          <MenuBarTab icon={<Settings size={16} />} label="Settings" active={activeNav === "settings"} onClick={() => setActiveNav("settings")} />
+          <MenuBarTab icon={<Clock size={20} />} label="Moments" active={activeNav === "moments"} onClick={() => setActiveNav("moments")} />
+          <MenuBarTab icon={<IconAskLuci size={20} active={activeNav === "ask"} />} label="Ask LUCI" active={activeNav === "ask"} onClick={() => setActiveNav("ask")} />
+          <MenuBarTab icon={<IconMemories size={20} active={activeNav === "memories"} />} label="Memories" active={activeNav === "memories"} onClick={() => setActiveNav("memories")} />
+          <MenuBarTab icon={<IconSettings size={20} active={activeNav === "settings"} />} label="Settings" active={activeNav === "settings"} onClick={() => setActiveNav("settings")} />
         </nav>
+
 
       </aside>
 
