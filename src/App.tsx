@@ -34,6 +34,9 @@ import {
   UsersRound,
   Sparkles,
   CornerUpLeft,
+  AlignJustify,
+  LayoutList,
+  ArrowUpRight,
 } from "lucide-react";
 import "./App.css";
 
@@ -62,18 +65,21 @@ interface Memory {
   project: string;
   appType: "Slack" | "Discord" | "Teams" | "Gmail";
   summary?: string;
+  sourceUrl?: string;
 }
 
 const mockMemoryList: Memory[] = [
   {
     id: 1,
     title: "Q1 Planning Meeting",
-    date: "2025/03/15 14:03",
+    date: "2025/04/11 14:03",
     duration: "1h 23m",
     cover: "linear-gradient(135deg,#e8f0fe,#c3d4f8)",
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project C",
     appType: "Slack",
+    summary: "Aligned on Q1 goals and assigned owners for each workstream.",
+    sourceUrl: "slack://channel?team=T123&id=C456",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -92,12 +98,14 @@ const mockMemoryList: Memory[] = [
   {
     id: 2,
     title: "Design Review Sprint 4",
-    date: "2025/03/15 15:30",
+    date: "2025/04/11 15:30",
     duration: "45m",
     cover: "linear-gradient(135deg,#fde8f0,#f8c3d4)",
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     appType: "Gmail",
+    summary: "Reviewed Sprint 4 designs with the team. Alice flagged contrast issues on the dashboard cards and Bob suggested tightening spacing on the nav. Diana confirmed the mobile breakpoints are approved and ready for handoff. Follow-up scheduled for Thursday.",
+    sourceUrl: "https://mail.google.com/mail/u/0/#inbox/abc123",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -112,12 +120,14 @@ const mockMemoryList: Memory[] = [
   {
     id: 3,
     title: "Engineering Sync",
-    date: "2025/03/15 16:45",
+    date: "2025/04/11 16:45",
     duration: "58m",
     cover: "linear-gradient(135deg,#e8fde8,#c3f8c3)",
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Untitled",
     appType: "Discord",
+    summary: "Synced on backend blockers and deployment timeline. Charlie raised a concern about the auth service latency under load, and the team agreed to run a stress test before the Friday release window.",
+    sourceUrl: "https://discord.com/channels/123456/789012",
     participants: [
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
       { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
@@ -139,6 +149,8 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     appType: "Teams",
+    summary: "Walked through the updated roadmap. Three features pushed to Q2 due to resource constraints, and two new requests from sales were added to the backlog. Alice will send a revised timeline to stakeholders by EOD Friday. Charlie flagged dependency on the data team for the analytics milestone.",
+    sourceUrl: "https://teams.microsoft.com/l/meetup-join/abc123",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
@@ -159,6 +171,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     appType: "Slack",
+    summary: "Sales kickoff went well. Targets set for H1.",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -305,7 +318,7 @@ const mockMemoryList: Memory[] = [
   {
     id: 13,
     title: "Feature Kickoff — Notification System",
-    date: "2026/04/08 10:00",
+    date: "2026/04/11 10:00",
     duration: "50m",
     cover: "linear-gradient(135deg,#fde8f0,#f8c3d4)",
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
@@ -338,7 +351,7 @@ const mockMemoryList: Memory[] = [
   {
     id: 15,
     title: "Sprint Planning — Q2",
-    date: "2026/04/10 09:30",
+    date: "2026/04/09 09:30",
     duration: "1h 20m",
     cover: "linear-gradient(135deg,#e8fde8,#c3f8c3)",
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
@@ -634,6 +647,49 @@ const APP_ICON_CONFIG: Record<string, { bg: string; icon: JSX.Element }> = {
   },
 };
 
+const APP_SOURCE_ICON: Record<string, { color: string; icon: JSX.Element }> = {
+  Slack: {
+    color: "#4A154B",
+    icon: (
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none">
+        <rect x="3" y="9" width="8" height="3" rx="1.5" fill="#4A154B"/>
+        <rect x="13" y="12" width="8" height="3" rx="1.5" fill="#4A154B"/>
+        <rect x="9" y="3" width="3" height="8" rx="1.5" fill="#4A154B"/>
+        <rect x="12" y="13" width="3" height="8" rx="1.5" fill="#4A154B"/>
+        <circle cx="11" cy="12" r="1.5" fill="#4A154B"/>
+        <circle cx="13" cy="12" r="1.5" fill="#4A154B"/>
+      </svg>
+    ),
+  },
+  Discord: {
+    color: "#5865F2",
+    icon: (
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="#5865F2">
+        <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.248-.192.366-.292a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.118.1.24.198.367.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+      </svg>
+    ),
+  },
+  Teams: {
+    color: "#6264A7",
+    icon: (
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="#6264A7">
+        <path d="M17 3H7v2h3.5v14h3V5H17V3z"/>
+        <circle cx="15.5" cy="6.5" r="2.5"/>
+        <path d="M18 10h-5v7a2 2 0 002 2h3V10z"/>
+      </svg>
+    ),
+  },
+  Gmail: {
+    color: "#EA4335",
+    icon: (
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none">
+        <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" stroke="#EA4335" strokeWidth="1.5"/>
+        <path d="M2 6l10 7 10-7" stroke="#EA4335" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+};
+
 function AppIconBadge({ appType }: { appType: string }) {
   const config = APP_ICON_CONFIG[appType] ?? APP_ICON_CONFIG["Gmail"];
   return (
@@ -705,6 +761,8 @@ export default function App() {
 
   const [memoryList, setMemoryList] = useState<Memory[]>(mockMemoryList);
   const [expandedSummaries, setExpandedSummaries] = useState<Set<number>>(new Set());
+  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set());
+  const [cardViewMode, setCardViewMode] = useState<"compact" | "expanded">("compact");
   const [memoryMenuId, setMemoryMenuId] = useState<number | null>(null);
   const [renameMemoryTarget, setRenameMemoryTarget] = useState<Memory | null>(null);
   const [renameMemoryValue, setRenameMemoryValue] = useState("");
@@ -744,6 +802,16 @@ export default function App() {
   const [editMeetingTarget, setEditMeetingTarget] = useState<Memory | null>(null);
   const [editMeetingProject, setEditMeetingProject] = useState("");
   const [editMeetingParticipants, setEditMeetingParticipants] = useState<Memory["participants"]>([]);
+  const [editContentTarget, setEditContentTarget] = useState<Memory | null>(null);
+  const [editContentTitle, setEditContentTitle] = useState("");
+  const [editContentSummary, setEditContentSummary] = useState("");
+  const [editContentDate, setEditContentDate] = useState("");
+  const [editContentAppType, setEditContentAppType] = useState<Memory["appType"]>("Slack");
+  const [createMemoryOpen, setCreateMemoryOpen] = useState(false);
+  const [createTitle, setCreateTitle] = useState("");
+  const [createSummary, setCreateSummary] = useState("");
+  const [createDate, setCreateDate] = useState("");
+  const [createAppType, setCreateAppType] = useState<Memory["appType"]>("Slack");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -836,6 +904,51 @@ export default function App() {
     setEditMeetingTarget(m);
     setEditMeetingProject(m.project);
     setEditMeetingParticipants([...m.participants]);
+  }
+
+  function openCreateMemory() {
+    setCreateTitle("");
+    setCreateSummary("");
+    setCreateDate(new Date().toLocaleString("sv").replace("T", " ").slice(0, 16));
+    setCreateAppType("Slack");
+    setCreateMemoryOpen(true);
+  }
+
+  function confirmCreateMemory() {
+    const newMemory: Memory = {
+      id: Date.now(),
+      title: createTitle || "Untitled",
+      summary: createSummary || undefined,
+      date: createDate,
+      duration: "",
+      cover: "linear-gradient(135deg,#e8f0fe,#c3d4f8)",
+      thumbnail: "",
+      project: memoryFilter === "All" ? "Untitled" : memoryFilter,
+      appType: createAppType,
+      participants: [],
+    };
+    setMemoryList((prev) => [newMemory, ...prev]);
+    setCreateMemoryOpen(false);
+  }
+
+  function openEditContent(m: Memory) {
+    setEditContentTarget(m);
+    setEditContentTitle(m.title);
+    setEditContentSummary(m.summary ?? "");
+    setEditContentDate(m.date);
+    setEditContentAppType(m.appType);
+  }
+
+  function confirmEditContent() {
+    if (!editContentTarget) return;
+    setMemoryList((prev) =>
+      prev.map((m) =>
+        m.id === editContentTarget.id
+          ? { ...m, title: editContentTitle, summary: editContentSummary, date: editContentDate, appType: editContentAppType }
+          : m
+      )
+    );
+    setEditContentTarget(null);
   }
 
   function confirmEditMeeting() {
@@ -1085,17 +1198,37 @@ export default function App() {
               ))}
             </div>
             {(memoryTab === "meetings" || memoryTab === "people") && <>
-            {memoryTab === "meetings" && <div className="memory-filters">
-              {[...memoryFilters.filter((f) => f !== "Untitled" && f !== "All"), "Untitled"].map((f) => (
-                <button
-                  key={f}
-                  className={`memory-filter-btn ${memoryFilter === f ? "active" : ""}`}
-                  onClick={() => setMemoryFilter(f)}
+            {memoryTab === "meetings" && (
+              <div className="memory-filter-row">
+                <select
+                  className="project-filter-select"
+                  value={memoryFilter}
+                  onChange={(e) => setMemoryFilter(e.target.value)}
                 >
-                  {f}
+                  <option value="All">All Projects</option>
+                  {[...memoryFilters.filter((f) => f !== "Untitled" && f !== "All"), "Untitled"].map((f) => (
+                    <option key={f} value={f}>{f}</option>
+                  ))}
+                </select>
+                <div className="memory-filter-row-right">
+                <button className="memory-create-btn" onClick={openCreateMemory}>
+                  <Plus size={13} />
                 </button>
-              ))}
-            </div>}
+                <div className="memory-view-toggle">
+                  <button
+                    className={`memory-view-btn${cardViewMode === "compact" ? " active" : ""}`}
+                    onClick={() => setCardViewMode("compact")}
+                    title="Compact"
+                  ><AlignJustify size={13} /></button>
+                  <button
+                    className={`memory-view-btn${cardViewMode === "expanded" ? " active" : ""}`}
+                    onClick={() => setCardViewMode("expanded")}
+                    title="Expanded"
+                  ><LayoutList size={13} /></button>
+                </div>
+                </div>
+              </div>
+            )}
             <>
             {memoryTab === "people" && (() => {
               const person = people.find((p) => p.id === personFilter);
@@ -1142,87 +1275,84 @@ export default function App() {
                 const sortedDates = Object.keys(groupedByDate).sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
                 return (
                   <div className="memories-rows">
-                    {sortedDates.flatMap((dateStr, dateIdx) => {
+                    {sortedDates.map((dateStr, dateIdx) => {
                       const dateObj = new Date(dateStr);
                       const day = dateObj.getDate();
                       const month = dateObj.toLocaleString("en-US", { month: "short" });
                       const items = groupedByDate[dateStr];
-                      const isLastDate = dateIdx === sortedDates.length - 1;
-                      return items.map((m, itemIdx) => {
-                        const isFirstItem = itemIdx === 0;
-                        const isLastItem = itemIdx === items.length - 1;
-                        const isVeryFirst = dateIdx === 0 && itemIdx === 0;
-                        return (
-                        <div key={m.id} className="memory-row">
-                          <div className="memories-timeline-item">
-                            <AppIconBadge appType={m.appType} />
-                            {!(isLastDate && isLastItem) && (
-                              <div className="timeline-line"></div>
+                      return (
+                        <div key={dateStr} className="memory-date-group">
+                          <div className="memory-date-label">
+                            <span className="memory-date-day">{day}</span>
+                            <span className="memory-date-month">{month}</span>
+                            {dateIdx < sortedDates.length - 1 && (
+                              <div className="memory-date-connector" />
                             )}
                           </div>
-                          <div className="memory-row-right">
-                            <div className="memory-row-header">
-                              <span className="memory-row-type">{m.appType}</span>
-                              <span className="memory-row-time">{m.date}</span>
-                            </div>
-                            <div className="memory-list-item">
-                              <div className="memory-sender-row">
-                                {m.participants[0] && (
-                                  <img src={m.participants[0].avatar} alt={m.participants[0].name} className="memory-sender-avatar" />
-                                )}
-                                <div className="memory-sender-info">
-                                  <span className="memory-sender-name">{m.participants[0]?.name ?? "Unknown"}</span>
-                                  <span className="memory-sender-email">{m.participants[1]?.name ? `→ ${m.participants[1].name}` : m.project}</span>
-                                </div>
-                                <div className="memory-item-badges">
-                                  <button className="memory-action-btn" onClick={(e) => { e.stopPropagation(); openEditMeeting(m); }}>
-                                    <Pencil size={13} />
-                                  </button>
-                                  <button className="memory-action-btn danger" onClick={(e) => { e.stopPropagation(); setDeleteMemoryTarget(m); }}>
-                                    <Trash2 size={13} />
-                                  </button>
-                                </div>
-                              </div>
-                              <div className="memory-subject">{m.title}</div>
-                              {(() => {
-                                const text = m.summary ?? `${m.title} — ${m.duration}. Discussion covered key points with ${m.participants[0]?.name ?? "the team"} and follow-up actions were agreed. Further details were shared async after the session and participants confirmed receipt. Next steps are tracked in the project board.`;
-                                const isExpanded = expandedSummaries.has(m.id);
-                                return (
-                                  <div className="memory-body-preview">
-                                    <div className={`memory-summary-text${isExpanded ? " expanded" : ""}`}>{text}</div>
-                                    <button
-                                      className="memory-show-more"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        setExpandedSummaries(prev => {
-                                          const next = new Set(prev);
-                                          if (next.has(m.id)) next.delete(m.id); else next.add(m.id);
-                                          return next;
-                                        });
-                                      }}
-                                    >
-                                      {isExpanded ? "Show less" : "Show more"}
-                                    </button>
+                          <div className="memory-date-cards">
+                            {items.map((m, itemIdx) => {
+                              const isVeryFirst = dateIdx === 0 && itemIdx === 0;
+                              return (
+                                <div
+                                  key={m.id}
+                                  className="memory-list-item"
+                                  onClick={() => setExpandedCards(prev => {
+                                    const next = new Set(prev);
+                                    if (next.has(m.id)) next.delete(m.id); else next.add(m.id);
+                                    return next;
+                                  })}
+                                >
+                                  <div className="memory-card-header-row">
+                                    <div className="memory-subject">{m.title}</div>
+                                    <span className="memory-card-time">{m.date.split(" ")[1]?.slice(0, 5)}</span>
+                                    <div className="memory-card-actions" onClick={(e) => e.stopPropagation()}>
+                                      <button className="memory-card-action-btn" title="Edit" onClick={() => openEditContent(m)}><Pencil size={12} /></button>
+                                      <button className="memory-card-action-btn" title="Configure" onClick={() => openEditMeeting(m)}><SlidersHorizontal size={12} /></button>
+                                      <button className="memory-card-action-btn danger" title="Delete" onClick={() => setDeleteMemoryTarget(m)}><Trash2 size={12} /></button>
+                                    </div>
                                   </div>
-                                );
-                              })()}
-                              {m.participants.length > 1 && (
-                                <div className="memory-participants">
-                                  <div className="participant-avatars">
-                                    {m.participants.slice(1, isVeryFirst ? 5 : 3).map((p, idx) => (
-                                      <img key={p.id} src={p.avatar} alt={p.name} className="participant-avatar" title={p.name} style={{ marginLeft: idx > 0 ? "-8px" : "0" }} />
-                                    ))}
-                                  </div>
-                                  {isVeryFirst && m.participants.length > 5 && (
-                                    <span className="participants-more">and {m.participants.length - 5} more</span>
+                                  {(cardViewMode === "expanded" || expandedCards.has(m.id)) ? (
+                                    <>
+                                      {m.summary && (
+                                        <div className="memory-summary-text">{m.summary}</div>
+                                      )}
+                                      <div className="memory-participants">
+                                        {m.participants.length > 0 && <>
+                                          <div className="participant-avatars">
+                                            {m.participants.slice(0, isVeryFirst ? 5 : 4).map((p, idx) => (
+                                              <img key={p.id} src={p.avatar} alt={p.name} className="participant-avatar" title={p.name} style={{ marginLeft: idx > 0 ? "-8px" : "0" }} />
+                                            ))}
+                                          </div>
+                                          <span className="participants-names">
+                                            {m.participants.slice(0, 2).map((p) => p.name).join(", ")}
+                                            {m.participants.length > 2 && ` +${m.participants.length - 2}`}
+                                          </span>
+                                        </>}
+                                        <a
+                                          className="memory-source-link"
+                                          href={m.sourceUrl ?? "#"}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          onClick={(e) => e.stopPropagation()}
+                                          style={{ opacity: m.sourceUrl ? 1 : 0.35, pointerEvents: m.sourceUrl ? "auto" : "none" }}
+                                        >
+                                          {APP_SOURCE_ICON[m.appType]?.icon}
+                                          <span className="memory-source-label">{m.appType}</span>
+                                          <ArrowUpRight size={11} />
+                                        </a>
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <div className="memory-summary-text memory-summary-collapsed">
+                                      {m.summary ?? `${m.title} — ${m.duration}. Discussion covered key points with ${m.participants[0]?.name ?? "the team"} and follow-up actions were agreed.`}
+                                    </div>
                                   )}
                                 </div>
-                              )}
-                            </div>
+                              );
+                            })}
                           </div>
                         </div>
-                        );
-                      });
+                      );
                     })}
                   </div>
                 );
@@ -1806,7 +1936,7 @@ export default function App() {
       {editMeetingTarget && (
         <div className="modal-backdrop" onClick={() => setEditMeetingTarget(null)}>
           <div className="modal modal--wide" onClick={(e) => e.stopPropagation()}>
-            <h2 className="modal-title">Edit Meeting</h2>
+            <h2 className="modal-title">Configure</h2>
             <div className="modal-body">
               {/* Project selector */}
               <div className="em-section">
@@ -1867,6 +1997,94 @@ export default function App() {
             <div className="modal-actions">
               <button className="modal-btn cancel" onClick={() => setEditMeetingTarget(null)}>Cancel</button>
               <button className="modal-btn confirm" onClick={confirmEditMeeting}>Save</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editContentTarget && (
+        <div className="modal-backdrop" onClick={() => setEditContentTarget(null)}>
+          <div className="modal modal--wide" onClick={(e) => e.stopPropagation()}>
+            <h2 className="modal-title">Edit</h2>
+            <div className="modal-body">
+              <div className="em-section">
+                <div className="em-label">Title</div>
+                <input
+                  className="em-input"
+                  value={editContentTitle}
+                  onChange={(e) => setEditContentTitle(e.target.value)}
+                  placeholder="Meeting title"
+                />
+              </div>
+              <div className="em-section">
+                <div className="em-label">Summary</div>
+                <textarea
+                  className="em-textarea"
+                  value={editContentSummary}
+                  onChange={(e) => setEditContentSummary(e.target.value)}
+                  placeholder="Summary"
+                  rows={4}
+                />
+              </div>
+              <div className="em-section">
+                <div className="em-label">Time</div>
+                <input
+                  className="em-input"
+                  value={editContentDate}
+                  onChange={(e) => setEditContentDate(e.target.value)}
+                  placeholder="e.g. 2026/04/11 14:00"
+                />
+              </div>
+              <div className="em-section">
+                <div className="em-label">Source</div>
+                <div className="em-project-pills">
+                  {(["Slack", "Discord", "Teams", "Gmail"] as Memory["appType"][]).map((t) => (
+                    <button
+                      key={t}
+                      className={`em-project-pill ${editContentAppType === t ? "active" : ""}`}
+                      onClick={() => setEditContentAppType(t)}
+                    >{t}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="modal-btn cancel" onClick={() => setEditContentTarget(null)}>Cancel</button>
+              <button className="modal-btn confirm" onClick={confirmEditContent}>Save</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {createMemoryOpen && (
+        <div className="modal-backdrop" onClick={() => setCreateMemoryOpen(false)}>
+          <div className="modal modal--wide" onClick={(e) => e.stopPropagation()}>
+            <h2 className="modal-title">New Memory</h2>
+            <div className="modal-body">
+              <div className="em-section">
+                <div className="em-label">Title</div>
+                <input className="em-input" value={createTitle} onChange={(e) => setCreateTitle(e.target.value)} placeholder="Meeting title" />
+              </div>
+              <div className="em-section">
+                <div className="em-label">Summary</div>
+                <textarea className="em-textarea" value={createSummary} onChange={(e) => setCreateSummary(e.target.value)} placeholder="Summary" rows={4} />
+              </div>
+              <div className="em-section">
+                <div className="em-label">Time</div>
+                <input className="em-input" value={createDate} onChange={(e) => setCreateDate(e.target.value)} placeholder="e.g. 2026/04/11 14:00" />
+              </div>
+              <div className="em-section">
+                <div className="em-label">Source</div>
+                <div className="em-project-pills">
+                  {(["Slack", "Discord", "Teams", "Gmail"] as Memory["appType"][]).map((t) => (
+                    <button key={t} className={`em-project-pill ${createAppType === t ? "active" : ""}`} onClick={() => setCreateAppType(t)}>{t}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="modal-btn cancel" onClick={() => setCreateMemoryOpen(false)}>Cancel</button>
+              <button className="modal-btn confirm" onClick={confirmCreateMemory}>Create</button>
             </div>
           </div>
         </div>
