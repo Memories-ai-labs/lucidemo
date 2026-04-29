@@ -35,8 +35,9 @@
 }
 
 .channel-name {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
+  line-height: 1.5;
   color: var(--semi-color-app-text-0);
 }
 
@@ -80,6 +81,7 @@
 
 .channel-time {
   font-size: 12px;
+  line-height: 1.4;
   color: var(--semi-App-grey-3);
   min-width: 40px;
   text-align: right;

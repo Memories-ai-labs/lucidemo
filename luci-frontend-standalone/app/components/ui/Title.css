@@ -9,9 +9,8 @@
 .title-text {
   font-size: 12px;
   font-weight: 600;
+  line-height: 1.5;
   color: var(--semi-App-grey-3);
-  text-transform: none;
-  letter-spacing: normal;
 }
 
 .title-right {

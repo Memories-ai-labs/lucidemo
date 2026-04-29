@@ -20,6 +20,7 @@ import IconBtn from "../luci-frontend-standalone/app/components/ui/IconBtn";
 import SegmentBtn from "../luci-frontend-standalone/app/components/ui/SegmentBtn";
 import SettingsTab from "../luci-frontend-standalone/app/components/ui/SettingsTab";
 import DropdownButton from "../luci-frontend-standalone/app/components/ui/DropdownButton";
+import MemoryCard, { type Memory } from "../luci-frontend-standalone/app/components/ui/MemoryCard";
 import {
   Clock,
   Layers,
@@ -35,7 +36,6 @@ import {
   Check,
   Key,
   Download,
-  SlidersHorizontal,
   X,
   Folder,
   UserPlus,
@@ -44,7 +44,6 @@ import {
   CornerUpLeft,
   AlignJustify,
   LayoutList,
-  ArrowUpRight,
 } from "lucide-react";
 import "./App.css";
 
@@ -60,20 +59,6 @@ interface Message {
   role: "user" | "agent";
   text: string;
   time: string;
-}
-
-interface Memory {
-  id: number;
-  title: string;
-  date: string;
-  duration: string;
-  cover: string; // gradient css value or image url
-  thumbnail: string; // thumbnail image url
-  participants: Array<{ id: number; avatar: string; name: string }>;
-  project: string;
-  appType: "Slack" | "Discord" | "Teams" | "Gmail";
-  summary?: string;
-  sourceUrl?: string;
 }
 
 const mockMemoryList: Memory[] = [
@@ -180,6 +165,7 @@ const mockMemoryList: Memory[] = [
     project: "Project A",
     appType: "Slack",
     summary: "Sales kickoff went well. Targets set for H1.",
+    sourceUrl: "slack://channel?team=T123&id=C789",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -198,6 +184,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project C",
     appType: "Teams",
+    sourceUrl: "https://teams.microsoft.com/l/meetup-join/def456",
     participants: [
       { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
       { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
@@ -218,6 +205,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     appType: "Gmail",
+    sourceUrl: "https://mail.google.com/mail/u/0/#inbox/def456",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -236,6 +224,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Untitled",
     appType: "Teams",
+    sourceUrl: "https://teams.microsoft.com/l/meetup-join/ghi789",
     participants: [
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
       { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
@@ -254,6 +243,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     appType: "Teams",
+    sourceUrl: "https://teams.microsoft.com/l/meetup-join/jkl012",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -276,6 +266,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project C",
     appType: "Gmail",
+    sourceUrl: "https://mail.google.com/mail/u/0/#inbox/ghi789",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
@@ -294,6 +285,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Untitled",
     appType: "Slack",
+    sourceUrl: "slack://channel?team=T123&id=D012",
     participants: [
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
       { id: 4, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=4", name: "Diana" },
@@ -314,6 +306,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     appType: "Discord",
+    sourceUrl: "https://discord.com/channels/123456/345678",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -332,6 +325,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     appType: "Discord",
+    sourceUrl: "https://discord.com/channels/123456/567890",
     summary: "Alice kicked off the notification system feature with a detailed breakdown of requirements and shared a Figma link covering 4 screen states. Charlie flagged a potential conflict with the existing push permission flow and suggested a brief sync before dev starts. Eve confirmed she could pick up the backend event schema this sprint without blocking the frontend work. The team agreed on a kickoff sync for Friday 10am to align on edge cases and mobile behaviour. Alice will send out a written spec recap by EOD Wednesday so everyone can async-review before the meeting.",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
@@ -348,6 +342,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     appType: "Teams",
+    sourceUrl: "https://teams.microsoft.com/l/meetup-join/mno345",
     summary: "Bob walked through the proposed REST structure for three new endpoints and Diana immediately raised concerns about pagination consistency with existing routes. Frank suggested adopting cursor-based pagination to align with what the mobile client already expects, sharing a short code snippet in chat. Henry confirmed the auth middleware would support the new token scopes without any changes to the permission layer. The team agreed to draft a formal API contract doc before implementation begins, with Bob owning the first draft by Monday. Diana will schedule a 30-min follow-up next week to review the draft before it goes to the wider engineering group.",
     participants: [
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -365,6 +360,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     appType: "Slack",
+    sourceUrl: "slack://channel?team=T123&id=E567",
     summary: "Alice shared the sprint board and walked through 14 candidate tickets, opening the floor for estimates and blockers before committing anything. Bob flagged that the search indexing task was blocked on a data team dependency and proposed sliding it to the following sprint rather than holding the team up. Charlie and Diana voted to pull in the notification preferences feature at 5 story points, noting it unblocked a pending design handoff. Eve confirmed she'd handle QA sign-off for all frontend changes this cycle and asked for a 2-day buffer at the end of the sprint. The team closed with 11 committed tickets and a shared velocity target of 42 points, with Alice posting the final board link in the channel.",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
@@ -383,6 +379,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project A",
     appType: "Gmail",
+    sourceUrl: "https://mail.google.com/mail/u/0/#inbox/pqr678",
     summary: "Bob sent a detailed email outlining three frontend architecture options — monorepo split, micro-frontend, and a feature-folder restructure — with pros and cons for each. Frank replied with a performance benchmark comparing bundle sizes across the options, noting the feature-folder approach shipped fastest in his test environment. Iris forwarded a relevant case study from a previous team that had evaluated similar trade-offs at a similar scale. Bob followed up with a consolidated trade-off summary and proposed a final decision meeting for next Tuesday afternoon. The thread ended with general team consensus leaning toward the feature-folder approach pending the Tuesday meeting.",
     participants: [
       { id: 2, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=2", name: "Bob" },
@@ -399,6 +396,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     appType: "Slack",
+    sourceUrl: "slack://channel?team=T123&id=F890",
     summary: "Charlie opened the triage thread with a list of 7 bugs flagged from the 2.1 release candidate, each with a severity tag and reproduction steps linked. Eve confirmed 3 were already fixed in her branch and would be merged by end of day, clearing the highest-priority items immediately. Grace identified that bug #4 was a regression introduced in last week's layout refactor and self-assigned it with a fix ETA of tomorrow morning. Kate asked for a reproduction case for bug #6 which appeared intermittent on Safari and couldn't be reproduced in Chromium. The thread closed with 5 of 7 bugs assigned and a shared goal of clearing the full backlog before Thursday's release window opens.",
     participants: [
       { id: 3, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=3", name: "Charlie" },
@@ -416,6 +414,7 @@ const mockMemoryList: Memory[] = [
     thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop",
     project: "Project B",
     appType: "Discord",
+    sourceUrl: "https://discord.com/channels/123456/678901",
     summary: "Alice walked stakeholders through the beta build's three core flows — onboarding, dashboard, and settings — using the staging environment via screen share. Bob handled live Q&A and noted two out-of-scope feature requests from attendees, logging them to the backlog for future sprint consideration. Diana shared a side-by-side comparison of old and new UI to highlight the design improvements, which drew strong positive reactions from the client. Frank flagged a loading state bug that appeared mid-demo and immediately created a hotfix ticket with reproduction steps. Henry and Jack both approved proceeding to the next milestone, with a final sign-off email to follow by end of week.",
     participants: [
       { id: 1, avatar: "https://api.dicebear.com/9.x/lorelei/svg?seed=1", name: "Alice" },
@@ -650,49 +649,6 @@ const APP_ICON_CONFIG: Record<string, { bg: string; icon: JSX.Element }> = {
       <svg viewBox="0 0 24 24" width="17" height="17" fill="none">
         <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" stroke="white" strokeWidth="1.5"/>
         <path d="M2 6l10 7 10-7" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-};
-
-const APP_SOURCE_ICON: Record<string, { color: string; icon: JSX.Element }> = {
-  Slack: {
-    color: "#4A154B",
-    icon: (
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none">
-        <rect x="3" y="9" width="8" height="3" rx="1.5" fill="#4A154B"/>
-        <rect x="13" y="12" width="8" height="3" rx="1.5" fill="#4A154B"/>
-        <rect x="9" y="3" width="3" height="8" rx="1.5" fill="#4A154B"/>
-        <rect x="12" y="13" width="3" height="8" rx="1.5" fill="#4A154B"/>
-        <circle cx="11" cy="12" r="1.5" fill="#4A154B"/>
-        <circle cx="13" cy="12" r="1.5" fill="#4A154B"/>
-      </svg>
-    ),
-  },
-  Discord: {
-    color: "#5865F2",
-    icon: (
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="#5865F2">
-        <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128c.126-.094.248-.192.366-.292a.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.118.1.24.198.367.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-      </svg>
-    ),
-  },
-  Teams: {
-    color: "#6264A7",
-    icon: (
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="#6264A7">
-        <path d="M17 3H7v2h3.5v14h3V5H17V3z"/>
-        <circle cx="15.5" cy="6.5" r="2.5"/>
-        <path d="M18 10h-5v7a2 2 0 002 2h3V10z"/>
-      </svg>
-    ),
-  },
-  Gmail: {
-    color: "#EA4335",
-    icon: (
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none">
-        <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" stroke="#EA4335" strokeWidth="1.5"/>
-        <path d="M2 6l10 7 10-7" stroke="#EA4335" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -1193,38 +1149,41 @@ export default function App() {
         <div className="main-drag" onMouseDown={handleDragStart} />
         {activeNav === "memories" && !activeChannel ? (
           <div className="memories-view">
-            <h1 className="memories-title">Memories</h1>
-            <div className="settings-tabs">
-              {(["meetings", "people", "library"] as const).map((tab) => (
-                <SettingsTab
-                  key={tab}
-                  label={tab === "meetings" ? "Project" : tab === "people" ? "People" : "Library"}
-                  active={memoryTab === tab}
-                  onClick={() => { setMemoryTab(tab); }}
-                />
-              ))}
+            <div className="memories-content">
+            <div className="memories-sticky-header">
+              <h1 className="memories-title">Memories</h1>
+              <div className="settings-tabs">
+                {(["meetings", "people", "library"] as const).map((tab) => (
+                  <SettingsTab
+                    key={tab}
+                    label={tab === "meetings" ? "Project" : tab === "people" ? "People" : "Library"}
+                    active={memoryTab === tab}
+                    onClick={() => { setMemoryTab(tab); }}
+                  />
+                ))}
+              </div>
+              {memoryTab === "meetings" && (
+                <div className="memory-filter-row">
+                  <DropdownButton
+                    value={memoryFilter}
+                    options={["All", ...memoryFilters.filter((f) => f !== "All" && f !== "Untitled"), "Untitled"]}
+                    onChange={setMemoryFilter}
+                  />
+                  <div className="memory-filter-row-right">
+                    <IconBtn icon={<Plus size={16} />} onClick={openCreateMemory} />
+                    <SegmentBtn
+                      value={cardViewMode}
+                      onChange={(v) => setCardViewMode(v as "compact" | "expanded")}
+                      options={[
+                        { value: "compact", icon: <AlignJustify size={16} />, title: "Compact" },
+                        { value: "expanded", icon: <LayoutList size={16} />, title: "Expanded" },
+                      ]}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
             {(memoryTab === "meetings" || memoryTab === "people") && <>
-            {memoryTab === "meetings" && (
-              <div className="memory-filter-row">
-                <DropdownButton
-                  value={memoryFilter}
-                  options={["All", ...memoryFilters.filter((f) => f !== "All" && f !== "Untitled"), "Untitled"]}
-                  onChange={setMemoryFilter}
-                />
-                <div className="memory-filter-row-right">
-                  <IconBtn icon={<Plus size={16} />} onClick={openCreateMemory} />
-                  <SegmentBtn
-                    value={cardViewMode}
-                    onChange={(v) => setCardViewMode(v as "compact" | "expanded")}
-                    options={[
-                      { value: "compact", icon: <AlignJustify size={16} />, title: "Compact" },
-                      { value: "expanded", icon: <LayoutList size={16} />, title: "Expanded" },
-                    ]}
-                  />
-                </div>
-              </div>
-            )}
             <>
             {memoryTab === "people" && (() => {
               const person = people.find((p) => p.id === personFilter);
@@ -1287,66 +1246,21 @@ export default function App() {
                             )}
                           </div>
                           <div className="memory-date-cards">
-                            {items.map((m, itemIdx) => {
-                              const isVeryFirst = dateIdx === 0 && itemIdx === 0;
-                              return (
-                                <div
-                                  key={m.id}
-                                  className="memory-list-item"
-                                  onClick={() => setExpandedCards(prev => {
-                                    const next = new Set(prev);
-                                    if (next.has(m.id)) next.delete(m.id); else next.add(m.id);
-                                    return next;
-                                  })}
-                                >
-                                  <div className="memory-card-header-row">
-                                    <div className="memory-subject">{m.title}</div>
-                                    <span className="memory-card-time">{m.date.split(" ")[1]?.slice(0, 5)}</span>
-                                    <div className="memory-card-actions" onClick={(e) => e.stopPropagation()}>
-                                      <IconBtn icon={<Pencil size={16} />} onClick={() => openEditContent(m)} />
-                                      <IconBtn icon={<SlidersHorizontal size={16} />} onClick={() => openEditMeeting(m)} />
-                                      <IconBtn icon={<Trash2 size={16} />} onClick={() => setDeleteMemoryTarget(m)} />
-                                    </div>
-                                  </div>
-                                  {(cardViewMode === "expanded" || expandedCards.has(m.id)) ? (
-                                    <>
-                                      {m.summary && (
-                                        <div className="memory-summary-text">{m.summary}</div>
-                                      )}
-                                      <div className="memory-participants">
-                                        {m.participants.length > 0 && <>
-                                          <div className="participant-avatars">
-                                            {m.participants.slice(0, isVeryFirst ? 5 : 4).map((p, idx) => (
-                                              <img key={p.id} src={p.avatar} alt={p.name} className="participant-avatar" title={p.name} style={{ marginLeft: idx > 0 ? "-8px" : "0" }} />
-                                            ))}
-                                          </div>
-                                          <span className="participants-names">
-                                            {m.participants.slice(0, 2).map((p) => p.name).join(", ")}
-                                            {m.participants.length > 2 && ` +${m.participants.length - 2}`}
-                                          </span>
-                                        </>}
-                                        <a
-                                          className="memory-source-link"
-                                          href={m.sourceUrl ?? "#"}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          onClick={(e) => e.stopPropagation()}
-                                          style={{ opacity: m.sourceUrl ? 1 : 0.35, pointerEvents: m.sourceUrl ? "auto" : "none" }}
-                                        >
-                                          {APP_SOURCE_ICON[m.appType]?.icon}
-                                          <span className="memory-source-label">{m.appType}</span>
-                                          <ArrowUpRight size={11} />
-                                        </a>
-                                      </div>
-                                    </>
-                                  ) : (
-                                    <div className="memory-summary-text memory-summary-collapsed">
-                                      {m.summary ?? `${m.title} — ${m.duration}. Discussion covered key points with ${m.participants[0]?.name ?? "the team"} and follow-up actions were agreed.`}
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })}
+                            {items.map((m) => (
+                              <MemoryCard
+                                key={m.id}
+                                memory={m}
+                                expanded={cardViewMode === "expanded" || expandedCards.has(m.id)}
+                                onToggleExpand={() => setExpandedCards(prev => {
+                                  const next = new Set(prev);
+                                  if (next.has(m.id)) next.delete(m.id); else next.add(m.id);
+                                  return next;
+                                })}
+                                onEditContent={() => openEditContent(m)}
+                                onEditMeeting={() => openEditMeeting(m)}
+                                onDelete={() => setDeleteMemoryTarget(m)}
+                              />
+                            ))}
                           </div>
                         </div>
                       );
@@ -1470,6 +1384,7 @@ export default function App() {
                 </div>
               </div>
             )}
+            </div>
           </div>
         ) : activeNav === "moments" && !activeChannel ? (() => {
           const activities = mockDailyActivities.filter(a => a.date === dailyDate).sort((a, b) => a.time.localeCompare(b.time));

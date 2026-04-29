@@ -18,14 +18,11 @@
   font-family: "Manrope", sans-serif;
   font-weight: 400;
   cursor: pointer;
-  transition: background 0.12s, border-color 0.12s;
+  transition: background 0.12s;
   white-space: nowrap;
 }
 
-.filter_dropdown_trigger:hover {
-  background: var(--grey-0);
-}
-
+.filter_dropdown_trigger:hover,
 .filter_dropdown_trigger.open {
   background: var(--grey-0);
 }
@@ -69,9 +66,10 @@
   font-size: var(--font-size-sm);
   font-family: "Manrope", sans-serif;
   font-weight: 400;
+  line-height: 1.5;
   text-align: left;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: background 0.1s;
   white-space: nowrap;
 }

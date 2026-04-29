@@ -1,7 +1,7 @@
 .segment_btn {
   display: flex;
   border: 1px solid var(--semi-App-grey-1);
-  border-radius: 7px;
+  border-radius: 8px;
   overflow: hidden;
 }
 

@@ -9,7 +9,7 @@
   border: none;
   font-size: 14px;
   font-family: "Manrope", sans-serif;
-  line-height: 20px;
+  line-height: 1.5;
   cursor: pointer;
   text-align: left;
   width: 100%;
@@ -20,7 +20,7 @@
 .sidebar_btn_selected {
   background: var(--luci-border-strong);
   color: var(--luci-accent);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .sidebar_btn_unselected {

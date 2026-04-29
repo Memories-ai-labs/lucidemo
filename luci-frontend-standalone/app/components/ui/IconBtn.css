@@ -4,12 +4,12 @@
   justify-content: center;
   width: 28px;
   height: 28px;
-  border-radius: 7px;
-  border: 1px solid var(--semi-App-grey-1);
-  background: var(--semi-color-bg-0);
+  border-radius: 8px;
+  border: 1px solid var(--grey-1);
+  background: transparent;
   color: var(--text-1);
   cursor: pointer;
-  transition: background 0.12s, border-color 0.12s;
+  transition: background 0.12s;
   flex-shrink: 0;
 }
 
