@@ -2041,7 +2041,6 @@ body,
   display: flex;
   flex-direction: column;
   gap: 28px;
-  padding-right: 8px;
   margin-top: 12px;
 }
 
@@ -2060,25 +2059,6 @@ body,
   display: flex;
   gap: 8px;
   margin-left: auto;
-}
-
-.library-section-btn {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--semi-App-grey-1m);
-  background: var(--semi-color-bg-0);
-  color: var(--semi-App-grey-6);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
-
-.library-section-btn:hover {
-  background: var(--semi-App-grey-1);
-  color: var(--semi-color-app-text-0);
 }
 
 .library-section-title {
@@ -2102,7 +2082,7 @@ body,
   padding: 10px 12px;
   border-radius: 8px;
   cursor: pointer;
-  background: var(--semi-color-bg-0);
+  background: var(--luci-surface-hover);
   transition: background 0.15s;
 }
 
@@ -2157,13 +2137,13 @@ body,
 }
 
 /* People Tab */
-.library-people-grid {
-  grid-template-columns: repeat(2, 1fr);
+.people-grid.library-people-grid {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .library-people-card {
   position: relative;
-  background: var(--semi-color-bg-0);
+  background: var(--luci-surface-hover);
 }
 
 .people-card-actions {
@@ -2183,7 +2163,6 @@ body,
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  padding-right: 8px;
 }
 
 .people-card {

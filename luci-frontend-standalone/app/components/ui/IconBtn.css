@@ -16,3 +16,17 @@
 .icon_btn:hover {
   background: var(--grey-0);
 }
+
+.icon_btn--with-label {
+  width: auto;
+  padding: 0 10px;
+  gap: 6px;
+}
+
+.icon_btn-label {
+  font-family: "Manrope", sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}

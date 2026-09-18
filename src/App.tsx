@@ -15,7 +15,6 @@ import {
   IconSettings,
   IconCollapse,
 } from "../luci-frontend-standalone/app/App";
-import RegularToggleBtn from "../luci-frontend-standalone/app/components/ui/RegularToggleBtn";
 import IconBtn from "../luci-frontend-standalone/app/components/ui/IconBtn";
 import SegmentBtn from "../luci-frontend-standalone/app/components/ui/SegmentBtn";
 import SettingsTab from "../luci-frontend-standalone/app/components/ui/SettingsTab";
@@ -1182,45 +1181,39 @@ export default function App() {
                   </div>
                 </div>
               )}
-            </div>
-            {(memoryTab === "meetings" || memoryTab === "people") && <>
-            <>
-            {memoryTab === "people" && (() => {
-              const person = people.find((p) => p.id === personFilter);
-              return person ? (
-                <div className="memory-filters">
-                  <div className="person-filter-chip">
-                    <img src={person.avatar} alt={person.name} className="person-filter-avatar" />
-                    <div className="person-filter-select-wrap">
-                      <select
-                        className="person-filter-select"
-                        value={personFilter}
-                        onChange={(e) => setPersonFilter(Number(e.target.value))}
-                      >
-                        {people.map((p) => (
-                          <option key={p.id} value={p.id}>{p.name}</option>
-                        ))}
-                      </select>
-                      <ChevronDown size={11} className="person-filter-chevron" />
+              {memoryTab === "people" && (() => {
+                const person = people.find((p) => p.id === personFilter);
+                if (!person) return null;
+                return (
+                  <div className="memory-filter-row">
+                    <DropdownButton
+                      value={person.name}
+                      options={people.map((p) => p.name)}
+                      onChange={(name) => {
+                        const found = people.find((p) => p.name === name);
+                        if (found) setPersonFilter(Number(found.id));
+                      }}
+                    />
+                    <div className="memory-filter-row-right">
+                      <IconBtn icon={<Plus size={16} />} onClick={openCreateMemory} />
+                      <SegmentBtn
+                        value={cardViewMode}
+                        onChange={(v) => setCardViewMode(v as "compact" | "expanded")}
+                        options={[
+                          { value: "compact", icon: <AlignJustify size={16} />, title: "Compact" },
+                          { value: "expanded", icon: <LayoutList size={16} />, title: "Expanded" },
+                        ]}
+                      />
                     </div>
                   </div>
-                  <div className="memory-filter-btns">
-                    {[...memoryFilters.filter((f) => f !== "Untitled"), "Untitled"].map((f) => (
-                      <RegularToggleBtn
-                        key={f}
-                        label={f}
-                        selected={memoryFilter === f}
-                        onClick={() => setMemoryFilter(f)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ) : null;
-            })()}
+                );
+              })()}
+            </div>
+            {(memoryTab === "meetings" || memoryTab === "people") && (
             <div className="memories-list-container">
               {(() => {
                 const filteredList = memoryList
-                  .filter((m) => memoryFilter === "All" || m.project === memoryFilter)
+                  .filter((m) => memoryTab === "people" || memoryFilter === "All" || m.project === memoryFilter)
                   .filter((m) => memoryTab !== "people" || m.participants.some((p) => Number(p.id) === Number(personFilter)));
                 const groupedByDate = filteredList.reduce((acc: Record<string, typeof filteredList>, m) => {
                   const dateStr = m.date.split(" ")[0];
@@ -1269,8 +1262,7 @@ export default function App() {
                 );
               })()}
             </div>
-            </>
-            </>}
+            )}
             {memoryTab === "daily" && (() => {
               const byHour: Record<number, typeof mockDailyActivities> = {};
               mockDailyActivities
@@ -1328,8 +1320,8 @@ export default function App() {
                   <div className="library-section-header">
                     <h2 className="library-section-title">Project</h2>
                     <div className="library-section-actions">
-                      <button className="library-section-btn" onClick={() => { setCreateProjectValue(""); setCreateProjectOpen(true); }}><Plus size={12} />Create</button>
-                      <button className="library-section-btn" onClick={() => { setEditProjectsOpen(true); setMergeMode(true); }}><Layers size={12} />Merge</button>
+                      <IconBtn icon={<Plus size={14} />} label="Create" onClick={() => { setCreateProjectValue(""); setCreateProjectOpen(true); }} />
+                      <IconBtn icon={<Layers size={14} />} label="Merge" onClick={() => { setEditProjectsOpen(true); setMergeMode(true); }} />
                     </div>
                   </div>
                   <div className="project-cards-list">
@@ -1358,8 +1350,8 @@ export default function App() {
                   <div className="library-section-header">
                     <h2 className="library-section-title">People</h2>
                     <div className="library-section-actions">
-                      <button className="library-section-btn" onClick={() => { setCreatePersonName(""); setCreatePersonEmail(""); setCreatePersonOpen(true); }}><UserPlus size={12} />Create</button>
-                      <button className="library-section-btn" onClick={() => { setMergePeopleSelected([]); setMergePeopleStep("select"); setMergePeopleNewName(""); setMergePeopleOpen(true); }}><UsersRound size={12} />Merge</button>
+                      <IconBtn icon={<UserPlus size={14} />} label="Create" onClick={() => { setCreatePersonName(""); setCreatePersonEmail(""); setCreatePersonOpen(true); }} />
+                      <IconBtn icon={<UsersRound size={14} />} label="Merge" onClick={() => { setMergePeopleSelected([]); setMergePeopleStep("select"); setMergePeopleNewName(""); setMergePeopleOpen(true); }} />
                     </div>
                   </div>
                   <div className="people-grid library-people-grid">
